@@ -1,5 +1,5 @@
 (() => {
-  // app-source.jsx
+  // app-source-new2.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -122,15 +122,25 @@
     { name: "Despensa", ids: ["tomateFrito", "panHamburguesa", "masaPizza", "vinoBlancoCocina"] }
   ];
   var EXTRAS = [
-    { id: "patatasFritas", emoji: "\u{1F954}", label: "Patatas fritas (bolsa)", mercadona: 1.1, lidl: 0.95, carrefour: 1.25, dia: 1 },
-    { id: "encurtidos", emoji: "\u{1FAD2}", label: "Aceitunas / encurtidos (frasco)", mercadona: 1.5, lidl: 1.3, carrefour: 1.7, dia: 1.4 },
-    { id: "frutosSecos", emoji: "\u{1F95C}", label: "Frutos secos (bolsa)", mercadona: 2.2, lidl: 1.9, carrefour: 2.5, dia: 2.05 },
-    { id: "refrescos", emoji: "\u{1F964}", label: "Refrescos (pack 6 latas)", mercadona: 3.3, lidl: 2.8, carrefour: 3.6, dia: 3 },
-    { id: "cerveza", emoji: "\u{1F37A}", label: "Cerveza (pack 6)", mercadona: 3.6, lidl: 3.1, carrefour: 3.9, dia: 3.3 },
-    { id: "vino", emoji: "\u{1F377}", label: "Vino (botella)", mercadona: 3, lidl: 2.6, carrefour: 3.4, dia: 2.8 },
-    { id: "helado", emoji: "\u{1F366}", label: "Helado (tarrina)", mercadona: 3.5, lidl: 3, carrefour: 3.9, dia: 3.2 },
-    { id: "chocolate", emoji: "\u{1F36B}", label: "Chocolate / galletas", mercadona: 1.8, lidl: 1.5, carrefour: 2, dia: 1.65 }
+    { id: "manzanas", emoji: "\u{1F34E}", label: "Manzanas (kg)", category: "Fruta", mercadona: 1.4, lidl: 1.2, carrefour: 1.6, dia: 1.3 },
+    { id: "platanos", emoji: "\u{1F34C}", label: "Pl\xE1tanos (kg)", category: "Fruta", mercadona: 1.5, lidl: 1.3, carrefour: 1.7, dia: 1.4 },
+    { id: "naranjas", emoji: "\u{1F34A}", label: "Naranjas (kg)", category: "Fruta", mercadona: 1.1, lidl: 0.95, carrefour: 1.25, dia: 1 },
+    { id: "fresas", emoji: "\u{1F353}", label: "Fresas (bandeja)", category: "Fruta", mercadona: 2.2, lidl: 1.9, carrefour: 2.5, dia: 2.05 },
+    { id: "pan", emoji: "\u{1F35E}", label: "Pan de barra", category: "Panader\xEDa", mercadona: 0.55, lidl: 0.45, carrefour: 0.65, dia: 0.5 },
+    { id: "panMolde", emoji: "\u{1F35E}", label: "Pan de molde integral", category: "Panader\xEDa", mercadona: 1.6, lidl: 1.35, carrefour: 1.8, dia: 1.45 },
+    { id: "yogures", emoji: "\u{1F95B}", label: "Yogures naturales (pack 4)", category: "L\xE1cteos", mercadona: 1.8, lidl: 1.5, carrefour: 2, dia: 1.65 },
+    { id: "quesoLonchas", emoji: "\u{1F9C0}", label: "Queso en lonchas", category: "L\xE1cteos", mercadona: 1.9, lidl: 1.6, carrefour: 2.1, dia: 1.75 },
+    { id: "quesoFresco", emoji: "\u{1F9C0}", label: "Queso fresco (tarrina)", category: "L\xE1cteos", mercadona: 1.7, lidl: 1.45, carrefour: 1.9, dia: 1.55 },
+    { id: "patatasFritas", emoji: "\u{1F954}", label: "Patatas fritas (bolsa)", category: "Snacks salados", mercadona: 1.1, lidl: 0.95, carrefour: 1.25, dia: 1 },
+    { id: "encurtidos", emoji: "\u{1FAD2}", label: "Aceitunas / encurtidos (frasco)", category: "Snacks salados", mercadona: 1.5, lidl: 1.3, carrefour: 1.7, dia: 1.4 },
+    { id: "frutosSecos", emoji: "\u{1F95C}", label: "Frutos secos (bolsa)", category: "Snacks salados", mercadona: 2.2, lidl: 1.9, carrefour: 2.5, dia: 2.05 },
+    { id: "helado", emoji: "\u{1F366}", label: "Helado (tarrina)", category: "Snacks dulces", mercadona: 3.5, lidl: 3, carrefour: 3.9, dia: 3.2 },
+    { id: "chocolate", emoji: "\u{1F36B}", label: "Chocolate / galletas", category: "Snacks dulces", mercadona: 1.8, lidl: 1.5, carrefour: 2, dia: 1.65 },
+    { id: "refrescos", emoji: "\u{1F964}", label: "Refrescos (pack 6 latas)", category: "Bebidas", mercadona: 3.3, lidl: 2.8, carrefour: 3.6, dia: 3 },
+    { id: "cerveza", emoji: "\u{1F37A}", label: "Cerveza (pack 6)", category: "Bebidas", mercadona: 3.6, lidl: 3.1, carrefour: 3.9, dia: 3.3 },
+    { id: "vino", emoji: "\u{1F377}", label: "Vino (botella)", category: "Bebidas", mercadona: 3, lidl: 2.6, carrefour: 3.4, dia: 2.8 }
   ];
+  var EXTRA_CATEGORIES = ["Fruta", "Panader\xEDa", "L\xE1cteos", "Snacks salados", "Snacks dulces", "Bebidas"];
   var MENU_NORMAL = [
     {
       day: "Lunes",
@@ -139,14 +149,31 @@
         name: "Garbanzos con espinacas",
         time: "30 min",
         items: [{ id: "garbanzos", qty: 1 }, { id: "espinacas", qty: 0.4 }, { id: "cebolla", qty: 0.15 }],
-        steps: ["Sofr\xEDe la cebolla, a\xF1ade las espinacas hasta que reduzcan y mezcla con los garbanzos cocidos."]
+        steps: [
+          "Pica la cebolla en trozos peque\xF1os.",
+          "Pon una sart\xE9n grande a fuego medio con un par de cucharadas de aceite de oliva.",
+          "Sofr\xEDe la cebolla 6-8 minutos, removiendo de vez en cuando, hasta que est\xE9 blanda y transparente.",
+          "A\xF1ade las espinacas frescas poco a poco (reducen mucho de volumen) y saltea 3-4 minutos hasta que se ablanden.",
+          "Incorpora los garbanzos ya cocidos (de bote, escurridos y enjuagados) y un chorrito de agua.",
+          "Cocina 5 minutos m\xE1s a fuego medio para que se integren los sabores, removiendo con cuidado de no romper los garbanzos.",
+          "Prueba de sal, a\xF1ade un toque de comino si te gusta, y sirve caliente."
+        ]
       },
       cena: {
         emoji: "\u{1F373}",
         name: "Tortilla de patatas con ensalada",
         time: "35 min",
         items: [{ id: "patatas", qty: 0.6 }, { id: "huevos", qty: 0.5 }, { id: "cebolla", qty: 0.2 }, { id: "ensalada", qty: 0.3 }],
-        steps: ["Sofr\xEDe las patatas en l\xE1minas con la cebolla.", "Bate los huevos, mezcla y cuaja la tortilla por ambos lados."]
+        steps: [
+          "Pela las patatas y c\xF3rtalas en l\xE1minas finas (medio cent\xEDmetro aproximadamente).",
+          "Pica la cebolla en juliana fina.",
+          "Calienta abundante aceite en una sart\xE9n a fuego medio-bajo y echa las patatas y la cebolla juntas.",
+          "Fr\xEDe lentamente 15-18 minutos, removiendo de tanto en tanto, hasta que las patatas est\xE9n blandas (no doradas, sino tiernas).",
+          "Escurre bien el aceite y reserva las patatas en un bol.",
+          "Bate los huevos en otro bol con una pizca de sal, mezcla con las patatas y deja reposar 2 minutos.",
+          "Vierte la mezcla en una sart\xE9n peque\xF1a antiadherente con un poco de aceite y cuaja a fuego medio 3-4 minutos por lado.",
+          "Deja reposar 1 minuto antes de cortar. Sirve con la ensalada ali\xF1ada con aceite, vinagre y sal."
+        ]
       }
     },
     {
@@ -156,14 +183,30 @@
         name: "Pavo a la plancha con pur\xE9 de patata",
         time: "30 min",
         items: [{ id: "pavoFilete", qty: 0.6 }, { id: "patatas", qty: 0.6 }, { id: "leche", qty: 0.2 }],
-        steps: ["Plancha los filetes de pavo 3-4 min por lado.", "Cuece y machaca las patatas con la leche."]
+        steps: [
+          "Pela las patatas, c\xF3rtalas en trozos medianos y ponlas a cocer en agua con sal 18-20 minutos, hasta que est\xE9n tiernas al pincharlas con un tenedor.",
+          "Mientras cuecen, saca los filetes de pavo a temperatura ambiente y sazona con sal y pimienta por ambos lados.",
+          "Escurre las patatas y mach\xE1calas con un tenedor o pasapur\xE9s.",
+          "A\xF1ade la leche caliente poco a poco mientras mezclas, hasta conseguir la textura de pur\xE9 que te guste.",
+          "Calienta una sart\xE9n o plancha a fuego fuerte con una gota de aceite.",
+          "Cocina los filetes de pavo 3-4 minutos por lado, sin moverlos demasiado, hasta que est\xE9n dorados por fuera y jugosos por dentro.",
+          "Sirve el pavo reci\xE9n hecho junto al pur\xE9 caliente."
+        ]
       },
       cena: {
         emoji: "\u{1F357}",
         name: "Pollo al horno con verduras asadas",
         time: "45 min",
         items: [{ id: "pollo", qty: 0.9 }, { id: "asar", qty: 0.8 }],
-        steps: ["Sazona el pollo y hornea junto a las verduras troceadas, 200\xB0C 35-40 min."]
+        steps: [
+          "Precalienta el horno a 200\xB0C.",
+          "Trocea las verduras variadas en trozos similares para que se asen de forma uniforme.",
+          "Coloca el pollo y las verduras en una bandeja de horno, con un buen chorro de aceite de oliva.",
+          "Sazona con sal, pimienta y las hierbas que m\xE1s te gusten (romero, tomillo u or\xE9gano).",
+          "Hornea 35-40 minutos, dando la vuelta al pollo y removiendo las verduras a mitad de cocci\xF3n.",
+          "Comprueba que el pollo est\xE1 hecho pinchando la parte m\xE1s gruesa: el jugo debe salir claro, no rosado.",
+          "Deja reposar 5 minutos fuera del horno antes de servir."
+        ]
       }
     },
     {
@@ -173,14 +216,30 @@
         name: "Arroz con verduras y jam\xF3n",
         time: "25 min",
         items: [{ id: "arroz", qty: 0.35 }, { id: "jamonYork", qty: 1 }, { id: "asar", qty: 0.4 }],
-        steps: ["Sofr\xEDe las verduras, a\xF1ade el arroz y agua.", "Casi al final, incorpora el jam\xF3n en taquitos."]
+        steps: [
+          "Corta las verduras variadas en trozos peque\xF1os.",
+          "Calienta un par de cucharadas de aceite en una sart\xE9n amplia o cazuela baja.",
+          "Sofr\xEDe las verduras 5-6 minutos a fuego medio hasta que empiecen a ablandarse.",
+          "A\xF1ade el arroz y remueve 1 minuto para que se impregne del aceite.",
+          "Vierte el doble de agua o caldo que de arroz, sazona y deja cocer a fuego medio-bajo, tapado, 16-18 minutos sin destapar.",
+          "Dos minutos antes de terminar, incorpora el jam\xF3n cocido cortado en taquitos.",
+          "Deja reposar 2 minutos fuera del fuego antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F35D}",
         name: "Pasta con tomate y at\xFAn",
         time: "20 min",
         items: [{ id: "pasta", qty: 1 }, { id: "tomateFrito", qty: 1 }, { id: "atun", qty: 1 }],
-        steps: ["Cuece la pasta.", "Calienta el tomate frito con el at\xFAn escurrido y mezcla."]
+        steps: [
+          "Pon a hervir agua abundante con sal en una olla grande.",
+          "Cuando hierva, a\xF1ade la pasta y cuece el tiempo que indique el paquete (normalmente 9-11 minutos), removiendo de vez en cuando.",
+          "Mientras tanto, calienta el tomate frito en una sart\xE9n a fuego medio.",
+          "Escurre bien el at\xFAn en lata y a\xF1\xE1delo al tomate, deshaci\xE9ndolo un poco con el tenedor.",
+          "Cocina 2-3 minutos para que se integren los sabores.",
+          "Escurre la pasta y m\xE9zclala directamente con la salsa en la sart\xE9n.",
+          "Sirve caliente; un toque de queso rallado por encima es opcional."
+        ]
       }
     },
     {
@@ -190,14 +249,30 @@
         name: "Merluza al horno con patatas panadera",
         time: "40 min",
         items: [{ id: "merluza", qty: 0.5 }, { id: "patatas", qty: 0.6 }, { id: "cebolla", qty: 0.15 }],
-        steps: ["Patatas en rodajas con cebolla como base, encima la merluza, horno 25-30 min a 190\xB0C."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Pela y corta las patatas en rodajas finas, y la cebolla en juliana.",
+          "Coloca las patatas y la cebolla en una bandeja de horno, con aceite, sal y un poco de agua para que no se sequen.",
+          "Hornea 15 minutos para que las patatas empiecen a ablandarse.",
+          "Saca la bandeja, coloca los lomos de merluza encima de las patatas, sazona y a\xF1ade un chorrito m\xE1s de aceite.",
+          "Vuelve a hornear 12-15 minutos m\xE1s, hasta que el pescado est\xE9 blanco y se separe con facilidad al pincharlo.",
+          "Sirve directamente en la misma bandeja o en platos individuales."
+        ]
       },
       cena: {
         emoji: "\u{1F963}",
         name: "Lentejas con chorizo",
         time: "40 min",
         items: [{ id: "lentejas", qty: 1 }, { id: "chorizo", qty: 0.3 }, { id: "cebolla", qty: 0.15 }, { id: "zanahoria", qty: 0.2 }],
-        steps: ["Sofr\xEDe cebolla y zanahoria, a\xF1ade chorizo, lentejas y agua.", "Cuece 30 min."]
+        steps: [
+          "Pica la cebolla y la zanahoria en trozos peque\xF1os.",
+          "Calienta aceite en una olla y sofr\xEDe la cebolla y la zanahoria 5-6 minutos a fuego medio.",
+          "A\xF1ade el chorizo cortado en rodajas y sofr\xEDe 2-3 minutos m\xE1s, hasta que suelte algo de su grasa y color.",
+          "Incorpora las lentejas (si son secas, previamente puestas en remojo) y cubre con agua abundante.",
+          "Lleva a ebullici\xF3n y luego baja el fuego, dejando cocer a fuego suave 25-30 minutos, removiendo de vez en cuando.",
+          "Si usas lentejas de bote (ya cocidas), reduce el tiempo de cocci\xF3n a 10 minutos.",
+          "Ajusta el punto de sal al final y sirve bien caliente."
+        ]
       }
     },
     {
@@ -207,14 +282,29 @@
         name: "Alb\xF3ndigas en salsa de tomate con arroz",
         time: "35 min",
         items: [{ id: "carnePicada", qty: 0.5 }, { id: "tomateFrito", qty: 1 }, { id: "arroz", qty: 0.3 }],
-        steps: ["Forma las alb\xF3ndigas, d\xF3ralas y termina de cocinarlas en el tomate frito.", "Sirve con arroz."]
+        steps: [
+          "Sazona la carne picada con sal, pimienta y, si quieres, un huevo y un poco de pan rallado para que liguen mejor.",
+          "Forma bolitas del tama\xF1o de una nuez con las manos ligeramente h\xFAmedas.",
+          "Calienta aceite en una sart\xE9n y dora las alb\xF3ndigas por todos los lados, 4-5 minutos en total, hasta que tengan un color tostado por fuera.",
+          "Retira el exceso de aceite y a\xF1ade el tomate frito directamente a la sart\xE9n con las alb\xF3ndigas.",
+          "Cocina a fuego medio-bajo 10-12 minutos, removiendo con cuidado, para que las alb\xF3ndigas terminen de hacerse por dentro en la salsa.",
+          "Mientras, cuece el arroz en agua con sal seg\xFAn el tiempo del paquete (normalmente 15-18 minutos) y escurre.",
+          "Sirve las alb\xF3ndigas con su salsa acompa\xF1adas del arroz blanco."
+        ]
       },
       cena: {
         emoji: "\u{1F420}",
         name: "Salm\xF3n al horno con arroz",
         time: "30 min",
         items: [{ id: "salmon", qty: 0.5 }, { id: "arroz", qty: 0.3 }],
-        steps: ["Hornea el salm\xF3n con lim\xF3n 15-18 min a 190\xB0C.", "Cuece el arroz aparte."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Coloca los lomos de salm\xF3n en una bandeja con papel de horno, sazona con sal y pimienta.",
+          "A\xF1ade un chorrito de aceite de oliva y unas rodajas de lim\xF3n por encima.",
+          "Hornea 15-18 minutos, seg\xFAn el grosor del lomo, hasta que est\xE9 hecho pero jugoso por dentro.",
+          "Mientras se hornea el salm\xF3n, cuece el arroz en agua con sal 15-18 minutos y escurre.",
+          "Deja reposar el salm\xF3n 2 minutos antes de servir junto al arroz."
+        ]
       }
     },
     {
@@ -224,14 +314,31 @@
         name: "Pizza casera de jam\xF3n y queso",
         time: "25 min",
         items: [{ id: "masaPizza", qty: 1 }, { id: "jamonYork", qty: 1 }, { id: "quesoRallado", qty: 1 }, { id: "tomateFrito", qty: 1 }],
-        steps: ["Extiende la base, a\xF1ade tomate, jam\xF3n y queso.", "Horno 220\xB0C 12-15 min."]
+        steps: [
+          "Precalienta el horno a 220\xB0C (o la temperatura m\xE1xima de tu horno) con la bandeja dentro para que se caliente.",
+          "Extiende la base de pizza sobre papel de horno.",
+          "Reparte el tomate frito por toda la base con el dorso de una cuchara, dejando un borde libre de 1-2 cm.",
+          "Distribuye el jam\xF3n cocido en trozos o lonchas por encima del tomate.",
+          "Cubre con el queso rallado de forma uniforme.",
+          "Desl\xEDzala (con el papel) sobre la bandeja caliente y hornea 12-15 minutos, hasta que el queso est\xE9 dorado y burbujeante.",
+          "Deja reposar 1-2 minutos antes de cortar en porciones."
+        ]
       },
       cena: {
         emoji: "\u{1F354}",
         name: "Hamburguesas caseras con boniato",
         time: "30 min",
         items: [{ id: "carnePicada", qty: 0.5 }, { id: "panHamburguesa", qty: 1 }, { id: "boniato", qty: 0.8 }],
-        steps: ["Forma las hamburguesas y plancha 3-4 min por lado.", "Boniato en bastones al horno 25 min."]
+        steps: [
+          "Precalienta el horno a 200\xB0C.",
+          "Pela el boniato y c\xF3rtalo en bastones tipo patatas fritas.",
+          "Col\xF3calos en una bandeja con aceite, sal y un poco de piment\xF3n si te gusta, y hornea 25 minutos, d\xE1ndoles la vuelta a mitad de cocci\xF3n.",
+          "Mientras, sazona la carne picada con sal y pimienta y forma hamburguesas con las manos, aplast\xE1ndolas ligeramente.",
+          "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
+          "Cocina las hamburguesas 3-4 minutos por lado, seg\xFAn el punto que te guste.",
+          "Tuesta ligeramente el pan de hamburguesa y monta con tus ingredientes favoritos (lechuga, tomate, salsas).",
+          "Sirve junto a los bastones de boniato reci\xE9n salidos del horno."
+        ]
       }
     },
     {
@@ -241,14 +348,30 @@
         name: "Lentejas con arroz y verduras",
         time: "35 min",
         items: [{ id: "lentejas", qty: 1 }, { id: "arroz", qty: 0.2 }, { id: "zanahoria", qty: 0.2 }, { id: "cebolla", qty: 0.15 }],
-        steps: ["Sofr\xEDe cebolla y zanahoria, a\xF1ade lentejas, arroz y agua.", "Cuece hasta que est\xE9 tierno."]
+        steps: [
+          "Pica la cebolla y la zanahoria en trozos peque\xF1os.",
+          "Sofr\xEDe ambas en una olla con un poco de aceite, 5-6 minutos a fuego medio.",
+          "A\xF1ade las lentejas (de bote, escurridas) y el arroz, removiendo 1 minuto.",
+          "Cubre con agua o caldo (el doble de volumen que de arroz y lentejas juntos) y sazona.",
+          "Cuece a fuego medio-bajo, tapado, 16-18 minutos, hasta que el arroz est\xE9 en su punto.",
+          "Si queda muy espeso, a\xF1ade un poco m\xE1s de agua caliente; si queda caldoso, deja reducir un par de minutos m\xE1s sin tapa.",
+          "Deja reposar 2 minutos antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F383}",
         name: "Crema de calabaza y tortilla francesa",
         time: "35 min",
         items: [{ id: "calabaza", qty: 1 }, { id: "leche", qty: 0.3 }, { id: "huevos", qty: 0.5 }],
-        steps: ["Cuece la calabaza y tritura con la leche.", "Acompa\xF1a con una tortilla francesa sencilla."]
+        steps: [
+          "Pela y corta la calabaza en trozos medianos.",
+          "Cu\xE9cela en agua con sal 15-18 minutos, hasta que est\xE9 muy tierna al pincharla.",
+          "Escurre (reservando un poco del agua de cocci\xF3n) y tritura con la batidora junto con la leche caliente, hasta conseguir una crema fina.",
+          "Si queda demasiado espesa, a\xF1ade un poco del agua de cocci\xF3n reservada.",
+          "Bate los huevos con una pizca de sal para la tortilla francesa.",
+          "Calienta una sart\xE9n peque\xF1a con una gota de aceite y cuaja la tortilla 1-2 minutos por lado, sin que se dore demasiado.",
+          "Sirve la crema bien caliente acompa\xF1ada de la tortilla reci\xE9n hecha."
+        ]
       }
     }
   ];
@@ -260,14 +383,29 @@
         name: "Ensalada de garbanzos con at\xFAn",
         time: "15 min",
         items: [{ id: "garbanzos", qty: 1 }, { id: "atun", qty: 1 }, { id: "ensalada", qty: 0.3 }],
-        steps: ["Mezcla los garbanzos cocidos con el at\xFAn escurrido y la ensalada.", "Ali\xF1a con aceite de oliva y lim\xF3n."]
+        steps: [
+          "Escurre y enjuaga los garbanzos de bote bajo el grifo.",
+          "Escurre bien el at\xFAn en lata, separando los trozos con un tenedor.",
+          "Lava y corta la lechuga y el tomate de la ensalada en trozos peque\xF1os.",
+          "Mezcla todo en un bol grande: garbanzos, at\xFAn y verdura de la ensalada.",
+          "Ali\xF1a con aceite de oliva, el zumo de medio lim\xF3n y una pizca de sal, removiendo bien.",
+          "Deja reposar 5 minutos en la nevera antes de servir para que se integren los sabores."
+        ]
       },
       cena: {
         emoji: "\u{1F952}",
         name: "Crema de calabac\xEDn con pollo a la plancha",
         time: "30 min",
         items: [{ id: "calabacin", qty: 0.8 }, { id: "pollo", qty: 0.5 }],
-        steps: ["Cuece el calabac\xEDn y tritura.", "Plancha el pollo en tiras finas y sirve junto a la crema."]
+        steps: [
+          "Lava el calabac\xEDn y c\xF3rtalo en trozos medianos (no es necesario pelarlo).",
+          "Cu\xE9celo en agua con sal 12-15 minutos, hasta que est\xE9 muy tierno.",
+          "Escurre, reservando un poco del agua de cocci\xF3n, y tritura con la batidora hasta conseguir una crema fina.",
+          "Ajusta la textura a\xF1adiendo un poco del agua reservada si queda muy espesa.",
+          "Sazona el pollo con sal y pimienta y c\xF3rtalo en filetes finos o tiras.",
+          "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite y cocina el pollo 2-3 minutos por lado.",
+          "Sirve la crema bien caliente con las tiras de pollo reci\xE9n hechas por encima."
+        ]
       }
     },
     {
@@ -277,14 +415,28 @@
         name: "Merluza al vapor con verduras",
         time: "25 min",
         items: [{ id: "merluza", qty: 0.6 }, { id: "asar", qty: 0.6 }],
-        steps: ["Cuece la merluza al vapor 10-12 min.", "Saltea las verduras ligeramente con muy poco aceite."]
+        steps: [
+          "Corta las verduras variadas en tiras o trozos peque\xF1os para que se cocinen r\xE1pido.",
+          "Si tienes vaporera, coloca agua en la base y las verduras en la parte superior 5-6 minutos.",
+          "A\xF1ade los lomos de merluza encima de las verduras y contin\xFAa al vapor 8-10 minutos m\xE1s, hasta que el pescado est\xE9 blanco y se separe con facilidad.",
+          "Si no tienes vaporera, cuece la merluza en un poco de agua con sal en una sart\xE9n tapada 8-10 minutos.",
+          "Para las verduras, salt\xE9alas en otra sart\xE9n con muy poco aceite y un par de cucharadas de agua, 5-6 minutos.",
+          "Sirve el pescado reci\xE9n hecho junto a las verduras, con un chorrito de aceite de oliva por encima."
+        ]
       },
       cena: {
         emoji: "\u{1F373}",
         name: "Tortilla de espinacas",
         time: "20 min",
         items: [{ id: "espinacas", qty: 0.4 }, { id: "huevos", qty: 0.5 }],
-        steps: ["Saltea las espinacas hasta que reduzcan, bate los huevos, mezcla y cuaja a fuego suave."]
+        steps: [
+          "Lava bien las espinacas frescas.",
+          "Calienta una sart\xE9n con una gota de aceite y saltea las espinacas 3-4 minutos hasta que reduzcan bastante de volumen.",
+          "Escurre el exceso de l\xEDquido que sueltan las espinacas.",
+          "Bate los huevos en un bol con una pizca de sal.",
+          "Mezcla las espinacas con el huevo batido.",
+          "Vierte en la sart\xE9n a fuego suave y cuaja 3-4 minutos por lado, hasta que est\xE9 dorada pero jugosa por dentro."
+        ]
       }
     },
     {
@@ -294,14 +446,28 @@
         name: "Lentejas estofadas con verduras",
         time: "35 min",
         items: [{ id: "lentejas", qty: 1 }, { id: "zanahoria", qty: 0.3 }, { id: "cebolla", qty: 0.15 }],
-        steps: ["Sofr\xEDe cebolla y zanahoria, a\xF1ade lentejas y agua.", "Cuece a fuego medio sin chorizo ni grasas a\xF1adidas."]
+        steps: [
+          "Pica la cebolla y la zanahoria en trozos peque\xF1os.",
+          "Sofr\xEDe ambas en una olla con muy poco aceite, 6-7 minutos a fuego medio, hasta que se ablanden.",
+          "A\xF1ade las lentejas de bote, escurridas y enjuagadas.",
+          "Cubre con agua o caldo de verduras y deja cocer a fuego medio-bajo 15-18 minutos, removiendo de vez en cuando.",
+          "Si usas lentejas secas, ponlas antes en remojo y alarga la cocci\xF3n a 30-35 minutos.",
+          "Ajusta de sal al final y sirve caliente, sin necesidad de chorizo ni embutidos."
+        ]
       },
       cena: {
         emoji: "\u{1F420}",
         name: "Salm\xF3n al papillote con ensalada",
         time: "25 min",
         items: [{ id: "salmon", qty: 0.5 }, { id: "ensalada", qty: 0.3 }],
-        steps: ["Envuelve el salm\xF3n en papel de horno con lim\xF3n y hierbas, 15 min a 190\xB0C.", "Sirve con ensalada."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Coloca cada lomo de salm\xF3n sobre un trozo de papel de horno grande.",
+          "A\xF1ade unas rodajas de lim\xF3n, un chorrito de aceite de oliva, sal y las hierbas que te gusten.",
+          "Cierra bien el papel formando un paquete (papillote) para que el vapor se quede dentro.",
+          "Hornea 15 minutos; el salm\xF3n se cocina con su propio vapor, quedando muy jugoso.",
+          "Abre el papillote con cuidado (sale vapor caliente) y sirve con la ensalada ali\xF1ada aparte."
+        ]
       }
     },
     {
@@ -311,14 +477,30 @@
         name: "Pollo al horno con boniato y verduras",
         time: "40 min",
         items: [{ id: "pollo", qty: 0.7 }, { id: "boniato", qty: 0.5 }, { id: "asar", qty: 0.4 }],
-        steps: ["Hornea el pollo junto al boniato y las verduras troceadas, 200\xB0C 35 min, sin piel para aligerar."]
+        steps: [
+          "Precalienta el horno a 200\xB0C.",
+          "Retira la piel del pollo para aligerar el plato.",
+          "Pela el boniato y c\xF3rtalo en dados, junto con las verduras variadas en trozos similares.",
+          "Coloca todo en una bandeja de horno con un chorrito de aceite, sal y pimienta.",
+          "Hornea 35 minutos, removiendo a mitad de cocci\xF3n para que se dore de forma pareja.",
+          "Comprueba que el pollo est\xE9 hecho pinchando la parte m\xE1s gruesa (el jugo debe salir claro).",
+          "Deja reposar 5 minutos antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F383}",
         name: "Crema de calabaza con huevo poch\xE9",
         time: "30 min",
         items: [{ id: "calabaza", qty: 0.8 }, { id: "huevos", qty: 0.5 }],
-        steps: ["Cuece y tritura la calabaza.", "Escalfa el huevo aparte y col\xF3calo encima de la crema."]
+        steps: [
+          "Pela y corta la calabaza en trozos medianos.",
+          "Cuece en agua con sal 15-18 minutos hasta que est\xE9 muy tierna.",
+          "Escurre y tritura con la batidora hasta conseguir una crema fina, ajustando con un poco de agua de cocci\xF3n si hace falta.",
+          "Para el huevo poch\xE9: lleva a ebullici\xF3n suave una olla peque\xF1a con agua y un chorrito de vinagre.",
+          "Casca el huevo en una taza y desl\xEDzalo con cuidado al agua, formando un peque\xF1o remolino con una cuchara.",
+          "Cocina 3 minutos sin que hierva fuerte, hasta que la clara est\xE9 cuajada y la yema l\xEDquida.",
+          "Sirve la crema caliente con el huevo poch\xE9 encima reci\xE9n escurrido."
+        ]
       }
     },
     {
@@ -328,14 +510,28 @@
         name: "Quinoa con verduras y at\xFAn",
         time: "20 min",
         items: [{ id: "quinoa", qty: 0.3 }, { id: "atun", qty: 1 }, { id: "asar", qty: 0.3 }],
-        steps: ["Cuece la quinoa 12-15 min.", "Mezcla con las verduras salteadas y el at\xFAn escurrido."]
+        steps: [
+          "Enjuaga la quinoa bajo el grifo con un colador fino.",
+          "Cu\xE9cela en agua con sal (el doble de volumen de agua que de quinoa) 12-15 minutos, hasta que est\xE9 tierna y transl\xFAcida.",
+          "Mientras cuece, corta las verduras variadas en trozos peque\xF1os y salt\xE9alas en una sart\xE9n con muy poco aceite, 5-6 minutos.",
+          "Escurre el at\xFAn en lata, separando los trozos.",
+          "Escurre la quinoa y m\xE9zclala en un bol con las verduras salteadas y el at\xFAn.",
+          "Ali\xF1a con un chorrito de aceite de oliva y sirve templada o fr\xEDa."
+        ]
       },
       cena: {
         emoji: "\u{1F952}",
         name: "Merluza con calabac\xEDn salteado",
         time: "25 min",
         items: [{ id: "merluza", qty: 0.5 }, { id: "calabacin", qty: 0.5 }],
-        steps: ["Plancha la merluza 3-4 min por lado.", "Saltea el calabac\xEDn en l\xE1minas finas."]
+        steps: [
+          "Corta el calabac\xEDn en l\xE1minas finas (con piel, no es necesario pelarlo).",
+          "Sazona los lomos de merluza con sal y pimienta.",
+          "Calienta una plancha o sart\xE9n antiadherente con una gota de aceite a fuego medio-alto.",
+          "Cocina la merluza 3-4 minutos por lado, hasta que est\xE9 blanca y se separe con facilidad.",
+          "Retira y reserva. En la misma sart\xE9n, saltea el calabac\xEDn 4-5 minutos, removiendo, hasta que est\xE9 tierno pero con un poco de textura.",
+          "Sirve la merluza con el calabac\xEDn reci\xE9n salteado."
+        ]
       }
     },
     {
@@ -345,14 +541,30 @@
         name: "Ensalada completa con pollo",
         time: "15 min",
         items: [{ id: "ensalada", qty: 0.4 }, { id: "pollo", qty: 0.5 }],
-        steps: ["Plancha el pollo y c\xF3rtalo en tiras.", "Sirve sobre la ensalada con un ali\xF1o ligero."]
+        steps: [
+          "Sazona el pollo con sal y pimienta y c\xF3rtalo en filetes finos.",
+          "Calienta una plancha con una gota de aceite a fuego fuerte.",
+          "Cocina el pollo 2-3 minutos por lado, hasta que est\xE9 dorado por fuera y hecho por dentro.",
+          "Deja reposar 2 minutos y c\xF3rtalo en tiras.",
+          "Lava y prepara la ensalada (lechuga, tomate y lo que tengas a mano).",
+          "Monta la ensalada en un plato y coloca las tiras de pollo templado por encima.",
+          "Ali\xF1a con aceite de oliva, vinagre y sal justo antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F955}",
         name: "Crema de zanahoria con tortilla francesa",
         time: "30 min",
         items: [{ id: "zanahoria", qty: 0.7 }, { id: "huevos", qty: 0.5 }],
-        steps: ["Cuece y tritura la zanahoria.", "Acompa\xF1a con una tortilla francesa sencilla."]
+        steps: [
+          "Pela y corta la zanahoria en rodajas.",
+          "Cu\xE9cela en agua con sal 18-20 minutos, hasta que est\xE9 muy tierna.",
+          "Escurre, reservando un poco de agua de cocci\xF3n, y tritura con la batidora hasta que quede una crema fina.",
+          "Ajusta la textura con el agua reservada si hace falta.",
+          "Bate los huevos para la tortilla francesa con una pizca de sal.",
+          "Cuaja en una sart\xE9n peque\xF1a con una gota de aceite, 1-2 minutos por lado.",
+          "Sirve la crema bien caliente junto a la tortilla reci\xE9n hecha."
+        ]
       }
     },
     {
@@ -362,14 +574,28 @@
         name: "Salm\xF3n al horno con verduras asadas",
         time: "35 min",
         items: [{ id: "salmon", qty: 0.5 }, { id: "asar", qty: 0.6 }],
-        steps: ["Hornea el salm\xF3n junto a las verduras troceadas, 190\xB0C 18-20 min."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Trocea las verduras variadas en trozos similares y col\xF3calas en una bandeja de horno con aceite y sal.",
+          "Hornea las verduras solas 10 minutos para que empiecen a asarse.",
+          "Saca la bandeja, a\xF1ade los lomos de salm\xF3n encima o al lado, con sal y un chorrito de aceite.",
+          "Vuelve a hornear 18-20 minutos m\xE1s, hasta que el salm\xF3n est\xE9 hecho pero jugoso.",
+          "Deja reposar 2 minutos antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F372}",
         name: "Sopa de verduras con huevo",
         time: "25 min",
         items: [{ id: "zanahoria", qty: 0.3 }, { id: "asar", qty: 0.3 }, { id: "huevos", qty: 0.5 }],
-        steps: ["Cuece las verduras troceadas en agua o caldo.", "Casca el huevo dentro al final, 2-3 min."]
+        steps: [
+          "Pica la zanahoria y las verduras variadas en trozos peque\xF1os.",
+          "Ponlas a cocer en una olla con agua o caldo y una pizca de sal.",
+          "Cuece a fuego medio 15-18 minutos, hasta que las verduras est\xE9n tiernas.",
+          "Casca el huevo directamente dentro de la sopa hirviendo a fuego suave.",
+          "Deja cocer 2-3 minutos sin remover demasiado, hasta que el huevo cuaje.",
+          "Sirve bien caliente, repartiendo el huevo entre los platos."
+        ]
       }
     }
   ];
@@ -381,14 +607,32 @@
         name: "Risotto de setas con parmesano",
         time: "35 min",
         items: [{ id: "arroz", qty: 0.3 }, { id: "setas", qty: 0.3 }, { id: "parmesano", qty: 1 }, { id: "vinoBlancoCocina", qty: 0.2 }],
-        steps: ["Sofr\xEDe las setas, a\xF1ade el arroz y ve incorporando caldo poco a poco con un toque de vino blanco.", "Termina con parmesano."]
+        steps: [
+          "Limpia las setas con un pa\xF1o h\xFAmedo y c\xF3rtalas en l\xE1minas.",
+          "Calienta caldo (de verduras o pollo) en una olla aparte y mantenlo caliente a fuego muy bajo.",
+          "En una sart\xE9n amplia, sofr\xEDe las setas con un poco de aceite 4-5 minutos, hasta que suelten su agua y se doren ligeramente. Reserva la mitad para decorar al final.",
+          "En la misma sart\xE9n, a\xF1ade el arroz y remueve 1-2 minutos para que se impregne de los sabores.",
+          "Vierte el vino blanco y deja que se evapore el alcohol, removiendo, durante 1 minuto.",
+          "A\xF1ade el caldo caliente poco a poco, un cacillo cada vez, removiendo constantemente y esperando a que se absorba antes de a\xF1adir m\xE1s. Repite durante 16-18 minutos.",
+          "Cuando el arroz est\xE9 cremoso y en su punto, retira del fuego y a\xF1ade el parmesano rallado, removiendo con energ\xEDa para que quede meloso.",
+          "Sirve de inmediato con las setas reservadas por encima."
+        ]
       },
       cena: {
         emoji: "\u{1F969}",
         name: "Solomillo de cerdo al horno con boniato",
         time: "40 min",
         items: [{ id: "solomilloCerdo", qty: 0.5 }, { id: "boniato", qty: 0.6 }],
-        steps: ["Sella el solomillo en la sart\xE9n y termina en el horno 15 min a 190\xB0C.", "Sirve con boniato asado."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Pela el boniato y c\xF3rtalo en dados; col\xF3calo en una bandeja con aceite y sal.",
+          "Hornea el boniato 10 minutos mientras preparas la carne.",
+          "Sazona el solomillo entero con sal y pimienta por todos los lados.",
+          "Calienta una sart\xE9n con un poco de aceite a fuego fuerte y sella el solomillo 1-2 minutos por cada lado, hasta que est\xE9 dorado por fuera.",
+          "Pasa el solomillo a la bandeja con el boniato y termina de hornear todo junto 12-15 minutos.",
+          "Comprueba el punto pinchando con un cuchillo: el jugo debe salir ligeramente rosado, no rojo.",
+          "Deja reposar la carne 5 minutos antes de cortarla en medallones, para que no pierda jugo."
+        ]
       }
     },
     {
@@ -398,14 +642,30 @@
         name: "Bacalao al horno con patatas y pimientos",
         time: "40 min",
         items: [{ id: "bacalao", qty: 0.5 }, { id: "patatas", qty: 0.5 }, { id: "asar", qty: 0.3 }],
-        steps: ["Coloca patatas y pimientos como base, encima el bacalao, horno 25 min a 190\xB0C."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Pela y corta las patatas en rodajas finas y los pimientos en tiras.",
+          "Coloca las patatas y pimientos como base en una bandeja, con aceite, sal y un poco de agua.",
+          "Hornea esta base 15 minutos, hasta que las patatas empiecen a ablandarse.",
+          "Coloca los lomos de bacalao desalado encima, con un chorrito de aceite de oliva.",
+          "Hornea 10-12 minutos m\xE1s, hasta que el bacalao est\xE9 blanco y tierno, sin pasarse de cocci\xF3n.",
+          "Deja reposar 2 minutos y sirve directamente de la bandeja."
+        ]
       },
       cena: {
         emoji: "\u{1F990}",
         name: "Langostinos a la plancha con ensalada",
         time: "20 min",
         items: [{ id: "langostinos", qty: 0.4 }, { id: "ensalada", qty: 0.3 }],
-        steps: ["Plancha los langostinos 2-3 min por lado con un poco de ajo.", "Sirve con ensalada fresca."]
+        steps: [
+          "Si los langostinos est\xE1n congelados, descong\xE9lalos antes en agua fr\xEDa.",
+          "S\xE9calos bien con papel de cocina (importante para que se doren en vez de hervirse en su propio jugo).",
+          "Pica un diente de ajo muy fino.",
+          "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite y el ajo picado.",
+          "Coloca los langostinos y cocina 2 minutos por lado, hasta que est\xE9n rosados y curvados.",
+          "Sazona con un poco de sal gruesa justo al sacarlos.",
+          "Sirve inmediatamente, reci\xE9n hechos, junto a la ensalada ali\xF1ada."
+        ]
       }
     },
     {
@@ -415,14 +675,29 @@
         name: "Pasta con setas y parmesano",
         time: "25 min",
         items: [{ id: "pasta", qty: 1 }, { id: "setas", qty: 0.3 }, { id: "parmesano", qty: 1 }],
-        steps: ["Saltea las setas, cuece la pasta y mezcla con un buen pu\xF1ado de parmesano rallado."]
+        steps: [
+          "Pon a hervir agua abundante con sal para la pasta.",
+          "Limpia y corta las setas en l\xE1minas.",
+          "Cuece la pasta el tiempo que indique el paquete (normalmente 9-11 minutos).",
+          "Mientras, saltea las setas en una sart\xE9n con un poco de aceite 5-6 minutos, hasta que se doren.",
+          "Reserva un poco del agua de cocci\xF3n de la pasta antes de escurrirla.",
+          "Mezcla la pasta escurrida con las setas en la sart\xE9n, a\xF1adiendo un chorrito del agua reservada para ligar.",
+          "Retira del fuego y a\xF1ade un buen pu\xF1ado de parmesano rallado, removiendo bien antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F420}",
         name: "Salm\xF3n en salsa de vino blanco con arroz",
         time: "30 min",
         items: [{ id: "salmon", qty: 0.5 }, { id: "vinoBlancoCocina", qty: 0.2 }, { id: "arroz", qty: 0.3 }],
-        steps: ["Plancha el salm\xF3n y reserva.", "En la misma sart\xE9n, reduce el vino blanco para la salsa.", "Sirve con arroz."]
+        steps: [
+          "Pon a cocer el arroz en agua con sal 15-18 minutos.",
+          "Sazona los lomos de salm\xF3n con sal y pimienta.",
+          "Calienta una sart\xE9n con un poco de aceite y cocina el salm\xF3n 3-4 minutos por lado, hasta que est\xE9 dorado. Retira y reserva.",
+          "En la misma sart\xE9n (sin lavarla, para aprovechar los sabores), a\xF1ade el vino blanco y deja que reduzca a fuego medio 2-3 minutos.",
+          "Si quieres una salsa m\xE1s untuosa, a\xF1ade una cucharada de nata o mantequilla y remueve hasta que se integre.",
+          "Vierte la salsa sobre el salm\xF3n reservado y sirve con el arroz escurrido."
+        ]
       }
     },
     {
@@ -432,14 +707,29 @@
         name: "Solomillo de cerdo con salsa y verduras",
         time: "35 min",
         items: [{ id: "solomilloCerdo", qty: 0.5 }, { id: "asar", qty: 0.5 }],
-        steps: ["Sella el solomillo y termina al horno.", "Acompa\xF1a con las verduras asadas."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Trocea las verduras variadas y col\xF3calas en una bandeja con aceite y sal.",
+          "Sazona el solomillo y s\xE9llalo en una sart\xE9n caliente 1-2 minutos por lado, hasta dorarlo.",
+          "Coloca el solomillo sobre las verduras y hornea todo junto 15-18 minutos.",
+          "Mientras se hornea, puedes preparar una salsa r\xE1pida en la misma sart\xE9n de sellar, a\xF1adiendo un poco de caldo y dejando reducir 3-4 minutos.",
+          "Deja reposar la carne 5 minutos antes de cortarla en medallones.",
+          "Sirve con las verduras asadas y la salsa por encima."
+        ]
       },
       cena: {
         emoji: "\u{1F41F}",
         name: "Merluza en salsa verde con patatas",
         time: "30 min",
         items: [{ id: "merluza", qty: 0.5 }, { id: "patatas", qty: 0.5 }],
-        steps: ["Cuece la merluza en caldo con perejil y un toque de vino.", "Sirve con patatas cocidas."]
+        steps: [
+          "Pela y cuece las patatas en agua con sal 18-20 minutos, hasta que est\xE9n tiernas.",
+          "Pica un pu\xF1ado de perejil fresco muy fino.",
+          "En una sart\xE9n baja, calienta un poco de caldo de pescado o agua con un chorrito de vino blanco.",
+          "A\xF1ade los lomos de merluza y cuece a fuego suave 8-10 minutos, hasta que est\xE9n blancos y tiernos.",
+          "Retira el pescado con cuidado y a\xF1ade el perejil picado al l\xEDquido de cocci\xF3n, removiendo para ligar la salsa.",
+          "Sirve la merluza con la salsa verde por encima y las patatas cocidas al lado."
+        ]
       }
     },
     {
@@ -449,14 +739,29 @@
         name: "Langostinos al ajillo con arroz",
         time: "25 min",
         items: [{ id: "langostinos", qty: 0.4 }, { id: "arroz", qty: 0.3 }],
-        steps: ["Saltea los langostinos con ajo y guindilla.", "Sirve sobre arroz blanco."]
+        steps: [
+          "Pon a cocer el arroz en agua con sal 15-18 minutos.",
+          "Pela los langostinos si lo prefieres, o d\xE9jalos enteros para m\xE1s sabor.",
+          "Pica 2-3 dientes de ajo en l\xE1minas y, si te gusta el toque picante, una guindilla peque\xF1a.",
+          "Calienta abundante aceite de oliva en una sart\xE9n y dora el ajo a fuego medio, sin que se queme.",
+          "Sube el fuego, a\xF1ade los langostinos y saltea 2-3 minutos, hasta que cambien de color.",
+          "Sirve los langostinos con su aceite de ajo por encima, acompa\xF1ados del arroz blanco escurrido."
+        ]
       },
       cena: {
         emoji: "\u{1F344}",
         name: "Risotto de calabac\xEDn y parmesano",
         time: "30 min",
         items: [{ id: "arroz", qty: 0.3 }, { id: "calabacin", qty: 0.4 }, { id: "parmesano", qty: 1 }],
-        steps: ["Sofr\xEDe el calabac\xEDn, a\xF1ade el arroz y caldo poco a poco.", "Termina con parmesano rallado."]
+        steps: [
+          "Corta el calabac\xEDn en dados peque\xF1os.",
+          "Calienta caldo en una olla aparte y mantenlo caliente a fuego bajo.",
+          "Sofr\xEDe el calabac\xEDn en una sart\xE9n amplia con un poco de aceite 4-5 minutos.",
+          "A\xF1ade el arroz y remueve 1-2 minutos para que se impregne.",
+          "Incorpora el caldo caliente poco a poco, un cacillo cada vez, esperando a que se absorba antes de a\xF1adir m\xE1s, durante 16-18 minutos, removiendo a menudo.",
+          "Cuando el arroz est\xE9 cremoso, retira del fuego y a\xF1ade el parmesano rallado, removiendo con energ\xEDa.",
+          "Sirve inmediatamente, mientras est\xE1 bien meloso."
+        ]
       }
     },
     {
@@ -466,14 +771,28 @@
         name: "Bacalao confitado con pimientos",
         time: "35 min",
         items: [{ id: "bacalao", qty: 0.5 }, { id: "asar", qty: 0.4 }],
-        steps: ["Confita el bacalao a fuego muy suave en aceite.", "Sirve con los pimientos asados."]
+        steps: [
+          "Corta los pimientos en tiras y \xE1salos en el horno a 200\xB0C durante 20 minutos, o salt\xE9alos en una sart\xE9n 10 minutos.",
+          "Seca bien los lomos de bacalao desalado con papel de cocina.",
+          "Cubre el fondo de una sart\xE9n con abundante aceite de oliva (debe cubrir el pescado) y calienta a fuego muy bajo, sin que llegue a hervir.",
+          "Introduce el bacalao en el aceite templado y cocina 8-10 minutos a fuego muy suave, sin que el aceite burbujee, para que quede meloso.",
+          "Retira con cuidado con una esp\xE1tula, escurriendo el exceso de aceite.",
+          "Sirve el bacalao confitado con los pimientos asados al lado."
+        ]
       },
       cena: {
         emoji: "\u{1F969}",
         name: "Solomillo con boniato y reducci\xF3n de vino",
         time: "40 min",
         items: [{ id: "solomilloCerdo", qty: 0.5 }, { id: "boniato", qty: 0.5 }, { id: "vinoBlancoCocina", qty: 0.15 }],
-        steps: ["Sella el solomillo, reserva.", "Reduce el vino en la sart\xE9n para la salsa.", "Sirve con boniato asado."]
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Pela el boniato, c\xF3rtalo en dados y horn\xE9alo con aceite y sal 25 minutos, dando la vuelta a mitad de cocci\xF3n.",
+          "Sazona el solomillo y s\xE9llalo en una sart\xE9n caliente 1-2 minutos por cada lado.",
+          "Termina de hacerlo al horno, junto al boniato, 12-15 minutos m\xE1s, hasta el punto que prefieras.",
+          "Retira la carne y d\xE9jala reposar. En la misma sart\xE9n de sellar, a\xF1ade el vino blanco y deja reducir 3-4 minutos a fuego medio, removiendo para que se mezcle con los restos de la sart\xE9n.",
+          "Corta el solomillo en medallones y sirve con la reducci\xF3n de vino por encima y el boniato asado al lado."
+        ]
       }
     },
     {
@@ -483,14 +802,30 @@
         name: "Paella de marisco sencilla",
         time: "40 min",
         items: [{ id: "arroz", qty: 0.4 }, { id: "langostinos", qty: 0.4 }, { id: "asar", qty: 0.3 }],
-        steps: ["Sofr\xEDe las verduras, a\xF1ade el arroz, el caldo y los langostinos al final.", "Cuece sin remover 18-20 min."]
+        steps: [
+          "Calienta caldo de pescado o marisco en una olla aparte y mantenlo caliente.",
+          "Corta las verduras variadas en trozos peque\xF1os.",
+          "En una paellera o sart\xE9n amplia y baja, sofr\xEDe las verduras con aceite 5-6 minutos.",
+          "A\xF1ade el arroz y remueve 1-2 minutos para que se impregne del sofrito.",
+          "Vierte el caldo caliente (el doble de volumen que de arroz) y reparte el arroz de forma uniforme por toda la sart\xE9n.",
+          "Deja cocer sin remover a fuego medio-alto los primeros 10 minutos, y luego a fuego m\xE1s bajo otros 8-10 minutos.",
+          "Cinco minutos antes de terminar, coloca los langostinos por encima para que se cocinen con el vapor del arroz.",
+          "Deja reposar 3-5 minutos fuera del fuego, tapado con un pa\xF1o, antes de servir."
+        ]
       },
       cena: {
         emoji: "\u{1F344}",
         name: "Crema de setas con parmesano",
         time: "30 min",
         items: [{ id: "setas", qty: 0.5 }, { id: "leche", qty: 0.3 }, { id: "parmesano", qty: 1 }],
-        steps: ["Saltea las setas, cuece con la leche y tritura.", "Sirve con parmesano rallado por encima."]
+        steps: [
+          "Limpia las setas con un pa\xF1o h\xFAmedo y c\xF3rtalas en l\xE1minas.",
+          "Saltea las setas en una sart\xE9n con un poco de aceite 6-7 minutos, hasta que se doren y suelten su aroma.",
+          "A\xF1ade la leche y deja que se caliente a fuego suave, sin que llegue a hervir fuerte, 3-4 minutos.",
+          "Tritura todo con la batidora hasta conseguir una crema fina (si te gusta con textura, reserva un par de l\xE1minas de setas para decorar).",
+          "Vuelve a calentar la crema un par de minutos si se ha enfriado al triturar.",
+          "Sirve bien caliente con parmesano rallado por encima."
+        ]
       }
     }
   ];
@@ -499,6 +834,16 @@
     normal: { label: "Normal", desc: "El equilibrio habitual entre sencillez, variedad y coste.", menu: MENU_NORMAL },
     elaborada: { label: "Elaborada", desc: "Ingredientes m\xE1s sofisticados: solomillo, marisco, risottos.", menu: MENU_ELABORADA }
   };
+  var NIVELES = [
+    { key: "sana", emoji: "\u{1F7E2}", label: "Econ\xF3mico", sub: "Sana y sencilla" },
+    { key: "normal", emoji: "\u{1F7E1}", label: "Equilibrado", sub: "Lo habitual" },
+    { key: "elaborada", emoji: "\u{1F534}", label: "Variado / gourmet", sub: "M\xE1s sofisticado" }
+  ];
+  var OBJETIVOS = [
+    { key: "ahorrar", emoji: "\u{1F4B0}", label: "Ahorrar" },
+    { key: "saludable", emoji: "\u{1F966}", label: "Comer saludable" },
+    { key: "equilibrado", emoji: "\u2696\uFE0F", label: "Equilibrado" }
+  ];
   var fmt = (n) => n.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   var fmtNum = (n) => n.toLocaleString("es-ES", { maximumFractionDigits: n < 10 ? 2 : 0 });
   var formatQty = (qty, unit) => {
@@ -523,6 +868,9 @@
     const [openCategories, setOpenCategories] = useState({});
     const [avoidIds, setAvoidIds] = useState([]);
     const [favoritos, setFavoritos] = useState([]);
+    const [boughtItems, setBoughtItems] = useState([]);
+    const [presupuestoSemanal, setPresupuestoSemanal] = useState("");
+    const [objetivo, setObjetivo] = useState("equilibrado");
     useEffect(() => {
       (async () => {
         try {
@@ -572,6 +920,21 @@
         try {
           const res8 = await storage.get("favoritos");
           if (res8 && res8.value) setFavoritos(JSON.parse(res8.value));
+        } catch (e) {
+        }
+        try {
+          const res9 = await storage.get("lista-compra-comprados");
+          if (res9 && res9.value) setBoughtItems(JSON.parse(res9.value));
+        } catch (e) {
+        }
+        try {
+          const res10 = await storage.get("presupuesto-semanal");
+          if (res10 && res10.value) setPresupuestoSemanal(res10.value);
+        } catch (e) {
+        }
+        try {
+          const res11 = await storage.get("objetivo-usuario");
+          if (res11 && res11.value) setObjetivo(res11.value);
         } catch (e) {
         }
         setLoaded(true);
@@ -739,6 +1102,29 @@
         return next;
       });
     };
+    const toggleBought = (id) => {
+      setBoughtItems((prev) => {
+        const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+        storage.set("lista-compra-comprados", JSON.stringify(next)).catch(() => {
+        });
+        return next;
+      });
+    };
+    const vaciarLista = () => {
+      setBoughtItems([]);
+      storage.set("lista-compra-comprados", JSON.stringify([])).catch(() => {
+      });
+    };
+    const updatePresupuestoSemanal = (value) => {
+      setPresupuestoSemanal(value);
+      storage.set("presupuesto-semanal", value).catch(() => {
+      });
+    };
+    const updateObjetivo = (value) => {
+      setObjetivo(value);
+      storage.set("objetivo-usuario", value).catch(() => {
+      });
+    };
     const ingresosNum = parseFloat(ingresos) || 0;
     const presupuestoMin = ingresosNum * 0.1;
     const presupuestoMax = ingresosNum * 0.2;
@@ -751,7 +1137,32 @@
       const p = t.reduce((a, b) => b.total > a.total ? b : a, t[0]);
       return { totals: t, cheapest: c, priciest: p, savings: p.total - c.total, monthlyCost: weeklyTotal(c.id) * 4.33 };
     }, [weeklyTotal]);
-    if (!loaded) return null;
+    const shoppingByCategory = CATEGORIES.map((cat) => ({
+      name: cat.name,
+      items: cat.ids.filter((id) => ingredientUsage[id]).map((id) => ({
+        id,
+        label: prices[id].label,
+        qtyLabel: formatQty(ingredientUsage[id].totalQty, prices[id].unit),
+        cost: (prices[id][cheapest.id] || 0) * ingredientUsage[id].totalQty
+      }))
+    })).filter((cat) => cat.items.length > 0);
+    const shoppingExtras = Object.entries(extrasQty).map(([id, qty]) => {
+      const ex = EXTRAS.find((e) => e.id === id);
+      return { id: `extra-${id}`, label: ex.label, qtyLabel: `${qty} ud.`, cost: ex[cheapest.id] * qty };
+    });
+    const allShoppingItems = [...shoppingByCategory.flatMap((c) => c.items), ...shoppingExtras];
+    const shoppingTotalAll = allShoppingItems.reduce((s, it) => s + it.cost, 0);
+    const shoppingTotalPendiente = allShoppingItems.filter((it) => !boughtItems.includes(it.id)).reduce((s, it) => s + it.cost, 0);
+    if (!loaded) {
+      return /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          style: { background: "#F3EEE3", color: "#6B6552", minHeight: "100vh" },
+          className: "flex items-center justify-center font-mono text-sm"
+        },
+        "Cargando tu men\xFA\u2026"
+      );
+    }
     return /* @__PURE__ */ React.createElement("div", { style: { background: "#F3EEE3", color: "#20281F", minHeight: "100vh" }, className: "font-body" }, /* @__PURE__ */ React.createElement("style", null, `
         .font-body { font-family: 'Work Sans', sans-serif; }
         .font-display { font-family: 'Archivo Black', sans-serif; }
@@ -763,20 +1174,55 @@
           background-color: #FBF8F0; margin-top: -1px;
         }
         .stamp { transform: rotate(-6deg); border: 3px solid #C2452F; color: #C2452F; }
-      `), /* @__PURE__ */ React.createElement("header", { className: "max-w-3xl mx-auto px-5 pt-10 pb-6" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#3F6B4F" } }, "Men\xFA semanal \xB7 comida y cena"), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-3xl sm:text-4xl mt-2 leading-tight" }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#4A4536" } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado.")), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Estilo de men\xFA"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, Object.entries(STYLES).map(([key, s]) => /* @__PURE__ */ React.createElement(
-      "button",
+      `), /* @__PURE__ */ React.createElement("header", { className: "max-w-3xl mx-auto px-5 pt-10 pb-6" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#3F6B4F" } }, "Men\xFA semanal \xB7 comida y cena"), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-3xl sm:text-4xl mt-2 leading-tight" }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#4A4536" } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado.")), /* @__PURE__ */ React.createElement(
+      "nav",
       {
-        key,
-        onClick: () => setStyle(key),
-        className: "font-mono text-xs px-3 py-1.5 rounded-sm",
+        className: "sticky top-0 z-10 overflow-x-auto whitespace-nowrap px-5 py-2.5 mb-6",
+        style: { background: "#F3EEE3", borderBottom: "1px solid #C9C0AC" },
+        "aria-label": "Navegaci\xF3n r\xE1pida entre secciones"
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto flex gap-2" }, [
+        { href: "#perfil", label: "Perfil" },
+        { href: "#menu-semana", label: "Men\xFA" },
+        { href: "#lista-compra", label: "Lista" },
+        { href: "#comparativa", label: "S\xFApers" },
+        { href: "#presupuesto", label: "Presupuesto" },
+        { href: "#historico", label: "Hist\xF3rico" },
+        { href: "#editor-precios", label: "Precios" }
+      ].map((item) => /* @__PURE__ */ React.createElement(
+        "a",
+        {
+          key: item.href,
+          href: item.href,
+          className: "font-mono text-xs px-2.5 py-1 rounded-sm flex-shrink-0",
+          style: { border: "1px solid #C9C0AC", background: "#FBF8F0", color: "#3F6B4F" }
+        },
+        item.label
+      )))
+    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4", style: { background: "#FBF8F0", border: "1.5px solid #3F6B4F" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "number",
+        value: presupuestoSemanal,
+        onChange: (e) => updatePresupuestoSemanal(e.target.value),
+        placeholder: "Ej. 70",
+        className: "font-mono text-lg bg-transparent border-b outline-none w-24",
+        style: { borderColor: "#3F6B4F" }
+      }
+    ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / semana"), parseFloat(presupuestoSemanal) > 0 && /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        className: "font-mono text-xs ml-auto px-2 py-1 rounded-sm",
         style: {
-          border: `1.5px solid ${menuStyle === key ? "#3F6B4F" : "#C9C0AC"}`,
-          background: menuStyle === key ? "#3F6B4F" : "#FBF8F0",
-          color: menuStyle === key ? "#FBF8F0" : "#20281F"
+          background: cheapest.total <= parseFloat(presupuestoSemanal) ? "#3F6B4F" : "#C2452F",
+          color: "#FBF8F0"
         }
       },
-      s.label
-    ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-1.5", style: { color: "#8A8470" } }, STYLES[menuStyle].desc)), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "\xBFPara cu\xE1ntos cocinas?"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, HOUSEHOLDS.map((h) => /* @__PURE__ */ React.createElement(
+      cheapest.total <= parseFloat(presupuestoSemanal) ? "Dentro" : "Por encima",
+      " \xB7 ",
+      fmt(cheapest.total),
+      " \u20AC"
+    )), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Personas en casa"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mb-4" }, HOUSEHOLDS.map((h) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: h.n,
@@ -784,12 +1230,42 @@
         className: "font-mono text-xs px-3 py-1.5 rounded-sm",
         style: {
           border: `1.5px solid ${servings === h.n ? "#3F6B4F" : "#C9C0AC"}`,
-          background: servings === h.n ? "#3F6B4F" : "#FBF8F0",
+          background: servings === h.n ? "#3F6B4F" : "#FFFFFF",
           color: servings === h.n ? "#FBF8F0" : "#20281F"
         }
       },
       h.label
-    )))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ingredientes a evitar (alergias o no me gusta) ", avoidIds.length > 0 ? `\xB7 ${avoidIds.length} seleccionados` : ""), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5 mt-3" }, Object.entries(prices).map(([id, ing]) => {
+    ))), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Nivel de comida"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mb-1" }, NIVELES.map((n) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: n.key,
+        onClick: () => setStyle(n.key),
+        className: "font-mono text-xs px-3 py-1.5 rounded-sm flex items-center gap-1.5",
+        style: {
+          border: `1.5px solid ${menuStyle === n.key ? "#3F6B4F" : "#C9C0AC"}`,
+          background: menuStyle === n.key ? "#3F6B4F" : "#FFFFFF",
+          color: menuStyle === n.key ? "#FBF8F0" : "#20281F"
+        }
+      },
+      /* @__PURE__ */ React.createElement("span", null, n.emoji),
+      " ",
+      n.label
+    ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, NIVELES.find((n) => n.key === menuStyle)?.sub, " \u2014 ", STYLES[menuStyle].desc), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Tu objetivo"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, OBJETIVOS.map((o) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: o.key,
+        onClick: () => updateObjetivo(o.key),
+        className: "font-mono text-xs px-3 py-1.5 rounded-sm flex items-center gap-1.5",
+        style: {
+          border: `1.5px solid ${objetivo === o.key ? "#3F6B4F" : "#C9C0AC"}`,
+          background: objetivo === o.key ? "#3F6B4F" : "#FFFFFF",
+          color: objetivo === o.key ? "#FBF8F0" : "#20281F"
+        }
+      },
+      /* @__PURE__ */ React.createElement("span", null, o.emoji),
+      " ",
+      o.label
+    ))), objetivo === "ahorrar" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#3F6B4F" } }, "\u{1F4A1} Como tu objetivo es ahorrar, el nivel \u{1F7E2} Econ\xF3mico suele salir m\xE1s barato. Pru\xE9balo y compara el ticket."), objetivo === "saludable" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#3F6B4F" } }, "\u{1F4A1} El nivel \u{1F7E2} Econ\xF3mico es tambi\xE9n el m\xE1s ligero en procesados y frituras esta semana."))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ingredientes a evitar (alergias o no me gusta) ", avoidIds.length > 0 ? `\xB7 ${avoidIds.length} seleccionados` : ""), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5 mt-3" }, Object.entries(prices).map(([id, ing]) => {
       const active = avoidIds.includes(id);
       return /* @__PURE__ */ React.createElement(
         "button",
@@ -805,7 +1281,7 @@
         },
         ing.label
       );
-    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-sm" }, "\u2212", fmt(savings), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu presupuesto"), /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-sm" }, "\u2212", fmt(savings), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu presupuesto"), /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -815,7 +1291,7 @@
         className: "font-mono text-lg bg-transparent border-b outline-none w-32",
         style: { borderColor: "#3F6B4F" }
       }
-    ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / mes")), ingresosNum > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-2", style: { color: "#4A4536" } }, "En Espa\xF1a, lo habitual es destinar entre el 10% y el 20% del ingreso a alimentaci\xF3n (media nacional: 15,8%, seg\xFAn el INE). Para tus ingresos, eso es:"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-sm mb-3" }, /* @__PURE__ */ React.createElement("strong", null, fmt(presupuestoMin), " \u20AC \u2013 ", fmt(presupuestoMax), " \u20AC / mes"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552" } }, " (media orientativa: ", fmt(presupuestoMedia), " \u20AC)")), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Tu men\xFA actual cuesta aprox."), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(monthlyCost), " \u20AC / mes")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: monthlyCost <= presupuestoMax ? "#3F6B4F" : "#C2452F" } }, monthlyCost < presupuestoMin ? "Est\xE1 por debajo del rango habitual \u2014 quiz\xE1 haya margen para variar m\xE1s el men\xFA." : monthlyCost <= presupuestoMax ? "Est\xE1 dentro del rango habitual para tus ingresos." : "Est\xE1 por encima del rango habitual \u2014 revisa el editor de precios o reduce extras.")) : /* @__PURE__ */ React.createElement("p", { className: "text-xs", style: { color: "#8A8470" } }, "Indica tus ingresos para ver si el coste de este men\xFA es razonable para tu situaci\xF3n."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 12, className: "mt-0.5 flex-shrink-0" }), "Referencia informativa (datos INE), no asesoramiento financiero. Tus gastos fijos (alquiler, hijos, deudas) cambian lo que es razonable para tu caso."))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, activeMenu.map((d) => /* @__PURE__ */ React.createElement("div", { key: d.day }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, d.day), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, ["comida", "cena"].map((mealType) => {
+    ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / mes")), ingresosNum > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-2", style: { color: "#4A4536" } }, "En Espa\xF1a, lo habitual es destinar entre el 10% y el 20% del ingreso a alimentaci\xF3n (media nacional: 15,8%, seg\xFAn el INE). Para tus ingresos, eso es:"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-sm mb-3" }, /* @__PURE__ */ React.createElement("strong", null, fmt(presupuestoMin), " \u20AC \u2013 ", fmt(presupuestoMax), " \u20AC / mes"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552" } }, " (media orientativa: ", fmt(presupuestoMedia), " \u20AC)")), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Tu men\xFA actual cuesta aprox."), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(monthlyCost), " \u20AC / mes")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: monthlyCost <= presupuestoMax ? "#3F6B4F" : "#C2452F" } }, monthlyCost < presupuestoMin ? "Est\xE1 por debajo del rango habitual \u2014 quiz\xE1 haya margen para variar m\xE1s el men\xFA." : monthlyCost <= presupuestoMax ? "Est\xE1 dentro del rango habitual para tus ingresos." : "Est\xE1 por encima del rango habitual \u2014 revisa el editor de precios o reduce extras.")) : /* @__PURE__ */ React.createElement("p", { className: "text-xs", style: { color: "#8A8470" } }, "Indica tus ingresos para ver si el coste de este men\xFA es razonable para tu situaci\xF3n."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 12, className: "mt-0.5 flex-shrink-0" }), "Referencia informativa (datos INE), no asesoramiento financiero. Tus gastos fijos (alquiler, hijos, deudas) cambian lo que es razonable para tu caso."))), /* @__PURE__ */ React.createElement("section", { id: "menu-semana", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, activeMenu.map((d) => /* @__PURE__ */ React.createElement("div", { key: d.day }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, d.day), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, ["comida", "cena"].map((mealType) => {
       const r = d[mealType];
       const key = `${d.day}-${mealType}`;
       const isOpen = openMeal === key;
@@ -829,14 +1305,82 @@
           className: "border rounded-sm",
           style: { borderColor: avoided ? "#C2452F" : "#C9C0AC", background: "#FBF8F0" }
         },
-        /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base" }, r.name))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => toggleFavorito(key) }, /* @__PURE__ */ React.createElement(Icon, { name: "star", size: 16, filled: isFav, color: isFav ? "#E8AE3D" : "#C9C0AC" })), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm" }, fmt(costCheapest), " \u20AC"), /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevronDown", size: 18, style: { transform: isOpen ? "rotate(180deg)" : "none", transition: "transform .2s" } })))),
+        /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base" }, r.name))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: () => toggleFavorito(key),
+            "aria-pressed": isFav,
+            "aria-label": isFav ? "Quitar de favoritos" : "Marcar como favorito"
+          },
+          /* @__PURE__ */ React.createElement(Icon, { name: "star", size: 16, filled: isFav, color: isFav ? "#E8AE3D" : "#C9C0AC" })
+        ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm" }, fmt(costCheapest), " \u20AC"), /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: () => setOpenMeal(isOpen ? null : key),
+            "aria-expanded": isOpen,
+            "aria-label": isOpen ? "Ocultar receta" : "Ver receta completa"
+          },
+          /* @__PURE__ */ React.createElement(Icon, { name: "chevronDown", size: 18, style: { transform: isOpen ? "rotate(180deg)" : "none", transition: "transform .2s" } })
+        ))),
         isOpen && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-4 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, avoided && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13, className: "mt-0.5 flex-shrink-0" }), "Contiene un ingrediente que marcaste para evitar. No se incluye en el total de la semana \u2014 sustit\xFAyelo o coc\xEDnalo aparte."), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Preparaci\xF3n"), /* @__PURE__ */ React.createElement("ol", { className: "text-sm mb-4 space-y-1.5", style: { color: "#4A4536" } }, r.steps.map((step, i) => /* @__PURE__ */ React.createElement("li", { key: i, className: "flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono flex-shrink-0", style: { color: "#3F6B4F" } }, i + 1, "."), /* @__PURE__ */ React.createElement("span", null, step)))), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Ingredientes para ", servings, " ", servings === 1 ? "persona" : "personas"), /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono" }, /* @__PURE__ */ React.createElement("tbody", null, r.items.map((it) => {
           const totalQty = it.qty * factor;
           const perPerson = totalQty / servings;
           return /* @__PURE__ */ React.createElement("tr", { key: it.id, style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1.5" }, prices[it.id].label), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#20281F" } }, formatQty(totalQty, prices[it.id].unit)), /* @__PURE__ */ React.createElement("span", { className: "text-xs" }, " (", formatQty(perPerson, prices[it.id].unit), "/persona)")), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right pl-4" }, fmt((prices[it.id][cheapest.id] || 0) * totalQty), " \u20AC"));
         }))))
       );
-    })))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "Comparativa de supermercados"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" }, totals.sort((a, b) => a.total - b.total).map((s) => /* @__PURE__ */ React.createElement("div", { key: s.id, className: "rounded-sm p-4 relative", style: { background: "#FBF8F0", border: `1.5px solid ${s.id === cheapest.id ? s.color : "#C9C0AC"}` } }, s.id === cheapest.id && /* @__PURE__ */ React.createElement("span", { className: "absolute -top-2 -right-2 rounded-full p-1", style: { background: "#3F6B4F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, s.name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xl font-bold mt-1" }, fmt(s.total), " \u20AC"))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Hist\xF3rico de semanas"), /* @__PURE__ */ React.createElement(
+    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        className: "flex items-center justify-between px-4 py-3 mb-3 rounded-sm",
+        style: { background: "#FBF8F0", border: "1.5px solid #3F6B4F" }
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Te queda por comprar"),
+      /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(shoppingTotalPendiente), " \u20AC")
+    ), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, shoppingByCategory.map((cat) => /* @__PURE__ */ React.createElement("div", { key: cat.name }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, cat.name), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, cat.items.map((it) => {
+      const checked = boughtItems.includes(it.id);
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: it.id,
+          onClick: () => toggleBought(it.id),
+          "aria-pressed": checked,
+          "aria-label": `Marcar ${it.label} como comprado`,
+          className: "w-full flex items-center justify-between px-3 py-2 rounded-sm text-left",
+          style: { background: "#FBF8F0", border: "1px solid #C9C0AC", opacity: checked ? 0.5 : 1 }
+        },
+        /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(
+          "span",
+          {
+            className: "flex items-center justify-center rounded-sm flex-shrink-0",
+            style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+          },
+          checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+        ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
+        /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
+      );
+    })))), shoppingExtras.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, "Picoteo y extras"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, shoppingExtras.map((it) => {
+      const checked = boughtItems.includes(it.id);
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: it.id,
+          onClick: () => toggleBought(it.id),
+          "aria-pressed": checked,
+          "aria-label": `Marcar ${it.label} como comprado`,
+          className: "w-full flex items-center justify-between px-3 py-2 rounded-sm text-left",
+          style: { background: "#FBF8F0", border: "1px solid #C9C0AC", opacity: checked ? 0.5 : 1 }
+        },
+        /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(
+          "span",
+          {
+            className: "flex items-center justify-center rounded-sm flex-shrink-0",
+            style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+          },
+          checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+        ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
+        /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
+      );
+    }))))), /* @__PURE__ */ React.createElement("section", { id: "comparativa", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "Comparativa de supermercados"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" }, totals.sort((a, b) => a.total - b.total).map((s) => /* @__PURE__ */ React.createElement("div", { key: s.id, className: "rounded-sm p-4 relative", style: { background: "#FBF8F0", border: `1.5px solid ${s.id === cheapest.id ? s.color : "#C9C0AC"}` } }, s.id === cheapest.id && /* @__PURE__ */ React.createElement("span", { className: "absolute -top-2 -right-2 rounded-full p-1", style: { background: "#3F6B4F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, s.name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xl font-bold mt-1" }, fmt(s.total), " \u20AC"))))), /* @__PURE__ */ React.createElement("section", { id: "historico", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Hist\xF3rico de semanas"), /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: () => guardarSemana(cheapest.total),
@@ -853,28 +1397,32 @@
         style: { background: "#FBF8F0", border: "1px solid #C9C0AC" }
       },
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, h.date), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, h.style), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, h.servings, " pers.")),
-      /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold" }, fmt(h.total), " \u20AC"), /* @__PURE__ */ React.createElement("button", { onClick: () => borrarSemana(h.id), style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "trash", size: 14 })))
-    ))))), (repeatedIngredients.length > 0 || leftoverIngredients.length > 0) && /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Aprovecha mejor la compra"), repeatedIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#3F6B4F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }), " Se repiten en varios platos"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, repeatedIngredients.map(([id, u]) => /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-sm text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "en ", u.count, " platos \xB7 compra un pack m\xE1s grande, lo aprovechas todo"))))), leftoverIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13 }), " Esto te puede sobrar"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, leftoverIngredients.map((u) => /* @__PURE__ */ React.createElement("div", { key: u.id, className: "flex items-center justify-between px-3 py-2 rounded-sm text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[u.id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs text-right", style: { color: "#6B6552" } }, "usas ", fmtNum(u.totalQty), " de ", u.packagesNeeded, " ", prices[u.id].unit, " que compras")))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Aprovecha el resto en otra receta de la semana siguiente, o cong\xE9lalo si se puede."))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Picoteo y extras"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "opcional")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536" } }, "Para el d\xEDa corriente \u2014 patatas, encurtidos, bebidas... M\xE1rcalos si quieres que se sumen al ticket de la semana; si no, el men\xFA sigue siendo solo las 14 comidas."), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2" }, EXTRAS.map((ex) => {
-      const checked = !!extrasQty[ex.id];
-      const qty = extrasQty[ex.id] || 1;
-      return /* @__PURE__ */ React.createElement(
-        "div",
-        {
-          key: ex.id,
-          className: "flex items-center justify-between px-3 py-2 rounded-sm",
-          style: { background: "#FBF8F0", border: `1.5px solid ${checked ? "#3F6B4F" : "#C9C0AC"}` }
-        },
-        /* @__PURE__ */ React.createElement("button", { onClick: () => toggleExtra(ex.id), className: "flex items-center gap-2 text-left flex-1" }, /* @__PURE__ */ React.createElement(
-          "span",
+      /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold" }, fmt(h.total), " \u20AC"), /* @__PURE__ */ React.createElement("button", { onClick: () => borrarSemana(h.id), "aria-label": `Borrar semana del ${h.date}`, style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "trash", size: 14 })))
+    ))))), (repeatedIngredients.length > 0 || leftoverIngredients.length > 0) && /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Aprovecha mejor la compra"), repeatedIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#3F6B4F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }), " Se repiten en varios platos"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, repeatedIngredients.map(([id, u]) => /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-sm text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "en ", u.count, " platos \xB7 compra un pack m\xE1s grande, lo aprovechas todo"))))), leftoverIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13 }), " Esto te puede sobrar"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, leftoverIngredients.map((u) => /* @__PURE__ */ React.createElement("div", { key: u.id, className: "flex items-center justify-between px-3 py-2 rounded-sm text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[u.id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs text-right", style: { color: "#6B6552" } }, "usas ", fmtNum(u.totalQty), " de ", u.packagesNeeded, " ", prices[u.id].unit, " que compras")))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Aprovecha el resto en otra receta de la semana siguiente, o cong\xE9lalo si se puede."))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-4" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Picoteo y extras"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "opcional")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536" } }, "Para el d\xEDa corriente \u2014 patatas, encurtidos, bebidas... M\xE1rcalos si quieres que se sumen al ticket de la semana; si no, el men\xFA sigue siendo solo las 14 comidas."), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, EXTRA_CATEGORIES.map((catName) => {
+      const items = EXTRAS.filter((ex) => ex.category === catName);
+      if (items.length === 0) return null;
+      return /* @__PURE__ */ React.createElement("div", { key: catName }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, catName), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2" }, items.map((ex) => {
+        const checked = !!extrasQty[ex.id];
+        const qty = extrasQty[ex.id] || 1;
+        return /* @__PURE__ */ React.createElement(
+          "div",
           {
-            className: "flex items-center justify-center rounded-sm",
-            style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+            key: ex.id,
+            className: "flex items-center justify-between px-3 py-2 rounded-sm",
+            style: { background: "#FBF8F0", border: `1.5px solid ${checked ? "#3F6B4F" : "#C9C0AC"}` }
           },
-          checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
-        ), /* @__PURE__ */ React.createElement("span", { className: "text-lg" }, ex.emoji), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, ex.label)),
-        checked && /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, -1), className: "px-1.5", style: { color: "#3F6B4F" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, 1), className: "px-1.5", style: { color: "#3F6B4F" } }, "+"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552", minWidth: 48, textAlign: "right" } }, fmt(ex[cheapest.id] * qty), " \u20AC"))
-      );
-    }))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-16" }, /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React.createElement("button", { onClick: () => toggleExtra(ex.id), className: "flex items-center gap-2 text-left flex-1" }, /* @__PURE__ */ React.createElement(
+            "span",
+            {
+              className: "flex items-center justify-center rounded-sm",
+              style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+            },
+            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+          ), /* @__PURE__ */ React.createElement("span", { className: "text-lg" }, ex.emoji), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, ex.label)),
+          checked && /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, -1), className: "px-1.5", style: { color: "#3F6B4F" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, 1), className: "px-1.5", style: { color: "#3F6B4F" } }, "+"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552", minWidth: 48, textAlign: "right" } }, fmt(ex[cheapest.id] * qty), " \u20AC"))
+        );
+      })));
+    }))), /* @__PURE__ */ React.createElement("section", { id: "editor-precios", className: "max-w-3xl mx-auto px-5 mb-16" }, /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: () => setEditing((v) => !v),
@@ -912,7 +1460,7 @@
           }
         ))));
       }));
-    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm", style: { background: "#3F6B4F", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#3F6B4F" } }, saveMsg)))), /* @__PURE__ */ React.createElement("footer", { className: "max-w-3xl mx-auto px-5 pb-10 text-xs", style: { color: "#8A8470" } }, "La Compra Justa \xB7 precios de referencia, no oficiales de cada cadena."));
+    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm", style: { background: "#3F6B4F", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#3F6B4F" } }, saveMsg)))), /* @__PURE__ */ React.createElement("footer", { className: "max-w-3xl mx-auto px-5 pb-10 text-xs", style: { color: "#8A8470" } }, "Prototipo \xB7 precios de referencia, no oficiales de cada cadena."));
   }
   var root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(/* @__PURE__ */ React.createElement(App, null));
