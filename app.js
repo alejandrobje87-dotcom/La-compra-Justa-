@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new3.jsx
+  // app-source-new5.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -120,6 +120,16 @@
     { name: "Legumbres y cereales", ids: ["garbanzos", "lentejas", "arroz", "pasta", "quinoa"] },
     { name: "L\xE1cteos y huevos", ids: ["huevos", "leche", "quesoRallado", "parmesano"] },
     { name: "Despensa", ids: ["tomateFrito", "panHamburguesa", "masaPizza", "vinoBlancoCocina"] }
+  ];
+  var ALLERGEN_GROUPS = [
+    { key: "gluten", emoji: "\u{1F33E}", label: "Gluten", ids: ["pasta", "masaPizza", "panHamburguesa"] },
+    { key: "lactosa", emoji: "\u{1F95B}", label: "Lactosa", ids: ["leche", "quesoRallado", "parmesano"] },
+    { key: "huevo", emoji: "\u{1F95A}", label: "Huevo", ids: ["huevos"] },
+    { key: "pescado", emoji: "\u{1F41F}", label: "Pescado", ids: ["salmon", "merluza", "atun", "bacalao"] },
+    { key: "marisco", emoji: "\u{1F990}", label: "Marisco", ids: ["langostinos"] },
+    { key: "legumbres", emoji: "\u{1FAD8}", label: "Legumbres", ids: ["garbanzos", "lentejas"] },
+    { key: "cerdo", emoji: "\u{1F437}", label: "Cerdo", ids: ["chorizo", "jamonYork", "solomilloCerdo"] },
+    { key: "alcohol", emoji: "\u{1F377}", label: "Alcohol (cocina)", ids: ["vinoBlancoCocina"] }
   ];
   var EXTRAS = [
     { id: "manzanas", emoji: "\u{1F34E}", label: "Manzanas (kg)", category: "Fruta", mercadona: 1.4, lidl: 1.2, carrefour: 1.6, dia: 1.3 },
@@ -876,6 +886,9 @@
     const [fechaObjetivoPeso, setFechaObjetivoPeso] = useState("");
     const [pesoHistorial, setPesoHistorial] = useState([]);
     const [pesoMsg, setPesoMsg] = useState("");
+    const [swaps, setSwaps] = useState({});
+    const [swapPickerKey, setSwapPickerKey] = useState(null);
+    const [shareMsg, setShareMsg] = useState("");
     useEffect(() => {
       (async () => {
         try {
@@ -962,6 +975,11 @@
           if (res15 && res15.value) setPesoHistorial(JSON.parse(res15.value));
         } catch (e) {
         }
+        try {
+          const res16 = await storage.get("intercambios-platos");
+          if (res16 && res16.value) setSwaps(JSON.parse(res16.value));
+        } catch (e) {
+        }
         setLoaded(true);
       })();
     }, []);
@@ -1030,12 +1048,34 @@
       }, 0);
     }, [prices, factor]);
     const activeMenu = STYLES[menuStyle].menu;
+    const getMeal = (day, mealType) => {
+      const key = `${menuStyle}|${day}|${mealType}`;
+      const overrideDay = swaps[key];
+      if (overrideDay) {
+        const sourceDay = activeMenu.find((d) => d.day === overrideDay);
+        if (sourceDay) return sourceDay[mealType];
+      }
+      const original = activeMenu.find((d) => d.day === day);
+      return original[mealType];
+    };
+    const swapMeal = (day, mealType, fromDay) => {
+      const key = `${menuStyle}|${day}|${mealType}`;
+      setSwaps((prev) => {
+        const next = { ...prev };
+        if (fromDay === day) delete next[key];
+        else next[key] = fromDay;
+        storage.set("intercambios-platos", JSON.stringify(next)).catch(() => {
+        });
+        return next;
+      });
+      setSwapPickerKey(null);
+    };
     const allMeals = useMemo(
       () => activeMenu.flatMap((d) => [
-        { ...d.comida, day: d.day, type: "Comida" },
-        { ...d.cena, day: d.day, type: "Cena" }
+        { ...getMeal(d.day, "comida"), day: d.day, type: "Comida" },
+        { ...getMeal(d.day, "cena"), day: d.day, type: "Cena" }
       ]),
-      [activeMenu]
+      [activeMenu, swaps, menuStyle]
     );
     const hasAvoided = (recipe) => recipe.items.some((it) => avoidIds.includes(it.id));
     const DISCRETE_UNITS = /* @__PURE__ */ new Set([
@@ -1119,6 +1159,15 @@
         return next;
       });
     };
+    const toggleAllergenGroup = (groupIds) => {
+      setAvoidIds((prev) => {
+        const allActive = groupIds.every((id) => prev.includes(id));
+        const next = allActive ? prev.filter((id) => !groupIds.includes(id)) : [.../* @__PURE__ */ new Set([...prev, ...groupIds])];
+        storage.set("ingredientes-evitar", JSON.stringify(next)).catch(() => {
+        });
+        return next;
+      });
+    };
     const toggleFavorito = (key) => {
       setFavoritos((prev) => {
         const next = prev.includes(key) ? prev.filter((x) => x !== key) : [...prev, key];
@@ -1139,6 +1188,43 @@
       setBoughtItems([]);
       storage.set("lista-compra-comprados", JSON.stringify([])).catch(() => {
       });
+    };
+    const compartirLista = async () => {
+      let texto = `\u{1F6D2} Lista de la compra \u2014 La Compra Justa
+M\xE1s barato en ${cheapest.name}: ${fmt(shoppingTotalAll)} \u20AC
+`;
+      shoppingByCategory.forEach((cat) => {
+        texto += `
+${cat.name}:
+`;
+        cat.items.forEach((it) => {
+          texto += `- ${it.label} (${it.qtyLabel})
+`;
+        });
+      });
+      if (shoppingExtras.length > 0) {
+        texto += `
+Picoteo y extras:
+`;
+        shoppingExtras.forEach((it) => {
+          texto += `- ${it.label} (${it.qtyLabel})
+`;
+        });
+      }
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "Lista de la compra", text: texto });
+          return;
+        } catch (e) {
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(texto);
+        setShareMsg("Copiada al portapapeles \u2713");
+      } catch (e) {
+        setShareMsg("No se pudo copiar");
+      }
+      setTimeout(() => setShareMsg(""), 2500);
     };
     const updatePresupuestoSemanal = (value) => {
       setPresupuestoSemanal(value);
@@ -1381,7 +1467,25 @@
       },
       /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, p.date),
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold" }, p.weight, " kg"), /* @__PURE__ */ React.createElement("button", { onClick: () => borrarPesoEntry(p.id), "aria-label": `Borrar registro de ${p.date}`, style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "trash", size: 14 })))
-    )))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ingredientes a evitar (alergias o no me gusta) ", avoidIds.length > 0 ? `\xB7 ${avoidIds.length} seleccionados` : ""), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5 mt-3" }, Object.entries(prices).map(([id, ing]) => {
+    )))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ingredientes a evitar (alergias o no me gusta) ", avoidIds.length > 0 ? `\xB7 ${avoidIds.length} seleccionados` : ""), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mt-3 mb-1.5", style: { color: "#3F6B4F" } }, "Alergias e intolerancias comunes"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#8A8470" } }, "Marca una y se excluyen de golpe todos los ingredientes relacionados."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5 mb-4" }, ALLERGEN_GROUPS.map((g) => {
+      const active = g.ids.every((id) => avoidIds.includes(id));
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: g.key,
+          onClick: () => toggleAllergenGroup(g.ids),
+          className: "text-xs px-2.5 py-1 rounded-sm flex items-center gap-1",
+          style: {
+            border: `1.5px solid ${active ? "#C2452F" : "#3F6B4F"}`,
+            background: active ? "#C2452F" : "#FBF8F0",
+            color: active ? "#FBF8F0" : "#3F6B4F"
+          }
+        },
+        /* @__PURE__ */ React.createElement("span", null, g.emoji),
+        " ",
+        g.label
+      );
+    })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#6B6552" } }, "O ingrediente por ingrediente"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5" }, Object.entries(prices).map(([id, ing]) => {
       const active = avoidIds.includes(id);
       return /* @__PURE__ */ React.createElement(
         "button",
@@ -1397,7 +1501,16 @@
         },
         ing.label
       );
-    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-sm" }, "\u2212", fmt(savings), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-sm" }, "\u2212", fmt(savings), " \u20AC")), historial.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2 mt-3 pt-3", style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Comparado con tu \xFAltima semana guardada (", historial[historial.length - 1].date, ")"), /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        className: "font-mono text-sm font-bold",
+        style: { color: cheapest.total <= historial[historial.length - 1].total ? "#3F6B4F" : "#C2452F" }
+      },
+      cheapest.total <= historial[historial.length - 1].total ? "\u2212" : "+",
+      fmt(Math.abs(cheapest.total - historial[historial.length - 1].total)),
+      " \u20AC"
+    ))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -1408,9 +1521,12 @@
         style: { borderColor: "#3F6B4F" }
       }
     ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / mes")), ingresosNum > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-2", style: { color: "#4A4536" } }, "En Espa\xF1a, lo habitual es destinar entre el 10% y el 20% del ingreso a alimentaci\xF3n (media nacional: 15,8%, seg\xFAn el INE). Para tus ingresos, eso es:"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-sm mb-3" }, /* @__PURE__ */ React.createElement("strong", null, fmt(presupuestoMin), " \u20AC \u2013 ", fmt(presupuestoMax), " \u20AC / mes"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552" } }, " (media orientativa: ", fmt(presupuestoMedia), " \u20AC)")), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Tu men\xFA actual cuesta aprox."), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(monthlyCost), " \u20AC / mes")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: monthlyCost <= presupuestoMax ? "#3F6B4F" : "#C2452F" } }, monthlyCost < presupuestoMin ? "Est\xE1 por debajo del rango habitual \u2014 quiz\xE1 haya margen para variar m\xE1s el men\xFA." : monthlyCost <= presupuestoMax ? "Est\xE1 dentro del rango habitual para tus ingresos." : "Est\xE1 por encima del rango habitual \u2014 revisa el editor de precios o reduce extras.")) : /* @__PURE__ */ React.createElement("p", { className: "text-xs", style: { color: "#8A8470" } }, "Indica tus ingresos para ver si el coste de este men\xFA es razonable para tu situaci\xF3n."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 12, className: "mt-0.5 flex-shrink-0" }), "Referencia informativa (datos INE), no asesoramiento financiero. Tus gastos fijos (alquiler, hijos, deudas) cambian lo que es razonable para tu caso.")))), /* @__PURE__ */ React.createElement("section", { id: "menu-semana", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, activeMenu.map((d) => /* @__PURE__ */ React.createElement("div", { key: d.day }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, d.day), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, ["comida", "cena"].map((mealType) => {
-      const r = d[mealType];
+      const r = getMeal(d.day, mealType);
       const key = `${d.day}-${mealType}`;
+      const swapKey = `${menuStyle}|${d.day}|${mealType}`;
+      const isSwapped = !!swaps[swapKey];
       const isOpen = openMeal === key;
+      const isPicking = swapPickerKey === swapKey;
       const costCheapest = recipeCost(r, cheapest.id);
       const avoided = hasAvoided(r);
       const isFav = favoritos.includes(key);
@@ -1421,7 +1537,15 @@
           className: "border rounded-sm",
           style: { borderColor: avoided ? "#C2452F" : "#C9C0AC", background: "#FBF8F0" }
         },
-        /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base" }, r.name))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, isSwapped && /* @__PURE__ */ React.createElement("span", { style: { color: "#3F6B4F" } }, "\xB7 cambiado"), avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base" }, r.name))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: () => setSwapPickerKey(isPicking ? null : swapKey),
+            "aria-label": "Cambiar este plato por otro de la semana",
+            style: { color: isSwapped ? "#3F6B4F" : "#C9C0AC" }
+          },
+          /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 15 })
+        ), /* @__PURE__ */ React.createElement(
           "button",
           {
             onClick: () => toggleFavorito(key),
@@ -1438,13 +1562,41 @@
           },
           /* @__PURE__ */ React.createElement(Icon, { name: "chevronDown", size: 18, style: { transform: isOpen ? "rotate(180deg)" : "none", transition: "transform .2s" } })
         ))),
+        isPicking && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-3 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Cambiar por el ", mealType === "comida" ? "almuerzo" : "cena", " de otro d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5" }, activeMenu.map((other) => {
+          const candidate = other[mealType];
+          const isCurrentSource = swaps[swapKey] ? swaps[swapKey] === other.day : other.day === d.day;
+          return /* @__PURE__ */ React.createElement(
+            "button",
+            {
+              key: other.day,
+              onClick: () => swapMeal(d.day, mealType, other.day),
+              className: "text-xs px-2.5 py-1 rounded-sm flex items-center gap-1",
+              style: {
+                border: `1.5px solid ${isCurrentSource ? "#3F6B4F" : "#C9C0AC"}`,
+                background: isCurrentSource ? "#3F6B4F" : "#FFFFFF",
+                color: isCurrentSource ? "#FBF8F0" : "#20281F"
+              }
+            },
+            /* @__PURE__ */ React.createElement("span", null, candidate.emoji),
+            " ",
+            candidate.name
+          );
+        })), isSwapped && /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: () => swapMeal(d.day, mealType, d.day),
+            className: "font-mono text-xs underline mt-2",
+            style: { color: "#C2452F" }
+          },
+          "Volver al plato original"
+        )),
         isOpen && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-4 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, avoided && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13, className: "mt-0.5 flex-shrink-0" }), "Contiene un ingrediente que marcaste para evitar. No se incluye en el total de la semana \u2014 sustit\xFAyelo o coc\xEDnalo aparte."), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Preparaci\xF3n"), /* @__PURE__ */ React.createElement("ol", { className: "text-sm mb-4 space-y-1.5", style: { color: "#4A4536" } }, r.steps.map((step, i) => /* @__PURE__ */ React.createElement("li", { key: i, className: "flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono flex-shrink-0", style: { color: "#3F6B4F" } }, i + 1, "."), /* @__PURE__ */ React.createElement("span", null, step)))), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Ingredientes para ", servings, " ", servings === 1 ? "persona" : "personas"), /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono" }, /* @__PURE__ */ React.createElement("tbody", null, r.items.map((it) => {
           const totalQty = it.qty * factor;
           const perPerson = totalQty / servings;
           return /* @__PURE__ */ React.createElement("tr", { key: it.id, style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1.5" }, prices[it.id].label), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#20281F" } }, formatQty(totalQty, prices[it.id].unit)), /* @__PURE__ */ React.createElement("span", { className: "text-xs" }, " (", formatQty(perPerson, prices[it.id].unit), "/persona)")), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right pl-4" }, fmt((prices[it.id][cheapest.id] || 0) * totalQty), " \u20AC"));
         }))))
       );
-    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement(
+    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: compartirLista, className: "font-mono text-xs underline flex items-center gap-1", style: { color: "#3F6B4F" } }, "Compartir"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo"))), shareMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-1", style: { color: "#3F6B4F" } }, shareMsg), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement(
       "div",
       {
         className: "flex items-center justify-between px-4 py-3 mb-3 rounded-sm",
