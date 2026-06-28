@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new5.jsx
+  // app-source-new9.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -64,7 +64,7 @@
   }
   var BASE_SERVINGS = 3;
   var STORES = [
-    { id: "mercadona", name: "Mercadona", color: "#3F6B4F" },
+    { id: "mercadona", name: "Mercadona", color: "#1FAA59" },
     { id: "lidl", name: "Lidl", color: "#0A5A3C" },
     { id: "carrefour", name: "Carrefour", color: "#1F4E8C" },
     { id: "dia", name: "D\xEDa", color: "#C2452F" }
@@ -111,12 +111,16 @@
     bacalao: { unit: "kg", label: "Bacalao desalado", mercadona: 13.5, lidl: 11.9, carrefour: 14.9, dia: 12.5 },
     setas: { unit: "kg", label: "Setas variadas", mercadona: 6.5, lidl: 5.8, carrefour: 7.2, dia: 6 },
     parmesano: { unit: "paquete", label: "Parmesano", mercadona: 3.2, lidl: 2.8, carrefour: 3.6, dia: 3 },
-    vinoBlancoCocina: { unit: "botella", label: "Vino blanco para cocinar", mercadona: 2.5, lidl: 2.1, carrefour: 2.8, dia: 2.3 }
+    vinoBlancoCocina: { unit: "botella", label: "Vino blanco para cocinar", mercadona: 2.5, lidl: 2.1, carrefour: 2.8, dia: 2.3 },
+    brocoli: { unit: "kg", label: "Br\xF3coli", mercadona: 1.6, lidl: 1.4, carrefour: 1.8, dia: 1.5 },
+    esparragos: { unit: "manojo", label: "Esp\xE1rragos trigueros", mercadona: 1.8, lidl: 1.55, carrefour: 2, dia: 1.65 },
+    mejillones: { unit: "kg", label: "Mejillones", mercadona: 4.5, lidl: 3.9, carrefour: 4.9, dia: 4.1 },
+    ternera: { unit: "kg", label: "Filete de ternera", mercadona: 12.5, lidl: 11, carrefour: 13.5, dia: 11.8 }
   };
   var CATEGORIES = [
-    { name: "Carnes", ids: ["pollo", "chorizo", "carnePicada", "pavoFilete", "jamonYork", "solomilloCerdo"] },
-    { name: "Pescados y mariscos", ids: ["salmon", "merluza", "atun", "bacalao", "langostinos"] },
-    { name: "Verduras y hortalizas", ids: ["patatas", "cebolla", "ensalada", "asar", "zanahoria", "boniato", "calabaza", "calabacin", "espinacas", "setas"] },
+    { name: "Carnes", ids: ["pollo", "chorizo", "carnePicada", "pavoFilete", "jamonYork", "solomilloCerdo", "ternera"] },
+    { name: "Pescados y mariscos", ids: ["salmon", "merluza", "atun", "bacalao", "langostinos", "mejillones"] },
+    { name: "Verduras y hortalizas", ids: ["patatas", "cebolla", "ensalada", "asar", "zanahoria", "boniato", "calabaza", "calabacin", "espinacas", "setas", "brocoli", "esparragos"] },
     { name: "Legumbres y cereales", ids: ["garbanzos", "lentejas", "arroz", "pasta", "quinoa"] },
     { name: "L\xE1cteos y huevos", ids: ["huevos", "leche", "quesoRallado", "parmesano"] },
     { name: "Despensa", ids: ["tomateFrito", "panHamburguesa", "masaPizza", "vinoBlancoCocina"] }
@@ -126,7 +130,7 @@
     { key: "lactosa", emoji: "\u{1F95B}", label: "Lactosa", ids: ["leche", "quesoRallado", "parmesano"] },
     { key: "huevo", emoji: "\u{1F95A}", label: "Huevo", ids: ["huevos"] },
     { key: "pescado", emoji: "\u{1F41F}", label: "Pescado", ids: ["salmon", "merluza", "atun", "bacalao"] },
-    { key: "marisco", emoji: "\u{1F990}", label: "Marisco", ids: ["langostinos"] },
+    { key: "marisco", emoji: "\u{1F990}", label: "Marisco", ids: ["langostinos", "mejillones"] },
     { key: "legumbres", emoji: "\u{1FAD8}", label: "Legumbres", ids: ["garbanzos", "lentejas"] },
     { key: "cerdo", emoji: "\u{1F437}", label: "Cerdo", ids: ["chorizo", "jamonYork", "solomilloCerdo"] },
     { key: "alcohol", emoji: "\u{1F377}", label: "Alcohol (cocina)", ids: ["vinoBlancoCocina"] }
@@ -839,10 +843,641 @@
       }
     }
   ];
+  var MENU_SANA_2 = [
+    {
+      day: "Lunes",
+      comida: {
+        emoji: "\u{1F966}",
+        name: "Br\xF3coli salteado con pollo",
+        time: "20 min",
+        items: [{ id: "brocoli", qty: 0.4 }, { id: "pollo", qty: 0.5 }],
+        steps: [
+          "Separa el br\xF3coli en arbolitos peque\xF1os y l\xE1valos bien.",
+          "Cu\xE9celo al vapor o en agua con sal 4-5 minutos, hasta que est\xE9 tierno pero firme. Escurre.",
+          "Sazona el pollo con sal y pimienta y c\xF3rtalo en tiras.",
+          "Calienta una sart\xE9n con una gota de aceite y saltea el pollo 4-5 minutos, hasta que est\xE9 dorado.",
+          "A\xF1ade el br\xF3coli escurrido a la sart\xE9n y saltea 2 minutos m\xE1s, removiendo, para que se integren los sabores.",
+          "Sirve caliente, con un chorrito de aceite de oliva si quieres."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F957}",
+        name: "Crema de esp\xE1rragos con huevo poch\xE9",
+        time: "25 min",
+        items: [{ id: "esparragos", qty: 1 }, { id: "huevos", qty: 0.5 }],
+        steps: [
+          "Corta la parte le\xF1osa de los esp\xE1rragos y trocea el resto.",
+          "Cu\xE9celos en agua con sal 10-12 minutos, hasta que est\xE9n muy tiernos.",
+          "Escurre, reservando un poco del agua de cocci\xF3n, y tritura con la batidora hasta conseguir una crema fina.",
+          "Para el huevo poch\xE9: en una olla peque\xF1a, calienta agua con un chorrito de vinagre sin que llegue a hervir fuerte.",
+          "Casca el huevo en una taza y desliza con cuidado al agua, formando un remolino con una cuchara.",
+          "Cocina 3 minutos, hasta que la clara est\xE9 cuajada y la yema l\xEDquida, y s\xEDrvelo sobre la crema caliente."
+        ]
+      }
+    },
+    {
+      day: "Martes",
+      comida: {
+        emoji: "\u{1F33E}",
+        name: "Quinoa con verduras y huevo",
+        time: "20 min",
+        items: [{ id: "quinoa", qty: 0.3 }, { id: "asar", qty: 0.3 }, { id: "huevos", qty: 0.5 }],
+        steps: [
+          "Enjuaga la quinoa bajo el grifo con un colador fino.",
+          "Cu\xE9cela en agua con sal (el doble de volumen de agua que de quinoa) 12-15 minutos.",
+          "Mientras, corta las verduras variadas en trozos peque\xF1os y salt\xE9alas con muy poco aceite 5-6 minutos.",
+          "Cuece un huevo duro 9-10 minutos en agua hirviendo, enfr\xEDalo bajo el grifo y p\xE9lalo.",
+          "Escurre la quinoa y m\xE9zclala con las verduras salteadas.",
+          "Corta el huevo en cuartos y col\xF3calo por encima antes de servir."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F41F}",
+        name: "Merluza con br\xF3coli al vapor",
+        time: "20 min",
+        items: [{ id: "merluza", qty: 0.5 }, { id: "brocoli", qty: 0.5 }],
+        steps: [
+          "Separa el br\xF3coli en arbolitos y l\xE1valo.",
+          "Si tienes vaporera, cuece el br\xF3coli 5 minutos y a\xF1ade la merluza encima 8-10 minutos m\xE1s.",
+          "Si no, cuece el br\xF3coli en agua con sal 5 minutos y la merluza en otra sart\xE9n con un poco de agua tapada 8-10 minutos.",
+          "Comprueba que el pescado est\xE9 blanco y se separe con facilidad al pincharlo.",
+          "Sirve con un chorrito de aceite de oliva y unas gotas de lim\xF3n."
+        ]
+      }
+    },
+    {
+      day: "Mi\xE9rcoles",
+      comida: {
+        emoji: "\u{1F9AA}",
+        name: "Ensalada de garbanzos con mejillones",
+        time: "20 min",
+        items: [{ id: "garbanzos", qty: 1 }, { id: "mejillones", qty: 0.4 }, { id: "ensalada", qty: 0.2 }],
+        steps: [
+          "Si los mejillones son frescos, l\xE1valos bien y cu\xE9celos al vapor 5-6 minutos, hasta que se abran. Desecha los que no se abran.",
+          "Si son ya cocidos (en conserva o congelados cocidos), simplemente descongela o escurre.",
+          "Escurre y enjuaga los garbanzos de bote.",
+          "Lava y trocea la ensalada.",
+          "Mezcla todo en un bol: garbanzos, mejillones sin la concha y la ensalada.",
+          "Ali\xF1a con aceite de oliva, un toque de lim\xF3n y sal, y sirve templado o fr\xEDo."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F373}",
+        name: "Tortilla de esp\xE1rragos",
+        time: "20 min",
+        items: [{ id: "esparragos", qty: 1 }, { id: "huevos", qty: 0.5 }],
+        steps: [
+          "Corta la parte le\xF1osa de los esp\xE1rragos y trocea el resto en piezas peque\xF1as.",
+          "Saltea los esp\xE1rragos en una sart\xE9n con una gota de aceite 5-6 minutos, hasta que est\xE9n tiernos.",
+          "Bate los huevos en un bol con una pizca de sal.",
+          "Mezcla los esp\xE1rragos salteados con el huevo batido.",
+          "Vierte en la sart\xE9n a fuego suave y cuaja 3-4 minutos por lado."
+        ]
+      }
+    },
+    {
+      day: "Jueves",
+      comida: {
+        emoji: "\u{1F357}",
+        name: "Pollo al horno con calabac\xEDn y zanahoria",
+        time: "40 min",
+        items: [{ id: "pollo", qty: 0.7 }, { id: "calabacin", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
+        steps: [
+          "Precalienta el horno a 200\xB0C.",
+          "Corta el calabac\xEDn y la zanahoria en rodajas.",
+          "Coloca el pollo y las verduras en una bandeja con aceite, sal y pimienta.",
+          "Hornea 35 minutos, removiendo las verduras a mitad de cocci\xF3n.",
+          "Comprueba que el pollo est\xE9 hecho pinchando la parte m\xE1s gruesa.",
+          "Deja reposar 5 minutos antes de servir."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F955}",
+        name: "Crema de zanahoria con huevo duro",
+        time: "30 min",
+        items: [{ id: "zanahoria", qty: 0.7 }, { id: "huevos", qty: 0.5 }],
+        steps: [
+          "Pela y corta la zanahoria en rodajas.",
+          "Cu\xE9cela en agua con sal 18-20 minutos, hasta que est\xE9 muy tierna.",
+          "Mientras, cuece un huevo en otra olla 9-10 minutos, enfr\xEDalo y p\xE9lalo.",
+          "Escurre la zanahoria, reservando un poco del agua, y tritura con la batidora hasta obtener una crema fina.",
+          "Sirve la crema caliente con el huevo duro troceado por encima."
+        ]
+      }
+    },
+    {
+      day: "Viernes",
+      comida: {
+        emoji: "\u{1F963}",
+        name: "Lentejas con espinacas",
+        time: "30 min",
+        items: [{ id: "lentejas", qty: 1 }, { id: "espinacas", qty: 0.3 }],
+        steps: [
+          "Calienta las lentejas de bote, escurridas, en una olla con un poco de agua.",
+          "A\xF1ade las espinacas frescas y deja que se ablanden 4-5 minutos, removiendo.",
+          "Sazona con sal y un chorrito de aceite de oliva.",
+          "Cocina 5 minutos m\xE1s a fuego suave para que se integren los sabores.",
+          "Sirve caliente, sin necesidad de embutidos ni grasas a\xF1adidas."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F420}",
+        name: "Salm\xF3n al horno con esp\xE1rragos",
+        time: "25 min",
+        items: [{ id: "salmon", qty: 0.5 }, { id: "esparragos", qty: 1 }],
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Corta la parte le\xF1osa de los esp\xE1rragos.",
+          "Coloca el salm\xF3n y los esp\xE1rragos en una bandeja con aceite, sal y unas rodajas de lim\xF3n.",
+          "Hornea 15-18 minutos, hasta que el salm\xF3n est\xE9 hecho pero jugoso.",
+          "Sirve directamente de la bandeja."
+        ]
+      }
+    },
+    {
+      day: "S\xE1bado",
+      comida: {
+        emoji: "\u{1F963}",
+        name: "Garbanzos con br\xF3coli",
+        time: "25 min",
+        items: [{ id: "garbanzos", qty: 1 }, { id: "brocoli", qty: 0.4 }],
+        steps: [
+          "Separa el br\xF3coli en arbolitos peque\xF1os y cu\xE9celo al vapor o en agua con sal 5 minutos.",
+          "Escurre y enjuaga los garbanzos de bote.",
+          "Calienta los garbanzos en una sart\xE9n con un poco de aceite y un toque de ajo si te gusta.",
+          "A\xF1ade el br\xF3coli escurrido y saltea 2-3 minutos para que se integren.",
+          "Ajusta de sal y sirve caliente."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F41F}",
+        name: "Merluza con tomate y calabac\xEDn",
+        time: "25 min",
+        items: [{ id: "merluza", qty: 0.5 }, { id: "tomateFrito", qty: 1 }, { id: "calabacin", qty: 0.3 }],
+        steps: [
+          "Corta el calabac\xEDn en rodajas finas.",
+          "Saltea el calabac\xEDn en una sart\xE9n con un poco de aceite 5 minutos.",
+          "A\xF1ade el tomate frito y deja que se caliente 2-3 minutos.",
+          "Coloca los lomos de merluza sobre la salsa, tapa la sart\xE9n y cocina a fuego medio-bajo 8-10 minutos.",
+          "Comprueba que el pescado est\xE9 blanco y tierno antes de servir."
+        ]
+      }
+    },
+    {
+      day: "Domingo",
+      comida: {
+        emoji: "\u{1F9AA}",
+        name: "Mejillones a la marinera ligera",
+        time: "25 min",
+        items: [{ id: "mejillones", qty: 0.6 }, { id: "tomateFrito", qty: 1 }],
+        steps: [
+          "Limpia los mejillones si son frescos, retirando las barbas.",
+          "Calienta el tomate frito en una cazuela amplia con un diente de ajo picado.",
+          "A\xF1ade los mejillones y tapa la cazuela.",
+          "Cocina a fuego medio-alto 5-6 minutos, hasta que los mejillones se abran (desecha los que no se abran).",
+          "Sirve calientes con su propia salsa, acompa\xF1ados de pan si quieres mojar."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F96C}",
+        name: "Crema de espinacas con huevo",
+        time: "25 min",
+        items: [{ id: "espinacas", qty: 0.4 }, { id: "huevos", qty: 0.5 }],
+        steps: [
+          "Lava bien las espinacas.",
+          "Cu\xE9celas en una olla con muy poca agua 3-4 minutos, hasta que reduzcan.",
+          "Tritura con la batidora junto con un poco del agua de cocci\xF3n hasta conseguir una crema fina.",
+          "Cuece un huevo en otra olla 9-10 minutos, enfr\xEDalo, p\xE9lalo y troc\xE9alo.",
+          "Sirve la crema caliente con el huevo troceado por encima."
+        ]
+      }
+    }
+  ];
+  var MENU_NORMAL_2 = [
+    {
+      day: "Lunes",
+      comida: {
+        emoji: "\u{1F35D}",
+        name: "Macarrones con verduras y jam\xF3n",
+        time: "25 min",
+        items: [{ id: "pasta", qty: 1 }, { id: "asar", qty: 0.3 }, { id: "jamonYork", qty: 1 }],
+        steps: [
+          "Pon a hervir agua con sal para la pasta.",
+          "Cuece la pasta el tiempo que indique el paquete.",
+          "Mientras, corta las verduras variadas en trozos peque\xF1os y salt\xE9alas con un poco de aceite 5-6 minutos.",
+          "A\xF1ade el jam\xF3n cocido en taquitos a las verduras y saltea 1-2 minutos m\xE1s.",
+          "Escurre la pasta y m\xE9zclala con las verduras y el jam\xF3n en la sart\xE9n.",
+          "Sirve caliente, con queso rallado opcional por encima."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F357}",
+        name: "Pollo al ajillo con patatas",
+        time: "35 min",
+        items: [{ id: "pollo", qty: 0.8 }, { id: "patatas", qty: 0.5 }],
+        steps: [
+          "Pela y corta las patatas en dados, y cu\xE9celas en agua con sal 15 minutos, o fr\xEDelas si prefieres.",
+          "Corta el pollo en trozos medianos y sazona con sal y pimienta.",
+          "Calienta aceite en una sart\xE9n y dora 2-3 dientes de ajo en l\xE1minas, sin que se quemen.",
+          "A\xF1ade el pollo y cocina 10-12 minutos a fuego medio, removiendo, hasta que est\xE9 dorado y hecho por dentro.",
+          "A\xF1ade las patatas escurridas a la sart\xE9n y saltea 2-3 minutos m\xE1s para que se impregnen del sabor.",
+          "Sirve caliente."
+        ]
+      }
+    },
+    {
+      day: "Martes",
+      comida: {
+        emoji: "\u{1F963}",
+        name: "Lentejas con verduras",
+        time: "35 min",
+        items: [{ id: "lentejas", qty: 1 }, { id: "zanahoria", qty: 0.2 }, { id: "cebolla", qty: 0.15 }],
+        steps: [
+          "Pica la cebolla y la zanahoria en trozos peque\xF1os.",
+          "Sofr\xEDe ambas en una olla con aceite 6-7 minutos.",
+          "A\xF1ade las lentejas de bote, escurridas, y cubre con agua.",
+          "Cuece a fuego medio-bajo 15-18 minutos, removiendo de vez en cuando.",
+          "Ajusta de sal al final y sirve caliente."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F41F}",
+        name: "Merluza con verduras variadas",
+        time: "25 min",
+        items: [{ id: "merluza", qty: 0.5 }, { id: "asar", qty: 0.5 }],
+        steps: [
+          "Corta las verduras variadas en trozos peque\xF1os.",
+          "Salt\xE9alas en una sart\xE9n con un poco de aceite 6-7 minutos.",
+          "Coloca los lomos de merluza encima de las verduras, tapa la sart\xE9n.",
+          "Cocina a fuego medio-bajo 8-10 minutos, hasta que el pescado est\xE9 blanco y tierno.",
+          "Sirve directamente de la sart\xE9n."
+        ]
+      }
+    },
+    {
+      day: "Mi\xE9rcoles",
+      comida: {
+        emoji: "\u{1F35A}",
+        name: "Arroz con pollo y verduras",
+        time: "30 min",
+        items: [{ id: "arroz", qty: 0.35 }, { id: "pollo", qty: 0.5 }, { id: "asar", qty: 0.3 }],
+        steps: [
+          "Corta el pollo en trozos peque\xF1os y las verduras en dados.",
+          "Sofr\xEDe el pollo en una cazuela baja con aceite 4-5 minutos, hasta que se dore.",
+          "A\xF1ade las verduras y sofr\xEDe 3-4 minutos m\xE1s.",
+          "Incorpora el arroz y remueve 1 minuto.",
+          "Vierte el doble de agua o caldo que de arroz, sazona y cuece tapado 16-18 minutos sin destapar.",
+          "Deja reposar 2 minutos antes de servir."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F952}",
+        name: "Tortilla de calabac\xEDn con ensalada",
+        time: "25 min",
+        items: [{ id: "calabacin", qty: 0.5 }, { id: "huevos", qty: 0.5 }, { id: "ensalada", qty: 0.3 }],
+        steps: [
+          "Corta el calabac\xEDn en l\xE1minas finas.",
+          "Saltea el calabac\xEDn en una sart\xE9n con un poco de aceite 5-6 minutos, hasta que est\xE9 tierno.",
+          "Bate los huevos con una pizca de sal y mezcla con el calabac\xEDn.",
+          "Vierte en la sart\xE9n y cuaja a fuego medio 3-4 minutos por lado.",
+          "Sirve con la ensalada ali\xF1ada aparte."
+        ]
+      }
+    },
+    {
+      day: "Jueves",
+      comida: {
+        emoji: "\u{1F963}",
+        name: "Garbanzos con chorizo",
+        time: "30 min",
+        items: [{ id: "garbanzos", qty: 1 }, { id: "chorizo", qty: 0.25 }, { id: "cebolla", qty: 0.15 }],
+        steps: [
+          "Pica la cebolla y sofr\xEDela en una olla con un poco de aceite 5-6 minutos.",
+          "A\xF1ade el chorizo en rodajas y sofr\xEDe 2-3 minutos m\xE1s.",
+          "Incorpora los garbanzos de bote, escurridos, y un chorrito de agua.",
+          "Cocina 5-6 minutos a fuego medio para que se integren los sabores.",
+          "Ajusta de sal y sirve caliente."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F420}",
+        name: "Salm\xF3n con patatas al horno",
+        time: "35 min",
+        items: [{ id: "salmon", qty: 0.5 }, { id: "patatas", qty: 0.5 }],
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Pela y corta las patatas en rodajas finas, col\xF3calas en una bandeja con aceite y sal.",
+          "Hornea las patatas solas 15 minutos.",
+          "A\xF1ade el salm\xF3n encima o al lado, con un chorrito de aceite.",
+          "Hornea 15 minutos m\xE1s, hasta que el salm\xF3n est\xE9 hecho pero jugoso."
+        ]
+      }
+    },
+    {
+      day: "Viernes",
+      comida: {
+        emoji: "\u{1F35D}",
+        name: "Pasta a la carbonara sencilla",
+        time: "25 min",
+        items: [{ id: "pasta", qty: 1 }, { id: "huevos", qty: 0.5 }, { id: "jamonYork", qty: 1 }],
+        steps: [
+          "Pon a hervir agua con sal y cuece la pasta el tiempo del paquete.",
+          "Mientras, corta el jam\xF3n cocido en taquitos y d\xF3ralo en una sart\xE9n sin aceite 2-3 minutos.",
+          "Bate los huevos en un bol con una pizca de pimienta.",
+          "Escurre la pasta (reservando un poco de agua de cocci\xF3n) y m\xE9zclala fuera del fuego con el huevo batido, removiendo r\xE1pido para que cuaje suavemente sin cuajarse del todo (usa el calor residual).",
+          "A\xF1ade el jam\xF3n dorado y un poco del agua reservada si queda muy seco.",
+          "Sirve enseguida, reci\xE9n mezclado."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F355}",
+        name: "Pizza casera de at\xFAn y cebolla",
+        time: "25 min",
+        items: [{ id: "masaPizza", qty: 1 }, { id: "atun", qty: 1 }, { id: "cebolla", qty: 0.2 }, { id: "tomateFrito", qty: 1 }],
+        steps: [
+          "Precalienta el horno a 220\xB0C con la bandeja dentro.",
+          "Extiende la masa de pizza sobre papel de horno y reparte el tomate frito.",
+          "Corta la cebolla en aros finos y rep\xE1rtela por encima.",
+          "A\xF1ade el at\xFAn escurrido y desmenuzado.",
+          "Hornea 12-15 minutos, hasta que los bordes est\xE9n dorados.",
+          "Deja reposar 1-2 minutos antes de cortar."
+        ]
+      }
+    },
+    {
+      day: "S\xE1bado",
+      comida: {
+        emoji: "\u{1F354}",
+        name: "Hamburguesas con boniato",
+        time: "30 min",
+        items: [{ id: "carnePicada", qty: 0.5 }, { id: "panHamburguesa", qty: 1 }, { id: "boniato", qty: 0.6 }],
+        steps: [
+          "Precalienta el horno a 200\xB0C.",
+          "Pela el boniato, c\xF3rtalo en bastones y hornea con aceite y sal 25 minutos.",
+          "Sazona la carne picada y forma las hamburguesas.",
+          "Calienta una plancha y cocina las hamburguesas 3-4 minutos por lado.",
+          "Tuesta el pan y monta con tus ingredientes favoritos.",
+          "Sirve junto al boniato reci\xE9n horneado."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F383}",
+        name: "Crema de calabaza con tropezones de jam\xF3n",
+        time: "30 min",
+        items: [{ id: "calabaza", qty: 1 }, { id: "leche", qty: 0.2 }, { id: "jamonYork", qty: 1 }],
+        steps: [
+          "Pela y corta la calabaza en trozos, cu\xE9cela en agua con sal 15-18 minutos.",
+          "Escurre y tritura con la leche caliente hasta obtener una crema fina.",
+          "Corta el jam\xF3n cocido en taquitos peque\xF1os y d\xF3ralo en una sart\xE9n sin aceite 2 minutos, hasta que est\xE9 crujiente.",
+          "Sirve la crema caliente con los tropezones de jam\xF3n por encima."
+        ]
+      }
+    },
+    {
+      day: "Domingo",
+      comida: {
+        emoji: "\u{1F361}",
+        name: "Alb\xF3ndigas con arroz",
+        time: "35 min",
+        items: [{ id: "carnePicada", qty: 0.5 }, { id: "tomateFrito", qty: 1 }, { id: "arroz", qty: 0.3 }],
+        steps: [
+          "Sazona la carne picada y forma bolitas peque\xF1as con las manos h\xFAmedas.",
+          "D\xF3ralas en una sart\xE9n con aceite por todos los lados, 4-5 minutos.",
+          "A\xF1ade el tomate frito y cocina a fuego medio-bajo 10-12 minutos, hasta que se hagan por dentro.",
+          "Cuece el arroz en agua con sal 15-18 minutos y escurre.",
+          "Sirve las alb\xF3ndigas con su salsa junto al arroz."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F41F}",
+        name: "Merluza con patatas panadera",
+        time: "40 min",
+        items: [{ id: "merluza", qty: 0.5 }, { id: "patatas", qty: 0.5 }, { id: "cebolla", qty: 0.15 }],
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Corta las patatas en rodajas finas y la cebolla en juliana.",
+          "Col\xF3calas en una bandeja con aceite, sal y un poco de agua, y hornea 15 minutos.",
+          "A\xF1ade la merluza encima y hornea 12-15 minutos m\xE1s.",
+          "Sirve directamente de la bandeja."
+        ]
+      }
+    }
+  ];
+  var MENU_ELABORADA_2 = [
+    {
+      day: "Lunes",
+      comida: {
+        emoji: "\u{1F344}",
+        name: "Risotto de esp\xE1rragos con parmesano",
+        time: "35 min",
+        items: [{ id: "arroz", qty: 0.3 }, { id: "esparragos", qty: 1 }, { id: "parmesano", qty: 1 }],
+        steps: [
+          "Corta la parte le\xF1osa de los esp\xE1rragos y trocea el resto.",
+          "Calienta caldo en una olla aparte y mantenlo caliente a fuego bajo.",
+          "Saltea los esp\xE1rragos en una sart\xE9n amplia con aceite 4-5 minutos.",
+          "A\xF1ade el arroz y remueve 1-2 minutos.",
+          "Incorpora el caldo caliente poco a poco, esperando a que se absorba antes de a\xF1adir m\xE1s, 16-18 minutos en total.",
+          "Retira del fuego y a\xF1ade el parmesano rallado, removiendo con energ\xEDa hasta que quede meloso."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F969}",
+        name: "Ternera a la plancha con boniato",
+        time: "35 min",
+        items: [{ id: "ternera", qty: 0.5 }, { id: "boniato", qty: 0.5 }],
+        steps: [
+          "Precalienta el horno a 200\xB0C.",
+          "Pela el boniato, c\xF3rtalo en dados y hornea con aceite y sal 25 minutos.",
+          "Saca el filete de ternera a temperatura ambiente y sazona con sal y pimienta.",
+          "Calienta una plancha a fuego fuerte con una gota de aceite.",
+          "Cocina la ternera 2-3 minutos por lado para un punto jugoso (m\xE1s tiempo si la prefieres m\xE1s hecha).",
+          "Deja reposar 2 minutos antes de cortar y sirve con el boniato."
+        ]
+      }
+    },
+    {
+      day: "Martes",
+      comida: {
+        emoji: "\u{1F9AA}",
+        name: "Mejillones a la marinera con vino blanco",
+        time: "25 min",
+        items: [{ id: "mejillones", qty: 0.6 }, { id: "vinoBlancoCocina", qty: 0.2 }, { id: "tomateFrito", qty: 1 }],
+        steps: [
+          "Limpia los mejillones, retirando las barbas si son frescos.",
+          "Calienta el tomate frito en una cazuela con un diente de ajo picado.",
+          "A\xF1ade el vino blanco y deja que reduzca 2 minutos.",
+          "Incorpora los mejillones, tapa la cazuela y cocina a fuego medio-alto 5-6 minutos, hasta que se abran.",
+          "Desecha los que no se hayan abierto y sirve calientes con la salsa."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F41F}",
+        name: "Bacalao con esp\xE1rragos trigueros",
+        time: "30 min",
+        items: [{ id: "bacalao", qty: 0.5 }, { id: "esparragos", qty: 1 }],
+        steps: [
+          "Corta la parte le\xF1osa de los esp\xE1rragos.",
+          "Salt\xE9alos en una sart\xE9n con aceite 5-6 minutos, hasta que est\xE9n tiernos.",
+          "Seca bien el bacalao desalado con papel de cocina.",
+          "En otra sart\xE9n, d\xF3ralo con un poco de aceite 3-4 minutos por lado, hasta que est\xE9 dorado por fuera y tierno por dentro.",
+          "Sirve el bacalao con los esp\xE1rragos al lado."
+        ]
+      }
+    },
+    {
+      day: "Mi\xE9rcoles",
+      comida: {
+        emoji: "\u{1F35D}",
+        name: "Pasta con langostinos y ajo",
+        time: "25 min",
+        items: [{ id: "pasta", qty: 1 }, { id: "langostinos", qty: 0.3 }],
+        steps: [
+          "Pon a hervir agua con sal y cuece la pasta el tiempo del paquete.",
+          "Pela los langostinos si lo prefieres.",
+          "Calienta aceite en una sart\xE9n con 2 dientes de ajo en l\xE1minas, sin que se quemen.",
+          "A\xF1ade los langostinos y saltea 2-3 minutos, hasta que cambien de color.",
+          "Escurre la pasta (reservando un poco de agua) y m\xE9zclala con los langostinos y su aceite de ajo.",
+          "Sirve enseguida, reci\xE9n hecho."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F969}",
+        name: "Solomillo de cerdo con salsa de setas",
+        time: "40 min",
+        items: [{ id: "solomilloCerdo", qty: 0.5 }, { id: "setas", qty: 0.3 }],
+        steps: [
+          "Sazona el solomillo y s\xE9llalo en una sart\xE9n caliente 1-2 minutos por cada lado.",
+          "Retira y reserva. Baja el fuego y a\xF1ade las setas en l\xE1minas a la misma sart\xE9n.",
+          "Saltea las setas 5-6 minutos, hasta que se doren y suelten su jugo.",
+          "A\xF1ade un poco de caldo o agua y deja reducir 2-3 minutos para hacer una salsa ligera.",
+          "Vuelve a meter el solomillo en la sart\xE9n 5-6 minutos m\xE1s para que termine de hacerse en la salsa.",
+          "Deja reposar 3 minutos antes de cortar en medallones."
+        ]
+      }
+    },
+    {
+      day: "Jueves",
+      comida: {
+        emoji: "\u{1F969}",
+        name: "Ternera al horno con patatas",
+        time: "40 min",
+        items: [{ id: "ternera", qty: 0.5 }, { id: "patatas", qty: 0.5 }],
+        steps: [
+          "Precalienta el horno a 190\xB0C.",
+          "Pela y corta las patatas en rodajas, col\xF3calas en una bandeja con aceite y sal.",
+          "Hornea las patatas 15 minutos.",
+          "Sazona la ternera y s\xE9llala en una sart\xE9n caliente 1-2 minutos por lado.",
+          "Col\xF3cala sobre las patatas y hornea todo junto 10-12 minutos m\xE1s, seg\xFAn el punto que prefieras.",
+          "Deja reposar 5 minutos antes de cortar y servir."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F344}",
+        name: "Risotto de langostinos",
+        time: "35 min",
+        items: [{ id: "arroz", qty: 0.3 }, { id: "langostinos", qty: 0.3 }, { id: "parmesano", qty: 1 }],
+        steps: [
+          "Pela los langostinos y reserva las c\xE1scaras para dar sabor al caldo si quieres (opcional).",
+          "Calienta caldo en una olla aparte y mantenlo caliente.",
+          "Saltea los langostinos 2 minutos en una sart\xE9n amplia, retira y reserva.",
+          "En la misma sart\xE9n, a\xF1ade el arroz y remueve 1-2 minutos.",
+          "Incorpora el caldo caliente poco a poco, durante 16-18 minutos, removiendo a menudo.",
+          "Cuando el arroz est\xE9 cremoso, a\xF1ade los langostinos reservados y el parmesano, mezclando bien antes de servir."
+        ]
+      }
+    },
+    {
+      day: "Viernes",
+      comida: {
+        emoji: "\u{1F41F}",
+        name: "Bacalao confitado con br\xF3coli",
+        time: "30 min",
+        items: [{ id: "bacalao", qty: 0.5 }, { id: "brocoli", qty: 0.4 }],
+        steps: [
+          "Separa el br\xF3coli en arbolitos y cu\xE9celo al vapor o en agua con sal 5 minutos.",
+          "Seca bien el bacalao desalado con papel de cocina.",
+          "Cubre el fondo de una sart\xE9n con abundante aceite y calienta a fuego muy bajo, sin que hierva.",
+          "Confita el bacalao 8-10 minutos a fuego muy suave, hasta que est\xE9 melosos por dentro.",
+          "Sirve el bacalao con el br\xF3coli al lado y un chorrito del aceite de confitar."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F969}",
+        name: "Solomillo con reducci\xF3n de vino y esp\xE1rragos",
+        time: "40 min",
+        items: [{ id: "solomilloCerdo", qty: 0.5 }, { id: "vinoBlancoCocina", qty: 0.15 }, { id: "esparragos", qty: 1 }],
+        steps: [
+          "Corta la parte le\xF1osa de los esp\xE1rragos y salt\xE9alos en una sart\xE9n con aceite 5-6 minutos. Reserva.",
+          "Sazona el solomillo y s\xE9llalo en otra sart\xE9n caliente 1-2 minutos por lado.",
+          "Termina de hacerlo a fuego medio 8-10 minutos m\xE1s, seg\xFAn el punto que prefieras. Retira y deja reposar.",
+          "En la misma sart\xE9n, a\xF1ade el vino blanco y deja reducir 3-4 minutos, removiendo para recoger los restos del fondo.",
+          "Corta el solomillo en medallones y sirve con la reducci\xF3n de vino por encima y los esp\xE1rragos al lado."
+        ]
+      }
+    },
+    {
+      day: "S\xE1bado",
+      comida: {
+        emoji: "\u{1F958}",
+        name: "Paella de mejillones y langostinos",
+        time: "40 min",
+        items: [{ id: "arroz", qty: 0.4 }, { id: "mejillones", qty: 0.4 }, { id: "langostinos", qty: 0.3 }],
+        steps: [
+          "Limpia los mejillones y pela los langostinos.",
+          "Calienta caldo de pescado en una olla aparte y mantenlo caliente.",
+          "En una paellera, sofr\xEDe un poco de ajo y tomate (o un sofrito simple) con aceite.",
+          "A\xF1ade el arroz y remueve 1-2 minutos.",
+          "Vierte el caldo caliente (el doble de volumen que de arroz) y reparte el arroz de forma uniforme.",
+          "Cuece sin remover 10 minutos a fuego medio-alto, luego a\xF1ade los mejillones y langostinos, y sigue 8-10 minutos m\xE1s a fuego m\xE1s bajo.",
+          "Deja reposar 3-5 minutos tapado con un pa\xF1o antes de servir."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F969}",
+        name: "Ternera con setas al vino",
+        time: "30 min",
+        items: [{ id: "ternera", qty: 0.5 }, { id: "setas", qty: 0.3 }, { id: "vinoBlancoCocina", qty: 0.15 }],
+        steps: [
+          "Sazona la ternera y s\xE9llala en una sart\xE9n caliente 2 minutos por lado. Retira y reserva.",
+          "En la misma sart\xE9n, saltea las setas en l\xE1minas 5-6 minutos, hasta que se doren.",
+          "A\xF1ade el vino blanco y deja reducir 2-3 minutos.",
+          "Vuelve a a\xF1adir la ternera a la sart\xE9n 1-2 minutos m\xE1s para que se caliente con la salsa.",
+          "Sirve inmediatamente."
+        ]
+      }
+    },
+    {
+      day: "Domingo",
+      comida: {
+        emoji: "\u{1F420}",
+        name: "Salm\xF3n con salsa de parmesano y esp\xE1rragos",
+        time: "30 min",
+        items: [{ id: "salmon", qty: 0.5 }, { id: "parmesano", qty: 1 }, { id: "esparragos", qty: 1 }],
+        steps: [
+          "Corta la parte le\xF1osa de los esp\xE1rragos y salt\xE9alos con aceite 5-6 minutos. Reserva.",
+          "Sazona el salm\xF3n y coc\xEDnalo en una sart\xE9n con un poco de aceite, 3-4 minutos por lado.",
+          "Retira el salm\xF3n y reserva. En la misma sart\xE9n, a\xF1ade un poco de nata o leche y el parmesano rallado, removiendo a fuego suave hasta que se forme una salsa.",
+          "Vierte la salsa sobre el salm\xF3n y sirve con los esp\xE1rragos al lado."
+        ]
+      },
+      cena: {
+        emoji: "\u{1F966}",
+        name: "Crema de br\xF3coli con parmesano",
+        time: "25 min",
+        items: [{ id: "brocoli", qty: 0.6 }, { id: "leche", qty: 0.3 }, { id: "parmesano", qty: 1 }],
+        steps: [
+          "Separa el br\xF3coli en arbolitos y cu\xE9celo en agua con sal 10-12 minutos, hasta que est\xE9 muy tierno.",
+          "Escurre, reservando un poco del agua, y tritura con la leche caliente hasta obtener una crema fina.",
+          "Calienta de nuevo si se ha enfriado al triturar.",
+          "Sirve bien caliente con parmesano rallado por encima."
+        ]
+      }
+    }
+  ];
   var STYLES = {
-    sana: { label: "Sana", desc: "M\xE1s verdura, legumbre y pescado; menos procesados y frituras.", menu: MENU_SANA },
-    normal: { label: "Normal", desc: "El equilibrio habitual entre sencillez, variedad y coste.", menu: MENU_NORMAL },
-    elaborada: { label: "Elaborada", desc: "Ingredientes m\xE1s sofisticados: solomillo, marisco, risottos.", menu: MENU_ELABORADA }
+    sana: { label: "Sana", desc: "M\xE1s verdura, legumbre y pescado; menos procesados y frituras.", weeks: [MENU_SANA, MENU_SANA_2] },
+    normal: { label: "Normal", desc: "El equilibrio habitual entre sencillez, variedad y coste.", weeks: [MENU_NORMAL, MENU_NORMAL_2] },
+    elaborada: { label: "Elaborada", desc: "Ingredientes m\xE1s sofisticados: solomillo, marisco, risottos.", weeks: [MENU_ELABORADA, MENU_ELABORADA_2] }
   };
   var NIVELES = [
     { key: "sana", emoji: "\u{1F7E2}", label: "Econ\xF3mico", sub: "Sana y sencilla" },
@@ -873,6 +1508,7 @@
     const [showExtras, setShowExtras] = useState(false);
     const [ingresos, setIngresos] = useState("");
     const [menuStyle, setMenuStyle] = useState("normal");
+    const [weekNumber, setWeekNumber] = useState(1);
     const [historial, setHistorial] = useState([]);
     const [historyMsg, setHistoryMsg] = useState("");
     const [openCategories, setOpenCategories] = useState({});
@@ -888,9 +1524,28 @@
     const [pesoMsg, setPesoMsg] = useState("");
     const [swaps, setSwaps] = useState({});
     const [swapPickerKey, setSwapPickerKey] = useState(null);
+    const [selectedDay, setSelectedDay] = useState("Lunes");
     const [shareMsg, setShareMsg] = useState("");
+    const [mercadonaReal, setMercadonaReal] = useState(false);
     useEffect(() => {
       (async () => {
+        try {
+          const res0 = await fetch("./precios-mercadona.json");
+          if (res0.ok) {
+            const real = await res0.json();
+            setPrices((prev) => {
+              const merged = { ...prev };
+              Object.keys(real).forEach((k) => {
+                if (merged[k] && typeof real[k] === "number") {
+                  merged[k] = { ...merged[k], mercadona: real[k] };
+                }
+              });
+              return merged;
+            });
+            setMercadonaReal(true);
+          }
+        } catch (e) {
+        }
         try {
           const res = await storage.get("precios-custom");
           if (res && res.value) {
@@ -923,6 +1578,11 @@
         try {
           const res5 = await storage.get("estilo-menu");
           if (res5 && res5.value) setMenuStyle(res5.value);
+        } catch (e) {
+        }
+        try {
+          const res5b = await storage.get("semana-numero");
+          if (res5b && res5b.value) setWeekNumber(parseInt(res5b.value, 10));
         } catch (e) {
         }
         try {
@@ -1047,9 +1707,9 @@
         return sum + (typeof p === "number" ? p * it.qty * factor : 0);
       }, 0);
     }, [prices, factor]);
-    const activeMenu = STYLES[menuStyle].menu;
+    const activeMenu = STYLES[menuStyle].weeks[weekNumber - 1];
     const getMeal = (day, mealType) => {
-      const key = `${menuStyle}|${day}|${mealType}`;
+      const key = `${menuStyle}|${weekNumber}|${day}|${mealType}`;
       const overrideDay = swaps[key];
       if (overrideDay) {
         const sourceDay = activeMenu.find((d) => d.day === overrideDay);
@@ -1059,7 +1719,7 @@
       return original[mealType];
     };
     const swapMeal = (day, mealType, fromDay) => {
-      const key = `${menuStyle}|${day}|${mealType}`;
+      const key = `${menuStyle}|${weekNumber}|${day}|${mealType}`;
       setSwaps((prev) => {
         const next = { ...prev };
         if (fromDay === day) delete next[key];
@@ -1075,7 +1735,7 @@
         { ...getMeal(d.day, "comida"), day: d.day, type: "Comida" },
         { ...getMeal(d.day, "cena"), day: d.day, type: "Cena" }
       ]),
-      [activeMenu, swaps, menuStyle]
+      [activeMenu, swaps, menuStyle, weekNumber]
     );
     const hasAvoided = (recipe) => recipe.items.some((it) => avoidIds.includes(it.id));
     const DISCRETE_UNITS = /* @__PURE__ */ new Set([
@@ -1126,11 +1786,17 @@
       storage.set("estilo-menu", s).catch(() => {
       });
     };
+    const setWeek = (n) => {
+      setWeekNumber(n);
+      setOpenMeal(null);
+      storage.set("semana-numero", String(n)).catch(() => {
+      });
+    };
     const guardarSemana = (totalSemana) => {
       const entry = {
         id: Date.now(),
         date: (/* @__PURE__ */ new Date()).toLocaleDateString("es-ES", { day: "2-digit", month: "short" }),
-        style: STYLES[menuStyle].label,
+        style: `${STYLES[menuStyle].label} S${weekNumber}`,
         servings,
         total: totalSemana
       };
@@ -1316,7 +1982,7 @@ Picoteo y extras:
     }
     return /* @__PURE__ */ React.createElement("div", { style: { background: "#F3EEE3", color: "#20281F", minHeight: "100vh" }, className: "font-body" }, /* @__PURE__ */ React.createElement("style", null, `
         .font-body { font-family: 'Work Sans', sans-serif; }
-        .font-display { font-family: 'Archivo Black', sans-serif; }
+        .font-display { font-family: 'Fraunces', serif; font-weight: 700; }
         .font-mono { font-family: 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
         .dotted-line { background-image: repeating-linear-gradient(to right, #20281F 0, #20281F 3px, transparent 3px, transparent 8px); height: 1px; }
         .ticket-edge::after {
@@ -1327,9 +1993,9 @@ Picoteo y extras:
         .stamp { transform: rotate(-6deg); border: 3px solid #C2452F; color: #C2452F; }
         summary { list-style: none; }
         summary::-webkit-details-marker { display: none; }
-        summary::after { content: '\u25BE'; float: right; color: #3F6B4F; transition: transform .2s; margin-left: 8px; }
+        summary::after { content: '\u25BE'; float: right; color: #1FAA59; transition: transform .2s; margin-left: 8px; }
         details[open] summary::after { transform: rotate(180deg); }
-      `), /* @__PURE__ */ React.createElement("header", { className: "max-w-3xl mx-auto px-5 pt-10 pb-6" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#3F6B4F" } }, "Men\xFA semanal \xB7 comida y cena"), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-3xl sm:text-4xl mt-2 leading-tight" }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#4A4536" } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado.")), /* @__PURE__ */ React.createElement(
+      `), /* @__PURE__ */ React.createElement("header", { style: { background: "#E3B23C" }, className: "pt-10 pb-8" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#1A4A2C" } }, "Men\xFA semanal \xB7 comida y cena"), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-4xl sm:text-5xl mt-2 leading-tight", style: { color: "#FFFFFF" } }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#FFFFFF", opacity: 0.92 } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado."))), /* @__PURE__ */ React.createElement(
       "nav",
       {
         className: "sticky top-0 z-10 overflow-x-auto whitespace-nowrap px-5 py-2.5 mb-6",
@@ -1349,12 +2015,12 @@ Picoteo y extras:
         {
           key: item.href,
           href: item.href,
-          className: "font-mono text-xs px-2.5 py-1 rounded-sm flex-shrink-0",
-          style: { border: "1px solid #C9C0AC", background: "#FBF8F0", color: "#3F6B4F" }
+          className: "font-mono text-xs px-2.5 py-1 rounded-xl flex-shrink-0",
+          style: { border: "1px solid #C9C0AC", background: "#FBF8F0", color: "#1FAA59" }
         },
         item.label
       )))
-    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4", style: { background: "#FBF8F0", border: "1.5px solid #3F6B4F" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4", style: { background: "#FBF8F0", border: "1.5px solid #1FAA59" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -1362,14 +2028,14 @@ Picoteo y extras:
         onChange: (e) => updatePresupuestoSemanal(e.target.value),
         placeholder: "Ej. 70",
         className: "font-mono text-lg bg-transparent border-b outline-none w-24",
-        style: { borderColor: "#3F6B4F" }
+        style: { borderColor: "#1FAA59" }
       }
     ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / semana"), parseFloat(presupuestoSemanal) > 0 && /* @__PURE__ */ React.createElement(
       "span",
       {
-        className: "font-mono text-xs ml-auto px-2 py-1 rounded-sm",
+        className: "font-mono text-xs ml-auto px-2 py-1 rounded-xl",
         style: {
-          background: cheapest.total <= parseFloat(presupuestoSemanal) ? "#3F6B4F" : "#C2452F",
+          background: cheapest.total <= parseFloat(presupuestoSemanal) ? "#1FAA59" : "#C2452F",
           color: "#FBF8F0"
         }
       },
@@ -1382,10 +2048,10 @@ Picoteo y extras:
       {
         key: h.n,
         onClick: () => setHousehold(h.n),
-        className: "font-mono text-xs px-3 py-1.5 rounded-sm",
+        className: "font-mono text-xs px-3 py-1.5 rounded-xl",
         style: {
-          border: `1.5px solid ${servings === h.n ? "#3F6B4F" : "#C9C0AC"}`,
-          background: servings === h.n ? "#3F6B4F" : "#FFFFFF",
+          border: `1.5px solid ${servings === h.n ? "#1FAA59" : "#C9C0AC"}`,
+          background: servings === h.n ? "#1FAA59" : "#FFFFFF",
           color: servings === h.n ? "#FBF8F0" : "#20281F"
         }
       },
@@ -1395,32 +2061,46 @@ Picoteo y extras:
       {
         key: n.key,
         onClick: () => setStyle(n.key),
-        className: "font-mono text-xs px-3 py-1.5 rounded-sm flex items-center gap-1.5",
+        className: "font-mono text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5",
         style: {
-          border: `1.5px solid ${menuStyle === n.key ? "#3F6B4F" : "#C9C0AC"}`,
-          background: menuStyle === n.key ? "#3F6B4F" : "#FFFFFF",
+          border: `1.5px solid ${menuStyle === n.key ? "#1FAA59" : "#C9C0AC"}`,
+          background: menuStyle === n.key ? "#1FAA59" : "#FFFFFF",
           color: menuStyle === n.key ? "#FBF8F0" : "#20281F"
         }
       },
       /* @__PURE__ */ React.createElement("span", null, n.emoji),
       " ",
       n.label
-    ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, NIVELES.find((n) => n.key === menuStyle)?.sub, " \u2014 ", STYLES[menuStyle].desc), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Tu objetivo"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, OBJETIVOS.map((o) => /* @__PURE__ */ React.createElement(
+    ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, NIVELES.find((n) => n.key === menuStyle)?.sub, " \u2014 ", STYLES[menuStyle].desc), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Semana"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mb-4" }, STYLES[menuStyle].weeks.map((_, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: i,
+        onClick: () => setWeek(i + 1),
+        className: "font-mono text-xs px-3 py-1.5 rounded-xl",
+        style: {
+          border: `1.5px solid ${weekNumber === i + 1 ? "#1FAA59" : "#C9C0AC"}`,
+          background: weekNumber === i + 1 ? "#1FAA59" : "#FFFFFF",
+          color: weekNumber === i + 1 ? "#FBF8F0" : "#20281F"
+        }
+      },
+      "Semana ",
+      i + 1
+    ))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, "Alterna entre semanas para no repetir siempre los mismos platos."), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Tu objetivo"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, OBJETIVOS.map((o) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: o.key,
         onClick: () => updateObjetivo(o.key),
-        className: "font-mono text-xs px-3 py-1.5 rounded-sm flex items-center gap-1.5",
+        className: "font-mono text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5",
         style: {
-          border: `1.5px solid ${objetivo === o.key ? "#3F6B4F" : "#C9C0AC"}`,
-          background: objetivo === o.key ? "#3F6B4F" : "#FFFFFF",
+          border: `1.5px solid ${objetivo === o.key ? "#1FAA59" : "#C9C0AC"}`,
+          background: objetivo === o.key ? "#1FAA59" : "#FFFFFF",
           color: objetivo === o.key ? "#FBF8F0" : "#20281F"
         }
       },
       /* @__PURE__ */ React.createElement("span", null, o.emoji),
       " ",
       o.label
-    ))), objetivo === "ahorrar" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#3F6B4F" } }, "\u{1F4A1} Como tu objetivo es ahorrar, el nivel \u{1F7E2} Econ\xF3mico suele salir m\xE1s barato. Pru\xE9balo y compara el ticket."), objetivo === "saludable" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#3F6B4F" } }, "\u{1F4A1} El nivel \u{1F7E2} Econ\xF3mico es tambi\xE9n el m\xE1s ligero en procesados y frituras esta semana."))), objetivo === "saludable" && /* @__PURE__ */ React.createElement("section", { id: "progreso-peso", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-1" }, "Tu progreso"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, "Esto es un registro personal, no sustituye el consejo de un profesional de la salud. M\xE1rcate objetivos graduales y realistas."), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-3 mb-3" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-1", style: { color: "#6B6552" } }, "Peso actual"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement(
+    ))), objetivo === "ahorrar" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#1FAA59" } }, "\u{1F4A1} Como tu objetivo es ahorrar, el nivel \u{1F7E2} Econ\xF3mico suele salir m\xE1s barato. Pru\xE9balo y compara el ticket."), objetivo === "saludable" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#1FAA59" } }, "\u{1F4A1} El nivel \u{1F7E2} Econ\xF3mico es tambi\xE9n el m\xE1s ligero en procesados y frituras esta semana."))), objetivo === "saludable" && /* @__PURE__ */ React.createElement("section", { id: "progreso-peso", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-1" }, "Tu progreso"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, "Esto es un registro personal, no sustituye el consejo de un profesional de la salud. M\xE1rcate objetivos graduales y realistas."), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-3 mb-3" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-1", style: { color: "#6B6552" } }, "Peso actual"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -1428,7 +2108,7 @@ Picoteo y extras:
         onChange: (e) => updatePesoActual(e.target.value),
         placeholder: "Ej. 78",
         className: "font-mono text-lg bg-transparent border-b outline-none w-16",
-        style: { borderColor: "#3F6B4F" }
+        style: { borderColor: "#1FAA59" }
       }
     ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "kg"))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-1", style: { color: "#6B6552" } }, "Peso al que te gustar\xEDa llegar"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement(
       "input",
@@ -1438,7 +2118,7 @@ Picoteo y extras:
         onChange: (e) => updatePesoObjetivo(e.target.value),
         placeholder: "Ej. 72",
         className: "font-mono text-lg bg-transparent border-b outline-none w-16",
-        style: { borderColor: "#3F6B4F" }
+        style: { borderColor: "#1FAA59" }
       }
     ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "kg")))), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-1", style: { color: "#6B6552" } }, "Fecha en la que te gustar\xEDa conseguirlo (opcional)"), /* @__PURE__ */ React.createElement(
       "input",
@@ -1447,38 +2127,38 @@ Picoteo y extras:
         value: fechaObjetivoPeso,
         onChange: (e) => updateFechaObjetivoPeso(e.target.value),
         className: "font-mono text-sm bg-transparent border-b outline-none mb-3",
-        style: { borderColor: "#3F6B4F" }
+        style: { borderColor: "#1FAA59" }
       }
     ), parseFloat(pesoActual) > 0 && parseFloat(pesoObjetivo) > 0 && /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536" } }, "Te ", parseFloat(pesoActual) > parseFloat(pesoObjetivo) ? "faltan" : "sobran", " ", /* @__PURE__ */ React.createElement("strong", null, Math.abs(parseFloat(pesoActual) - parseFloat(pesoObjetivo)).toFixed(1), " kg"), " para llegar a tu objetivo", fechaObjetivoPeso ? ` antes del ${new Date(fechaObjetivoPeso).toLocaleDateString("es-ES", { day: "2-digit", month: "short", year: "numeric" })}` : "", "."), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-2" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, "Seguimiento mensual"), /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: anotarPesoMensual,
-        className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm",
-        style: { background: "#3F6B4F", color: "#FBF8F0" }
+        className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl",
+        style: { background: "#1FAA59", color: "#FBF8F0" }
       },
       /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }),
       " Anotar este mes"
-    )), pesoMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#3F6B4F" } }, pesoMsg), pesoHistorial.length === 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, 'A\xFAn no has anotado tu peso. Pulsa "Anotar este mes" cuando quieras empezar tu seguimiento.') : /* @__PURE__ */ React.createElement(React.Fragment, null, pesoHistorial.length >= 2 && /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-3 mb-3", style: { background: "#FFFFFF", border: "1px solid #C9C0AC", height: 140 } }, /* @__PURE__ */ React.createElement(MiniLineChart, { data: pesoHistorial, dataKey: "weight", unit: " kg" })), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, pesoHistorial.slice().reverse().map((p) => /* @__PURE__ */ React.createElement(
+    )), pesoMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#1FAA59" } }, pesoMsg), pesoHistorial.length === 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, 'A\xFAn no has anotado tu peso. Pulsa "Anotar este mes" cuando quieras empezar tu seguimiento.') : /* @__PURE__ */ React.createElement(React.Fragment, null, pesoHistorial.length >= 2 && /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-3 mb-3", style: { background: "#FFFFFF", border: "1px solid #C9C0AC", height: 140 } }, /* @__PURE__ */ React.createElement(MiniLineChart, { data: pesoHistorial, dataKey: "weight", unit: " kg" })), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, pesoHistorial.slice().reverse().map((p) => /* @__PURE__ */ React.createElement(
       "div",
       {
         key: p.id,
-        className: "flex items-center justify-between px-3 py-2 rounded-sm",
+        className: "flex items-center justify-between px-3 py-2 rounded-xl",
         style: { background: "#FFFFFF", border: "1px solid #C9C0AC" }
       },
       /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, p.date),
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold" }, p.weight, " kg"), /* @__PURE__ */ React.createElement("button", { onClick: () => borrarPesoEntry(p.id), "aria-label": `Borrar registro de ${p.date}`, style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "trash", size: 14 })))
-    )))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ingredientes a evitar (alergias o no me gusta) ", avoidIds.length > 0 ? `\xB7 ${avoidIds.length} seleccionados` : ""), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mt-3 mb-1.5", style: { color: "#3F6B4F" } }, "Alergias e intolerancias comunes"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#8A8470" } }, "Marca una y se excluyen de golpe todos los ingredientes relacionados."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5 mb-4" }, ALLERGEN_GROUPS.map((g) => {
+    )))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ingredientes a evitar (alergias o no me gusta) ", avoidIds.length > 0 ? `\xB7 ${avoidIds.length} seleccionados` : ""), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mt-3 mb-1.5", style: { color: "#1FAA59" } }, "Alergias e intolerancias comunes"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#8A8470" } }, "Marca una y se excluyen de golpe todos los ingredientes relacionados."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5 mb-4" }, ALLERGEN_GROUPS.map((g) => {
       const active = g.ids.every((id) => avoidIds.includes(id));
       return /* @__PURE__ */ React.createElement(
         "button",
         {
           key: g.key,
           onClick: () => toggleAllergenGroup(g.ids),
-          className: "text-xs px-2.5 py-1 rounded-sm flex items-center gap-1",
+          className: "text-xs px-2.5 py-1 rounded-xl flex items-center gap-1",
           style: {
-            border: `1.5px solid ${active ? "#C2452F" : "#3F6B4F"}`,
+            border: `1.5px solid ${active ? "#C2452F" : "#1FAA59"}`,
             background: active ? "#C2452F" : "#FBF8F0",
-            color: active ? "#FBF8F0" : "#3F6B4F"
+            color: active ? "#FBF8F0" : "#1FAA59"
           }
         },
         /* @__PURE__ */ React.createElement("span", null, g.emoji),
@@ -1492,7 +2172,7 @@ Picoteo y extras:
         {
           key: id,
           onClick: () => toggleAvoid(id),
-          className: "text-xs px-2.5 py-1 rounded-sm",
+          className: "text-xs px-2.5 py-1 rounded-xl",
           style: {
             border: `1.5px solid ${active ? "#C2452F" : "#C9C0AC"}`,
             background: active ? "#C2452F" : "#FBF8F0",
@@ -1501,16 +2181,16 @@ Picoteo y extras:
         },
         ing.label
       );
-    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-sm" }, "\u2212", fmt(savings), " \u20AC")), historial.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2 mt-3 pt-3", style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Comparado con tu \xFAltima semana guardada (", historial[historial.length - 1].date, ")"), /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-xl" }, "\u2212", fmt(savings), " \u20AC")), historial.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2 mt-3 pt-3", style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Comparado con tu \xFAltima semana guardada (", historial[historial.length - 1].date, ")"), /* @__PURE__ */ React.createElement(
       "span",
       {
         className: "font-mono text-sm font-bold",
-        style: { color: cheapest.total <= historial[historial.length - 1].total ? "#3F6B4F" : "#C2452F" }
+        style: { color: cheapest.total <= historial[historial.length - 1].total ? "#1FAA59" : "#C2452F" }
       },
       cheapest.total <= historial[historial.length - 1].total ? "\u2212" : "+",
       fmt(Math.abs(cheapest.total - historial[historial.length - 1].total)),
       " \u20AC"
-    ))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
+    ))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -1518,12 +2198,54 @@ Picoteo y extras:
         onChange: (e) => updateIngresos(e.target.value),
         placeholder: "Ej. 2400",
         className: "font-mono text-lg bg-transparent border-b outline-none w-32",
-        style: { borderColor: "#3F6B4F" }
+        style: { borderColor: "#1FAA59" }
       }
-    ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / mes")), ingresosNum > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-2", style: { color: "#4A4536" } }, "En Espa\xF1a, lo habitual es destinar entre el 10% y el 20% del ingreso a alimentaci\xF3n (media nacional: 15,8%, seg\xFAn el INE). Para tus ingresos, eso es:"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-sm mb-3" }, /* @__PURE__ */ React.createElement("strong", null, fmt(presupuestoMin), " \u20AC \u2013 ", fmt(presupuestoMax), " \u20AC / mes"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552" } }, " (media orientativa: ", fmt(presupuestoMedia), " \u20AC)")), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Tu men\xFA actual cuesta aprox."), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(monthlyCost), " \u20AC / mes")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: monthlyCost <= presupuestoMax ? "#3F6B4F" : "#C2452F" } }, monthlyCost < presupuestoMin ? "Est\xE1 por debajo del rango habitual \u2014 quiz\xE1 haya margen para variar m\xE1s el men\xFA." : monthlyCost <= presupuestoMax ? "Est\xE1 dentro del rango habitual para tus ingresos." : "Est\xE1 por encima del rango habitual \u2014 revisa el editor de precios o reduce extras.")) : /* @__PURE__ */ React.createElement("p", { className: "text-xs", style: { color: "#8A8470" } }, "Indica tus ingresos para ver si el coste de este men\xFA es razonable para tu situaci\xF3n."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 12, className: "mt-0.5 flex-shrink-0" }), "Referencia informativa (datos INE), no asesoramiento financiero. Tus gastos fijos (alquiler, hijos, deudas) cambian lo que es razonable para tu caso.")))), /* @__PURE__ */ React.createElement("section", { id: "menu-semana", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, activeMenu.map((d) => /* @__PURE__ */ React.createElement("div", { key: d.day }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, d.day), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, ["comida", "cena"].map((mealType) => {
+    ), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm", style: { color: "#6B6552" } }, "\u20AC / mes")), ingresosNum > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-2", style: { color: "#4A4536" } }, "En Espa\xF1a, lo habitual es destinar entre el 10% y el 20% del ingreso a alimentaci\xF3n (media nacional: 15,8%, seg\xFAn el INE). Para tus ingresos, eso es:"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-sm mb-3" }, /* @__PURE__ */ React.createElement("strong", null, fmt(presupuestoMin), " \u20AC \u2013 ", fmt(presupuestoMax), " \u20AC / mes"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552" } }, " (media orientativa: ", fmt(presupuestoMedia), " \u20AC)")), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Tu men\xFA actual cuesta aprox."), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(monthlyCost), " \u20AC / mes")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: monthlyCost <= presupuestoMax ? "#1FAA59" : "#C2452F" } }, monthlyCost < presupuestoMin ? "Est\xE1 por debajo del rango habitual \u2014 quiz\xE1 haya margen para variar m\xE1s el men\xFA." : monthlyCost <= presupuestoMax ? "Est\xE1 dentro del rango habitual para tus ingresos." : "Est\xE1 por encima del rango habitual \u2014 revisa el editor de precios o reduce extras.")) : /* @__PURE__ */ React.createElement("p", { className: "text-xs", style: { color: "#8A8470" } }, "Indica tus ingresos para ver si el coste de este men\xFA es razonable para tu situaci\xF3n."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 12, className: "mt-0.5 flex-shrink-0" }), "Referencia informativa (datos INE), no asesoramiento financiero. Tus gastos fijos (alquiler, hijos, deudas) cambian lo que es razonable para tu caso.")))), /* @__PURE__ */ React.createElement("section", { id: "menu-semana", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => {
+          const i = activeMenu.findIndex((d) => d.day === selectedDay);
+          setSelectedDay(activeMenu[(i - 1 + activeMenu.length) % activeMenu.length].day);
+          setOpenMeal(null);
+        },
+        "aria-label": "D\xEDa anterior",
+        className: "flex-shrink-0 px-2 py-1.5 rounded-xl",
+        style: { border: "1px solid #C9C0AC", color: "#1FAA59" }
+      },
+      "\u2039"
+    ), /* @__PURE__ */ React.createElement("div", { className: "flex gap-1.5 overflow-x-auto flex-1" }, activeMenu.map((d) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: d.day,
+        onClick: () => {
+          setSelectedDay(d.day);
+          setOpenMeal(null);
+        },
+        className: "font-mono text-xs px-2.5 py-1.5 rounded-xl flex-shrink-0",
+        style: {
+          border: `1.5px solid ${selectedDay === d.day ? "#1FAA59" : "#C9C0AC"}`,
+          background: selectedDay === d.day ? "#1FAA59" : "#FBF8F0",
+          color: selectedDay === d.day ? "#FBF8F0" : "#20281F"
+        }
+      },
+      d.day.slice(0, 3)
+    ))), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => {
+          const i = activeMenu.findIndex((d) => d.day === selectedDay);
+          setSelectedDay(activeMenu[(i + 1) % activeMenu.length].day);
+          setOpenMeal(null);
+        },
+        "aria-label": "D\xEDa siguiente",
+        className: "flex-shrink-0 px-2 py-1.5 rounded-xl",
+        style: { border: "1px solid #C9C0AC", color: "#1FAA59" }
+      },
+      "\u203A"
+    )), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, activeMenu.filter((d) => d.day === selectedDay).map((d) => /* @__PURE__ */ React.createElement("div", { key: d.day }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#1FAA59" } }, d.day), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, ["comida", "cena"].map((mealType) => {
       const r = getMeal(d.day, mealType);
       const key = `${d.day}-${mealType}`;
-      const swapKey = `${menuStyle}|${d.day}|${mealType}`;
+      const swapKey = `${menuStyle}|${weekNumber}|${d.day}|${mealType}`;
       const isSwapped = !!swaps[swapKey];
       const isOpen = openMeal === key;
       const isPicking = swapPickerKey === swapKey;
@@ -1534,15 +2256,15 @@ Picoteo y extras:
         "div",
         {
           key,
-          className: "border rounded-sm",
+          className: "border rounded-xl",
           style: { borderColor: avoided ? "#C2452F" : "#C9C0AC", background: "#FBF8F0" }
         },
-        /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, isSwapped && /* @__PURE__ */ React.createElement("span", { style: { color: "#3F6B4F" } }, "\xB7 cambiado"), avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base" }, r.name))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, isSwapped && /* @__PURE__ */ React.createElement("span", { style: { color: "#1FAA59" } }, "\xB7 cambiado"), avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base" }, r.name))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement(
           "button",
           {
             onClick: () => setSwapPickerKey(isPicking ? null : swapKey),
             "aria-label": "Cambiar este plato por otro de la semana",
-            style: { color: isSwapped ? "#3F6B4F" : "#C9C0AC" }
+            style: { color: isSwapped ? "#1FAA59" : "#C9C0AC" }
           },
           /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 15 })
         ), /* @__PURE__ */ React.createElement(
@@ -1570,10 +2292,10 @@ Picoteo y extras:
             {
               key: other.day,
               onClick: () => swapMeal(d.day, mealType, other.day),
-              className: "text-xs px-2.5 py-1 rounded-sm flex items-center gap-1",
+              className: "text-xs px-2.5 py-1 rounded-xl flex items-center gap-1",
               style: {
-                border: `1.5px solid ${isCurrentSource ? "#3F6B4F" : "#C9C0AC"}`,
-                background: isCurrentSource ? "#3F6B4F" : "#FFFFFF",
+                border: `1.5px solid ${isCurrentSource ? "#1FAA59" : "#C9C0AC"}`,
+                background: isCurrentSource ? "#1FAA59" : "#FFFFFF",
                 color: isCurrentSource ? "#FBF8F0" : "#20281F"
               }
             },
@@ -1590,104 +2312,112 @@ Picoteo y extras:
           },
           "Volver al plato original"
         )),
-        isOpen && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-4 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, avoided && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13, className: "mt-0.5 flex-shrink-0" }), "Contiene un ingrediente que marcaste para evitar. No se incluye en el total de la semana \u2014 sustit\xFAyelo o coc\xEDnalo aparte."), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Preparaci\xF3n"), /* @__PURE__ */ React.createElement("ol", { className: "text-sm mb-4 space-y-1.5", style: { color: "#4A4536" } }, r.steps.map((step, i) => /* @__PURE__ */ React.createElement("li", { key: i, className: "flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono flex-shrink-0", style: { color: "#3F6B4F" } }, i + 1, "."), /* @__PURE__ */ React.createElement("span", null, step)))), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Ingredientes para ", servings, " ", servings === 1 ? "persona" : "personas"), /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono" }, /* @__PURE__ */ React.createElement("tbody", null, r.items.map((it) => {
+        isOpen && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-4 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, avoided && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13, className: "mt-0.5 flex-shrink-0" }), "Contiene un ingrediente que marcaste para evitar. No se incluye en el total de la semana \u2014 sustit\xFAyelo o coc\xEDnalo aparte."), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Preparaci\xF3n"), /* @__PURE__ */ React.createElement("ol", { className: "text-sm mb-4 space-y-1.5", style: { color: "#4A4536" } }, r.steps.map((step, i) => /* @__PURE__ */ React.createElement("li", { key: i, className: "flex gap-2" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono flex-shrink-0", style: { color: "#1FAA59" } }, i + 1, "."), /* @__PURE__ */ React.createElement("span", null, step)))), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Ingredientes para ", servings, " ", servings === 1 ? "persona" : "personas"), /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono" }, /* @__PURE__ */ React.createElement("tbody", null, r.items.map((it) => {
           const totalQty = it.qty * factor;
           const perPerson = totalQty / servings;
           return /* @__PURE__ */ React.createElement("tr", { key: it.id, style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1.5" }, prices[it.id].label), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#20281F" } }, formatQty(totalQty, prices[it.id].unit)), /* @__PURE__ */ React.createElement("span", { className: "text-xs" }, " (", formatQty(perPerson, prices[it.id].unit), "/persona)")), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right pl-4" }, fmt((prices[it.id][cheapest.id] || 0) * totalQty), " \u20AC"));
         }))))
       );
-    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: compartirLista, className: "font-mono text-xs underline flex items-center gap-1", style: { color: "#3F6B4F" } }, "Compartir"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo"))), shareMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-1", style: { color: "#3F6B4F" } }, shareMsg), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement(
+    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: compartirLista, className: "font-mono text-xs underline flex items-center gap-1", style: { color: "#1FAA59" } }, "Compartir"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo"))), shareMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-1", style: { color: "#1FAA59" } }, shareMsg), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement(
       "div",
       {
-        className: "flex items-center justify-between px-4 py-3 mb-3 rounded-sm",
-        style: { background: "#FBF8F0", border: "1.5px solid #3F6B4F" }
+        className: "flex items-center justify-between px-4 py-3 mb-3 rounded-xl",
+        style: { background: "#FBF8F0", border: "1.5px solid #1FAA59" }
       },
       /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Te queda por comprar"),
       /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(shoppingTotalPendiente), " \u20AC")
-    ), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, shoppingByCategory.map((cat) => /* @__PURE__ */ React.createElement("div", { key: cat.name }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, cat.name), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, cat.items.map((it) => {
-      const checked = boughtItems.includes(it.id);
-      return /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          key: it.id,
-          onClick: () => toggleBought(it.id),
-          "aria-pressed": checked,
-          "aria-label": `Marcar ${it.label} como comprado`,
-          className: "w-full flex items-center justify-between px-3 py-2 rounded-sm text-left",
-          style: { background: "#FBF8F0", border: "1px solid #C9C0AC", opacity: checked ? 0.5 : 1 }
-        },
-        /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(
-          "span",
+    ), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, shoppingByCategory.map((cat) => {
+      const catTotal = cat.items.reduce((s, it) => s + it.cost, 0);
+      const catBought = cat.items.filter((it) => boughtItems.includes(it.id)).length;
+      return /* @__PURE__ */ React.createElement("details", { key: cat.name, className: "rounded-xl", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase px-3 py-2.5 cursor-pointer flex items-center justify-between", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement("span", null, cat.name, " ", /* @__PURE__ */ React.createElement("span", { style: { color: "#8A8470" } }, "(", catBought, "/", cat.items.length, ")")), /* @__PURE__ */ React.createElement("span", null, fmt(catTotal), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "px-3 pb-3 space-y-1.5" }, cat.items.map((it) => {
+        const checked = boughtItems.includes(it.id);
+        return /* @__PURE__ */ React.createElement(
+          "button",
           {
-            className: "flex items-center justify-center rounded-sm flex-shrink-0",
-            style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+            key: it.id,
+            onClick: () => toggleBought(it.id),
+            "aria-pressed": checked,
+            "aria-label": `Marcar ${it.label} como comprado`,
+            className: "w-full flex items-center justify-between px-3 py-2 rounded-xl text-left",
+            style: { background: "#FFFFFF", border: "1px solid #C9C0AC", opacity: checked ? 0.5 : 1 }
           },
-          checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
-        ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
-        /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
-      );
-    })))), shoppingExtras.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, "Picoteo y extras"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, shoppingExtras.map((it) => {
-      const checked = boughtItems.includes(it.id);
-      return /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          key: it.id,
-          onClick: () => toggleBought(it.id),
-          "aria-pressed": checked,
-          "aria-label": `Marcar ${it.label} como comprado`,
-          className: "w-full flex items-center justify-between px-3 py-2 rounded-sm text-left",
-          style: { background: "#FBF8F0", border: "1px solid #C9C0AC", opacity: checked ? 0.5 : 1 }
-        },
-        /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(
-          "span",
+          /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(
+            "span",
+            {
+              className: "flex items-center justify-center rounded-xl flex-shrink-0",
+              style: { width: 18, height: 18, border: "1.5px solid #1FAA59", background: checked ? "#1FAA59" : "transparent" }
+            },
+            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+          ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
+          /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
+        );
+      })));
+    }), shoppingExtras.length > 0 && (() => {
+      const extrasTotal = shoppingExtras.reduce((s, it) => s + it.cost, 0);
+      const extrasBought = shoppingExtras.filter((it) => boughtItems.includes(it.id)).length;
+      return /* @__PURE__ */ React.createElement("details", { className: "rounded-xl", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase px-3 py-2.5 cursor-pointer flex items-center justify-between", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement("span", null, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { style: { color: "#8A8470" } }, "(", extrasBought, "/", shoppingExtras.length, ")")), /* @__PURE__ */ React.createElement("span", null, fmt(extrasTotal), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "px-3 pb-3 space-y-1.5" }, shoppingExtras.map((it) => {
+        const checked = boughtItems.includes(it.id);
+        return /* @__PURE__ */ React.createElement(
+          "button",
           {
-            className: "flex items-center justify-center rounded-sm flex-shrink-0",
-            style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+            key: it.id,
+            onClick: () => toggleBought(it.id),
+            "aria-pressed": checked,
+            "aria-label": `Marcar ${it.label} como comprado`,
+            className: "w-full flex items-center justify-between px-3 py-2 rounded-xl text-left",
+            style: { background: "#FFFFFF", border: "1px solid #C9C0AC", opacity: checked ? 0.5 : 1 }
           },
-          checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
-        ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
-        /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
-      );
-    }))))), /* @__PURE__ */ React.createElement("section", { id: "comparativa", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "Comparativa de supermercados"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" }, totals.sort((a, b) => a.total - b.total).map((s) => /* @__PURE__ */ React.createElement("div", { key: s.id, className: "rounded-sm p-4 relative", style: { background: "#FBF8F0", border: `1.5px solid ${s.id === cheapest.id ? s.color : "#C9C0AC"}` } }, s.id === cheapest.id && /* @__PURE__ */ React.createElement("span", { className: "absolute -top-2 -right-2 rounded-full p-1", style: { background: "#3F6B4F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, s.name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xl font-bold mt-1" }, fmt(s.total), " \u20AC"))))), /* @__PURE__ */ React.createElement("section", { id: "historico", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Hist\xF3rico de semanas"), /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(
+            "span",
+            {
+              className: "flex items-center justify-center rounded-xl flex-shrink-0",
+              style: { width: 18, height: 18, border: "1.5px solid #1FAA59", background: checked ? "#1FAA59" : "transparent" }
+            },
+            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+          ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
+          /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
+        );
+      })));
+    })())), /* @__PURE__ */ React.createElement("section", { id: "comparativa", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "Comparativa de supermercados"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" }, totals.sort((a, b) => a.total - b.total).map((s) => /* @__PURE__ */ React.createElement("div", { key: s.id, className: "rounded-xl p-4 relative", style: { background: "#FBF8F0", border: `1.5px solid ${s.id === cheapest.id ? s.color : "#C9C0AC"}` } }, s.id === cheapest.id && /* @__PURE__ */ React.createElement("span", { className: "absolute -top-2 -right-2 rounded-full p-1", style: { background: "#1FAA59" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, s.name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xl font-bold mt-1" }, fmt(s.total), " \u20AC"))))), /* @__PURE__ */ React.createElement("section", { id: "historico", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Hist\xF3rico de semanas"), /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: () => guardarSemana(cheapest.total),
-        className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm",
-        style: { background: "#3F6B4F", color: "#FBF8F0" }
+        className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl",
+        style: { background: "#1FAA59", color: "#FBF8F0" }
       },
       /* @__PURE__ */ React.createElement(Icon, { name: "archive", size: 13 }),
       " Guardar esta semana"
-    )), historyMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#3F6B4F" } }, historyMsg), historial.length === 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, 'A\xFAn no has guardado ninguna semana. Pulsa "Guardar esta semana" para empezar a ver c\xF3mo evoluciona tu gasto con el tiempo.') : /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ver hist\xF3rico (", historial.length, " ", historial.length === 1 ? "semana guardada" : "semanas guardadas", ")"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, historial.length >= 2 && /* @__PURE__ */ React.createElement("div", { className: "rounded-sm p-3 mb-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC", height: 160 } }, /* @__PURE__ */ React.createElement(MiniLineChart, { data: historial, dataKey: "total", unit: " \u20AC" })), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, historial.slice().reverse().map((h) => /* @__PURE__ */ React.createElement(
+    )), historyMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#1FAA59" } }, historyMsg), historial.length === 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, 'A\xFAn no has guardado ninguna semana. Pulsa "Guardar esta semana" para empezar a ver c\xF3mo evoluciona tu gasto con el tiempo.') : /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ver hist\xF3rico (", historial.length, " ", historial.length === 1 ? "semana guardada" : "semanas guardadas", ")"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, historial.length >= 2 && /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-3 mb-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC", height: 160 } }, /* @__PURE__ */ React.createElement(MiniLineChart, { data: historial, dataKey: "total", unit: " \u20AC" })), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, historial.slice().reverse().map((h) => /* @__PURE__ */ React.createElement(
       "div",
       {
         key: h.id,
-        className: "flex items-center justify-between px-3 py-2 rounded-sm",
+        className: "flex items-center justify-between px-3 py-2 rounded-xl",
         style: { background: "#FBF8F0", border: "1px solid #C9C0AC" }
       },
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, h.date), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, h.style), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, h.servings, " pers.")),
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold" }, fmt(h.total), " \u20AC"), /* @__PURE__ */ React.createElement("button", { onClick: () => borrarSemana(h.id), "aria-label": `Borrar semana del ${h.date}`, style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "trash", size: 14 })))
-    )))))), (repeatedIngredients.length > 0 || leftoverIngredients.length > 0) && /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Aprovecha mejor la compra"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, repeatedIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#3F6B4F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }), " Se repiten en varios platos"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, repeatedIngredients.map(([id, u]) => /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-sm text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "en ", u.count, " platos \xB7 compra un pack m\xE1s grande, lo aprovechas todo"))))), leftoverIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13 }), " Esto te puede sobrar"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, leftoverIngredients.map((u) => /* @__PURE__ */ React.createElement("div", { key: u.id, className: "flex items-center justify-between px-3 py-2 rounded-sm text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[u.id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs text-right", style: { color: "#6B6552" } }, "usas ", fmtNum(u.totalQty), " de ", u.packagesNeeded, " ", prices[u.id].unit, " que compras")))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Aprovecha el resto en otra receta de la semana siguiente, o cong\xE9lalo si se puede."))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer flex items-center gap-2" }, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "opcional")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3 mt-3", style: { color: "#4A4536" } }, "Para el d\xEDa corriente \u2014 patatas, encurtidos, bebidas... M\xE1rcalos si quieres que se sumen al ticket de la semana; si no, el men\xFA sigue siendo solo las 14 comidas."), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, EXTRA_CATEGORIES.map((catName) => {
+    )))))), (repeatedIngredients.length > 0 || leftoverIngredients.length > 0) && /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Aprovecha mejor la compra"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, repeatedIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }), " Se repiten en varios platos"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, repeatedIngredients.map(([id, u]) => /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-xl text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "en ", u.count, " platos \xB7 compra un pack m\xE1s grande, lo aprovechas todo"))))), leftoverIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13 }), " Esto te puede sobrar"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, leftoverIngredients.map((u) => /* @__PURE__ */ React.createElement("div", { key: u.id, className: "flex items-center justify-between px-3 py-2 rounded-xl text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[u.id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs text-right", style: { color: "#6B6552" } }, "usas ", fmtNum(u.totalQty), " de ", u.packagesNeeded, " ", prices[u.id].unit, " que compras")))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Aprovecha el resto en otra receta de la semana siguiente, o cong\xE9lalo si se puede."))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer flex items-center gap-2" }, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "opcional")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3 mt-3", style: { color: "#4A4536" } }, "Para el d\xEDa corriente \u2014 patatas, encurtidos, bebidas... M\xE1rcalos si quieres que se sumen al ticket de la semana; si no, el men\xFA sigue siendo solo las 14 comidas."), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, EXTRA_CATEGORIES.map((catName) => {
       const items = EXTRAS.filter((ex) => ex.category === catName);
       if (items.length === 0) return null;
-      return /* @__PURE__ */ React.createElement("div", { key: catName }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#3F6B4F" } }, catName), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2" }, items.map((ex) => {
+      return /* @__PURE__ */ React.createElement("div", { key: catName }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#1FAA59" } }, catName), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2" }, items.map((ex) => {
         const checked = !!extrasQty[ex.id];
         const qty = extrasQty[ex.id] || 1;
         return /* @__PURE__ */ React.createElement(
           "div",
           {
             key: ex.id,
-            className: "flex items-center justify-between px-3 py-2 rounded-sm",
-            style: { background: "#FBF8F0", border: `1.5px solid ${checked ? "#3F6B4F" : "#C9C0AC"}` }
+            className: "flex items-center justify-between px-3 py-2 rounded-xl",
+            style: { background: "#FBF8F0", border: `1.5px solid ${checked ? "#1FAA59" : "#C9C0AC"}` }
           },
           /* @__PURE__ */ React.createElement("button", { onClick: () => toggleExtra(ex.id), className: "flex items-center gap-2 text-left flex-1" }, /* @__PURE__ */ React.createElement(
             "span",
             {
-              className: "flex items-center justify-center rounded-sm",
-              style: { width: 18, height: 18, border: "1.5px solid #3F6B4F", background: checked ? "#3F6B4F" : "transparent" }
+              className: "flex items-center justify-center rounded-xl",
+              style: { width: 18, height: 18, border: "1.5px solid #1FAA59", background: checked ? "#1FAA59" : "transparent" }
             },
             checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
           ), /* @__PURE__ */ React.createElement("span", { className: "text-lg" }, ex.emoji), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, ex.label)),
-          checked && /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, -1), className: "px-1.5", style: { color: "#3F6B4F" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, 1), className: "px-1.5", style: { color: "#3F6B4F" } }, "+"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552", minWidth: 48, textAlign: "right" } }, fmt(ex[cheapest.id] * qty), " \u20AC"))
+          checked && /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, -1), className: "px-1.5", style: { color: "#1FAA59" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, 1), className: "px-1.5", style: { color: "#1FAA59" } }, "+"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552", minWidth: 48, textAlign: "right" } }, fmt(ex[cheapest.id] * qty), " \u20AC"))
         );
       })));
     })))), /* @__PURE__ */ React.createElement("section", { id: "editor-precios", className: "max-w-3xl mx-auto px-5 mb-16" }, /* @__PURE__ */ React.createElement(
@@ -1695,10 +2425,10 @@ Picoteo y extras:
       {
         onClick: () => setEditing((v) => !v),
         className: "font-mono text-xs uppercase tracking-wide underline",
-        style: { color: "#3F6B4F" }
+        style: { color: "#1FAA59" }
       },
       editing ? "Ocultar ajuste de precios" : "Ajustar precios a tu s\xFAper real \u2192"
-    ), editing && /* @__PURE__ */ React.createElement("div", { className: "mt-4 rounded-sm p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3", style: { color: "#6B6552" } }, "Cambia cualquier precio para que coincida con tu compra real. Se guarda solo en este dispositivo."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), "Huevos, pollo, carne picada y salm\xF3n est\xE1n anclados a datos reales de comparadores de precios (FACUA, Mercastic, Supersupers) de mayo 2026. El resto son estimaciones orientativas \u2014 y los de Lidl en general, porque no vende online en Espa\xF1a y apenas hay seguimiento p\xFAblico de sus precios."), /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono min-w-[480px]" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { borderBottom: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1 pr-2 text-left", style: { color: "#6B6552" } }, "Ingrediente"), STORES.map((s) => /* @__PURE__ */ React.createElement("td", { key: s.id, className: "py-1 px-2 text-right", style: { color: "#6B6552" } }, s.name)))), /* @__PURE__ */ React.createElement("tbody", null, CATEGORIES.map((cat) => {
+    ), editing && /* @__PURE__ */ React.createElement("div", { className: "mt-4 rounded-xl p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3", style: { color: "#6B6552" } }, "Cambia cualquier precio para que coincida con tu compra real. Se guarda solo en este dispositivo."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: mercadonaReal ? "#1FAA59" : "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), mercadonaReal ? "Los precios de Mercadona se actualizan autom\xE1ticamente cada semana desde su cat\xE1logo real. El resto son estimaciones orientativas." : "Huevos, pollo, carne picada y salm\xF3n est\xE1n anclados a datos reales de comparadores de precios (FACUA, Mercastic, Supersupers) de mayo 2026. El resto son estimaciones orientativas \u2014 y los de Lidl en general, porque no vende online en Espa\xF1a y apenas hay seguimiento p\xFAblico de sus precios."), /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono min-w-[480px]" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { borderBottom: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1 pr-2 text-left", style: { color: "#6B6552" } }, "Ingrediente"), STORES.map((s) => /* @__PURE__ */ React.createElement("td", { key: s.id, className: "py-1 px-2 text-right", style: { color: "#6B6552" } }, s.name)))), /* @__PURE__ */ React.createElement("tbody", null, CATEGORIES.map((cat) => {
       const catOpen = !!openCategories[cat.name];
       const idsPresent = cat.ids.filter((id) => prices[id]);
       if (idsPresent.length === 0) return null;
@@ -1707,7 +2437,7 @@ Picoteo y extras:
         {
           onClick: () => setOpenCategories((p) => ({ ...p, [cat.name]: !p[cat.name] })),
           className: "flex items-center gap-1.5 font-mono text-xs uppercase",
-          style: { color: "#3F6B4F" }
+          style: { color: "#1FAA59" }
         },
         /* @__PURE__ */ React.createElement(Icon, { name: "chevronDown", size: 13, style: { transform: catOpen ? "rotate(180deg)" : "none" } }),
         cat.name,
@@ -1728,7 +2458,7 @@ Picoteo y extras:
           }
         ))));
       }));
-    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm", style: { background: "#3F6B4F", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-sm", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#3F6B4F" } }, saveMsg)))), /* @__PURE__ */ React.createElement("footer", { className: "max-w-3xl mx-auto px-5 pb-10 text-xs", style: { color: "#8A8470" } }, "Prototipo \xB7 precios de referencia, no oficiales de cada cadena."));
+    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "#1FAA59", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, saveMsg)))), /* @__PURE__ */ React.createElement("footer", { className: "max-w-3xl mx-auto px-5 pb-10 text-xs", style: { color: "#8A8470" } }, "Prototipo \xB7 precios de referencia, no oficiales de cada cadena."));
   }
   var root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(/* @__PURE__ */ React.createElement(App, null));
