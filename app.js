@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new9.jsx
+  // app-source-new10.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -1855,6 +1855,65 @@
       storage.set("lista-compra-comprados", JSON.stringify([])).catch(() => {
       });
     };
+    const STORAGE_KEYS = [
+      "estilo-menu",
+      "extras-seleccionados",
+      "favoritos",
+      "fecha-objetivo-peso",
+      "historial-semanas",
+      "ingredientes-evitar",
+      "ingresos-mensuales",
+      "intercambios-platos",
+      "lista-compra-comprados",
+      "objetivo-usuario",
+      "peso-actual",
+      "peso-historial",
+      "peso-objetivo",
+      "precios-custom",
+      "presupuesto-semanal",
+      "raciones",
+      "semana-numero"
+    ];
+    const exportarDatos = async () => {
+      const data = {};
+      for (const k of STORAGE_KEYS) {
+        try {
+          const res = await storage.get(k);
+          if (res && res.value !== void 0) data[k] = res.value;
+        } catch (e) {
+        }
+      }
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `la-compra-justa-datos-${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+    const importarDatos = (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (ev) => {
+        try {
+          const data = JSON.parse(ev.target.result);
+          for (const k of STORAGE_KEYS) {
+            if (data[k] !== void 0) {
+              await storage.set(k, data[k]);
+            }
+          }
+          setShareMsg("Datos importados \u2713 Recargando...");
+          setTimeout(() => window.location.reload(), 1200);
+        } catch (err) {
+          setShareMsg("Archivo no v\xE1lido");
+          setTimeout(() => setShareMsg(""), 2500);
+        }
+      };
+      reader.readAsText(file);
+    };
     const compartirLista = async () => {
       let texto = `\u{1F6D2} Lista de la compra \u2014 La Compra Justa
 M\xE1s barato en ${cheapest.name}: ${fmt(shoppingTotalAll)} \u20AC
@@ -2458,7 +2517,23 @@ Picoteo y extras:
           }
         ))));
       }));
-    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "#1FAA59", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, saveMsg)))), /* @__PURE__ */ React.createElement("footer", { className: "max-w-3xl mx-auto px-5 pb-10 text-xs", style: { color: "#8A8470" } }, "Prototipo \xB7 precios de referencia, no oficiales de cada cadena."));
+    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "#1FAA59", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, saveMsg)))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-16" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Copia de seguridad y pasar a otro dispositivo"), /* @__PURE__ */ React.createElement("div", { className: "mt-3 rounded-xl p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536" } }, "Tus datos se guardan solo en este navegador. Para usarlos en otro dispositivo (o no perderlos si borras el navegador), exporta un archivo aqu\xED e imp\xF3rtalo en el otro."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap items-center gap-3" }, /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: exportarDatos,
+        className: "font-mono text-xs uppercase px-3 py-1.5 rounded-xl",
+        style: { background: "#1FAA59", color: "#FFFFFF" }
+      },
+      "Exportar mis datos"
+    ), /* @__PURE__ */ React.createElement(
+      "label",
+      {
+        className: "font-mono text-xs uppercase px-3 py-1.5 rounded-xl cursor-pointer",
+        style: { border: "1px solid #C9C0AC", color: "#20281F" }
+      },
+      "Importar datos",
+      /* @__PURE__ */ React.createElement("input", { type: "file", accept: "application/json", onChange: importarDatos, style: { display: "none" } })
+    ), shareMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, shareMsg))))), /* @__PURE__ */ React.createElement("footer", { className: "max-w-3xl mx-auto px-5 pb-10 text-xs", style: { color: "#8A8470" } }, "Prototipo \xB7 precios de referencia, no oficiales de cada cadena."));
   }
   var root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(/* @__PURE__ */ React.createElement(App, null));
