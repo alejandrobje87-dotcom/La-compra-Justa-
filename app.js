@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new14.jsx
+  // app-source-new15.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -3345,7 +3345,7 @@ Picoteo y extras:
         "Cargando tu men\xFA\u2026"
       );
     }
-    return /* @__PURE__ */ React.createElement("div", { style: { background: "#F3EEE3", color: "#20281F", minHeight: "100vh" }, className: "font-body" }, /* @__PURE__ */ React.createElement("style", null, `
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "#F3EEE3", color: "#20281F", minHeight: "100vh" }, className: "font-body pb-safe" }, /* @__PURE__ */ React.createElement("style", null, `
         .font-body { font-family: 'Work Sans', sans-serif; }
         .font-display { font-family: 'Fraunces', serif; font-weight: 700; }
         .font-mono { font-family: 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
@@ -3360,11 +3360,42 @@ Picoteo y extras:
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '\u25BE'; float: right; color: #1FAA59; transition: transform .2s; margin-left: 8px; }
         details[open] summary::after { transform: rotate(180deg); }
+        .card-soft { box-shadow: 0 1px 2px rgba(32,40,31,0.04), 0 4px 16px rgba(32,40,31,0.06); border: none !important; }
+        .card-hero { box-shadow: 0 2px 4px rgba(32,40,31,0.06), 0 12px 32px rgba(32,40,31,0.10); }
+        body { -webkit-font-smoothing: antialiased; }
+        .tap-scale { transition: transform .08s ease; }
+        .tap-scale:active { transform: scale(0.97); }
+      `), /* @__PURE__ */ React.createElement("style", null, `
+        @media (max-width: 640px) { .pb-safe { padding-bottom: 88px; } }
       `), /* @__PURE__ */ React.createElement("header", { style: { background: "#E3B23C" }, className: "pt-10 pb-8" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#1A4A2C" } }, "Men\xFA semanal \xB7 comida y cena"), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-4xl sm:text-5xl mt-2 leading-tight", style: { color: "#FFFFFF" } }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#FFFFFF", opacity: 0.92 } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado."))), /* @__PURE__ */ React.createElement(
       "nav",
       {
-        className: "sticky top-0 z-10 overflow-x-auto whitespace-nowrap px-5 py-2.5 mb-6",
-        style: { background: "#F3EEE3", borderBottom: "1px solid #C9C0AC" },
+        className: "fixed bottom-0 left-0 right-0 z-20 px-2 py-1.5 sm:hidden",
+        style: { background: "#FBF8F0", boxShadow: "0 -2px 12px rgba(32,40,31,0.08)" },
+        "aria-label": "Navegaci\xF3n principal"
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto flex justify-around" }, [
+        { href: "#perfil", label: "Perfil", icon: "\u{1F464}" },
+        { href: "#menu-semana", label: "Men\xFA", icon: "\u{1F37D}\uFE0F" },
+        { href: "#lista-compra", label: "Lista", icon: "\u{1F6D2}" },
+        { href: "#comparativa", label: "S\xFApers", icon: "\u{1F3EA}" },
+        { href: "#editor-precios", label: "Precios", icon: "\u{1F3F7}\uFE0F" }
+      ].map((item) => /* @__PURE__ */ React.createElement(
+        "a",
+        {
+          key: item.href,
+          href: item.href,
+          className: "flex flex-col items-center gap-0.5 px-2 py-1 tap-scale",
+          style: { color: "#4A4536" }
+        },
+        /* @__PURE__ */ React.createElement("span", { style: { fontSize: 18 } }, item.icon),
+        /* @__PURE__ */ React.createElement("span", { className: "font-mono", style: { fontSize: 10 } }, item.label)
+      )))
+    ), /* @__PURE__ */ React.createElement(
+      "nav",
+      {
+        className: "sticky top-0 z-10 overflow-x-auto whitespace-nowrap px-5 py-2.5 mb-6 hidden sm:block",
+        style: { background: "rgba(243,238,227,0.92)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E3DCC9" },
         "aria-label": "Navegaci\xF3n r\xE1pida entre secciones"
       },
       /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto flex gap-2" }, [
@@ -3380,12 +3411,12 @@ Picoteo y extras:
         {
           key: item.href,
           href: item.href,
-          className: "font-mono text-xs px-2.5 py-1 rounded-xl flex-shrink-0",
-          style: { border: "1px solid #C9C0AC", background: "#FBF8F0", color: "#1FAA59" }
+          className: "font-mono text-xs px-2.5 py-1 rounded-xl flex-shrink-0 tap-scale",
+          style: { background: "#FBF8F0", color: "#1FAA59", boxShadow: "0 1px 2px rgba(32,40,31,0.06)" }
         },
         item.label
       )))
-    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4", style: { background: "#FBF8F0", border: "1.5px solid #1FAA59" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "card-soft rounded-2xl p-5", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -3546,16 +3577,30 @@ Picoteo y extras:
         },
         ing.label
       );
-    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-t-sm shadow-sm overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#4A4536" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#4A4536" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("div", { className: "mt-4 flex items-end justify-between" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "M\xE1s barato en"), /* @__PURE__ */ React.createElement("p", { className: "font-display text-xl mt-1", style: { color: cheapest.color } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "text-right" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#4A4536" } }, "Total"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-3xl font-bold" }, fmt(cheapest.total), " \u20AC"))), /* @__PURE__ */ React.createElement("div", { className: "dotted-line mt-4 mb-3" }), /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Frente a comprarlo todo en ", priciest.name, ", te ahorras"), /* @__PURE__ */ React.createElement("span", { className: "stamp font-mono text-sm font-bold px-2 py-0.5 rounded-xl" }, "\u2212", fmt(savings), " \u20AC")), historial.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2 mt-3 pt-3", style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Comparado con tu \xFAltima semana guardada (", historial[historial.length - 1].date, ")"), /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-8" }, /* @__PURE__ */ React.createElement("div", { className: "card-hero rounded-2xl overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#8A8470" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("p", { className: "font-display leading-none", style: { fontSize: "3rem", color: "#20281F" } }, fmt(cheapest.total), " \u20AC"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: "#4A4536" } }, "Lo m\xE1s barato esta semana, comprando en", " ", /* @__PURE__ */ React.createElement("span", { style: { color: cheapest.color, fontWeight: 600 } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-4" }, /* @__PURE__ */ React.createElement(
       "span",
       {
-        className: "font-mono text-sm font-bold",
-        style: { color: cheapest.total <= historial[historial.length - 1].total ? "#1FAA59" : "#C2452F" }
+        className: "font-mono text-xs font-bold px-3 py-1.5 rounded-xl",
+        style: { background: "#1FAA59", color: "#FFFFFF" }
       },
-      cheapest.total <= historial[historial.length - 1].total ? "\u2212" : "+",
+      "Ahorras ",
+      fmt(savings),
+      " \u20AC vs ",
+      priciest.name
+    ), historial.length > 0 && /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        className: "font-mono text-xs font-bold px-3 py-1.5 rounded-xl",
+        style: {
+          background: cheapest.total <= historial[historial.length - 1].total ? "rgba(31,170,89,0.12)" : "rgba(194,69,47,0.12)",
+          color: cheapest.total <= historial[historial.length - 1].total ? "#1FAA59" : "#C2452F"
+        }
+      },
+      cheapest.total <= historial[historial.length - 1].total ? "\u25BC" : "\u25B2",
+      " ",
       fmt(Math.abs(cheapest.total - historial[historial.length - 1].total)),
-      " \u20AC"
-    ))), /* @__PURE__ */ React.createElement("div", { className: "ticket-edge" })), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
+      " \u20AC vs semana anterior"
+    )))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5 px-1", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
