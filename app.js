@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new16.jsx
+  // app-source-new17.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -3221,7 +3221,7 @@
       reader.readAsText(file);
     };
     const compartirLista = async () => {
-      let texto = `\u{1F6D2} Lista de la compra \u2014 La Compra Justa
+      let texto = `\u{1F6D2} Lista de la compra \u2014 La Cesta Inteligente
 M\xE1s barato en ${cheapest.name}: ${fmt(shoppingTotalAll)} \u20AC
 `;
       shoppingByCategory.forEach((cat) => {
@@ -3367,7 +3367,14 @@ Picoteo y extras:
         .tap-scale:active { transform: scale(0.97); }
       `), /* @__PURE__ */ React.createElement("style", null, `
         @media (max-width: 640px) { .pb-safe { padding-bottom: 88px; } }
-      `), /* @__PURE__ */ React.createElement("header", { style: { background: "#1FAA59" }, className: "pt-10 pb-8" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-1" }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 22 } }, "\u{1F957}"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#E3B23C" } }, "Men\xFA semanal \xB7 comida y cena")), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-4xl sm:text-5xl mt-1 leading-tight", style: { color: "#FFFFFF" } }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#FFFFFF", opacity: 0.92 } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado."))), /* @__PURE__ */ React.createElement(
+      `), /* @__PURE__ */ React.createElement("header", { style: { background: "#FFFFFF" }, className: "pt-8 pb-4 border-b" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 flex justify-center" }, /* @__PURE__ */ React.createElement(
+      "img",
+      {
+        src: "./logo.png",
+        alt: "La Cesta Inteligente \u2014 La compra adaptada a tu vida",
+        style: { maxWidth: "340px", width: "100%", height: "auto" }
+      }
+    ))), /* @__PURE__ */ React.createElement(
       "nav",
       {
         className: "fixed bottom-0 left-0 right-0 z-20 px-2 py-1.5 sm:hidden",
@@ -3577,7 +3584,7 @@ Picoteo y extras:
         },
         ing.label
       );
-    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-8", style: { marginTop: "-1.5rem" } }, /* @__PURE__ */ React.createElement("div", { className: "card-hero rounded-2xl overflow-hidden", style: { background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#8A8470" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("p", { className: "font-display leading-none", style: { fontSize: "3.25rem", color: "#1FAA59" } }, fmt(cheapest.total), " \u20AC"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: "#4A4536" } }, "Lo m\xE1s barato esta semana, comprando en", " ", /* @__PURE__ */ React.createElement("span", { style: { color: cheapest.color, fontWeight: 700 } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-4" }, /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-8 mt-6" }, /* @__PURE__ */ React.createElement("div", { className: "card-hero rounded-2xl overflow-hidden", style: { background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#8A8470" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("p", { className: "font-display leading-none", style: { fontSize: "3.25rem", color: "#1FAA59" } }, fmt(cheapest.total), " \u20AC"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: "#4A4536" } }, "Lo m\xE1s barato esta semana, comprando en", " ", /* @__PURE__ */ React.createElement("span", { style: { color: cheapest.color, fontWeight: 700 } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-4" }, /* @__PURE__ */ React.createElement(
       "span",
       {
         className: "font-mono text-xs font-bold px-3 py-1.5 rounded-xl",
