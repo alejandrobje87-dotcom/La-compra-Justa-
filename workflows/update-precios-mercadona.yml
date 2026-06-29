@@ -1,0 +1,49 @@
+name: Actualizar precios de Mercadona
+
+# Se ejecuta automáticamente cada lunes a las 6:00 (hora UTC) y también se
+# puede lanzar a mano desde la pestaña "Actions" del repositorio.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-precios:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar mercadona-cli
+        run: npm install -g @ivorpad/mercadona
+
+      - name: Buscar precios en Mercadona
+        # mad1 = código postal de referencia (Madrid). Cámbialo si quieres
+        # otra zona: mercadona set-postal <tu_codigo_postal>
+        run: |
+          mercadona set-postal 28022 || true
+          mercadona batch -f scripts/search-terms.txt > mercadona-output.txt || true
+          cat mercadona-output.txt
+
+      - name: Generar precios-mercadona.json
+        run: node scripts/parse-mercadona.js mercadona-output.txt
+
+      - name: Publicar cambios si hay precios nuevos
+        run: |
+          git config user.name "robot-precios"
+          git config user.email "robot-precios@users.noreply.github.com"
+          if git diff --quiet -- web/precios-mercadona.json; then
+            echo "Sin cambios en los precios, no se publica nada."
+          else
+            git add web/precios-mercadona.json
+            git commit -m "Actualizar precios de Mercadona (automático)"
+            git push
+          fi
