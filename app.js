@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new15.jsx
+  // app-source-new16.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -3339,21 +3339,21 @@ Picoteo y extras:
       return /* @__PURE__ */ React.createElement(
         "div",
         {
-          style: { background: "#F3EEE3", color: "#6B6552", minHeight: "100vh" },
+          style: { background: "#F4F7F4", color: "#6B6552", minHeight: "100vh" },
           className: "flex items-center justify-center font-mono text-sm"
         },
         "Cargando tu men\xFA\u2026"
       );
     }
-    return /* @__PURE__ */ React.createElement("div", { style: { background: "#F3EEE3", color: "#20281F", minHeight: "100vh" }, className: "font-body pb-safe" }, /* @__PURE__ */ React.createElement("style", null, `
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "#F4F7F4", color: "#20281F", minHeight: "100vh" }, className: "font-body pb-safe" }, /* @__PURE__ */ React.createElement("style", null, `
         .font-body { font-family: 'Work Sans', sans-serif; }
-        .font-display { font-family: 'Fraunces', serif; font-weight: 700; }
+        .font-display { font-family: 'Nunito', sans-serif; font-weight: 800; letter-spacing: -0.01em; }
         .font-mono { font-family: 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
         .dotted-line { background-image: repeating-linear-gradient(to right, #20281F 0, #20281F 3px, transparent 3px, transparent 8px); height: 1px; }
         .ticket-edge::after {
           content: ""; display: block; height: 14px;
-          background: repeating-linear-gradient(135deg, transparent 0 6px, #F3EEE3 6px 12px), repeating-linear-gradient(45deg, transparent 0 6px, #F3EEE3 6px 12px);
-          background-color: #FBF8F0; margin-top: -1px;
+          background: repeating-linear-gradient(135deg, transparent 0 6px, #F4F7F4 6px 12px), repeating-linear-gradient(45deg, transparent 0 6px, #F4F7F4 6px 12px);
+          background-color: #FFFFFF; margin-top: -1px;
         }
         .stamp { transform: rotate(-6deg); border: 3px solid #C2452F; color: #C2452F; }
         summary { list-style: none; }
@@ -3367,11 +3367,11 @@ Picoteo y extras:
         .tap-scale:active { transform: scale(0.97); }
       `), /* @__PURE__ */ React.createElement("style", null, `
         @media (max-width: 640px) { .pb-safe { padding-bottom: 88px; } }
-      `), /* @__PURE__ */ React.createElement("header", { style: { background: "#E3B23C" }, className: "pt-10 pb-8" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#1A4A2C" } }, "Men\xFA semanal \xB7 comida y cena"), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-4xl sm:text-5xl mt-2 leading-tight", style: { color: "#FFFFFF" } }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#FFFFFF", opacity: 0.92 } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado."))), /* @__PURE__ */ React.createElement(
+      `), /* @__PURE__ */ React.createElement("header", { style: { background: "#1FAA59" }, className: "pt-10 pb-8" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-1" }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 22 } }, "\u{1F957}"), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs tracking-widest uppercase", style: { color: "#E3B23C" } }, "Men\xFA semanal \xB7 comida y cena")), /* @__PURE__ */ React.createElement("h1", { className: "font-display text-4xl sm:text-5xl mt-1 leading-tight", style: { color: "#FFFFFF" } }, "La Compra Justa"), /* @__PURE__ */ React.createElement("p", { className: "mt-2 text-sm sm:text-base", style: { color: "#FFFFFF", opacity: 0.92 } }, "Comidas sencillas para toda la semana, con el ticket real de lo que cuestan en cada supermercado."))), /* @__PURE__ */ React.createElement(
       "nav",
       {
         className: "fixed bottom-0 left-0 right-0 z-20 px-2 py-1.5 sm:hidden",
-        style: { background: "#FBF8F0", boxShadow: "0 -2px 12px rgba(32,40,31,0.08)" },
+        style: { background: "#FFFFFF", boxShadow: "0 -2px 12px rgba(32,40,31,0.08)" },
         "aria-label": "Navegaci\xF3n principal"
       },
       /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto flex justify-around" }, [
@@ -3395,7 +3395,7 @@ Picoteo y extras:
       "nav",
       {
         className: "sticky top-0 z-10 overflow-x-auto whitespace-nowrap px-5 py-2.5 mb-6 hidden sm:block",
-        style: { background: "rgba(243,238,227,0.92)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E3DCC9" },
+        style: { background: "rgba(244,247,244,0.92)", backdropFilter: "blur(8px)", borderBottom: "1px solid #E3E8E3" },
         "aria-label": "Navegaci\xF3n r\xE1pida entre secciones"
       },
       /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto flex gap-2" }, [
@@ -3412,11 +3412,11 @@ Picoteo y extras:
           key: item.href,
           href: item.href,
           className: "font-mono text-xs px-2.5 py-1 rounded-xl flex-shrink-0 tap-scale",
-          style: { background: "#FBF8F0", color: "#1FAA59", boxShadow: "0 1px 2px rgba(32,40,31,0.06)" }
+          style: { background: "#FFFFFF", color: "#1FAA59", boxShadow: "0 1px 2px rgba(32,40,31,0.06)" }
         },
         item.label
       )))
-    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "card-soft rounded-2xl p-5", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("section", { id: "perfil", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "card-soft rounded-2xl p-5", style: { background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "Tu perfil"), /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Presupuesto semanal para comida (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -3432,7 +3432,7 @@ Picoteo y extras:
         className: "font-mono text-xs ml-auto px-2 py-1 rounded-xl",
         style: {
           background: cheapest.total <= parseFloat(presupuestoSemanal) ? "#1FAA59" : "#C2452F",
-          color: "#FBF8F0"
+          color: "#FFFFFF"
         }
       },
       cheapest.total <= parseFloat(presupuestoSemanal) ? "Dentro" : "Por encima",
@@ -3448,7 +3448,7 @@ Picoteo y extras:
         style: {
           border: `1.5px solid ${servings === h.n ? "#1FAA59" : "#C9C0AC"}`,
           background: servings === h.n ? "#1FAA59" : "#FFFFFF",
-          color: servings === h.n ? "#FBF8F0" : "#20281F"
+          color: servings === h.n ? "#FFFFFF" : "#20281F"
         }
       },
       h.label
@@ -3461,7 +3461,7 @@ Picoteo y extras:
         style: {
           border: `1.5px solid ${menuStyle === n.key ? "#1FAA59" : "#C9C0AC"}`,
           background: menuStyle === n.key ? "#1FAA59" : "#FFFFFF",
-          color: menuStyle === n.key ? "#FBF8F0" : "#20281F"
+          color: menuStyle === n.key ? "#FFFFFF" : "#20281F"
         }
       },
       /* @__PURE__ */ React.createElement("span", null, n.emoji),
@@ -3476,7 +3476,7 @@ Picoteo y extras:
         style: {
           border: `1.5px solid ${weekNumber === i + 1 ? "#1FAA59" : "#C9C0AC"}`,
           background: weekNumber === i + 1 ? "#1FAA59" : "#FFFFFF",
-          color: weekNumber === i + 1 ? "#FBF8F0" : "#20281F"
+          color: weekNumber === i + 1 ? "#FFFFFF" : "#20281F"
         }
       },
       "Semana ",
@@ -3490,13 +3490,13 @@ Picoteo y extras:
         style: {
           border: `1.5px solid ${objetivo === o.key ? "#1FAA59" : "#C9C0AC"}`,
           background: objetivo === o.key ? "#1FAA59" : "#FFFFFF",
-          color: objetivo === o.key ? "#FBF8F0" : "#20281F"
+          color: objetivo === o.key ? "#FFFFFF" : "#20281F"
         }
       },
       /* @__PURE__ */ React.createElement("span", null, o.emoji),
       " ",
       o.label
-    ))), objetivo === "ahorrar" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#1FAA59" } }, "\u{1F4A1} Como tu objetivo es ahorrar, el nivel \u{1F7E2} Econ\xF3mico suele salir m\xE1s barato. Pru\xE9balo y compara el ticket."), objetivo === "saludable" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#1FAA59" } }, "\u{1F4A1} El nivel \u{1F7E2} Econ\xF3mico es tambi\xE9n el m\xE1s ligero en procesados y frituras esta semana."))), objetivo === "saludable" && /* @__PURE__ */ React.createElement("section", { id: "progreso-peso", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-1" }, "Tu progreso"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, "Esto es un registro personal, no sustituye el consejo de un profesional de la salud. M\xE1rcate objetivos graduales y realistas."), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-3 mb-3" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-1", style: { color: "#6B6552" } }, "Peso actual"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement(
+    ))), objetivo === "ahorrar" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#1FAA59" } }, "\u{1F4A1} Como tu objetivo es ahorrar, el nivel \u{1F7E2} Econ\xF3mico suele salir m\xE1s barato. Pru\xE9balo y compara el ticket."), objetivo === "saludable" && menuStyle !== "sana" && /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-3", style: { color: "#1FAA59" } }, "\u{1F4A1} El nivel \u{1F7E2} Econ\xF3mico es tambi\xE9n el m\xE1s ligero en procesados y frituras esta semana."))), objetivo === "saludable" && /* @__PURE__ */ React.createElement("section", { id: "progreso-peso", className: "max-w-3xl mx-auto px-5 mb-6" }, /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-1" }, "Tu progreso"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4", style: { color: "#8A8470" } }, "Esto es un registro personal, no sustituye el consejo de un profesional de la salud. M\xE1rcate objetivos graduales y realistas."), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-3 mb-3" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-1", style: { color: "#6B6552" } }, "Peso actual"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-1" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -3530,7 +3530,7 @@ Picoteo y extras:
       {
         onClick: anotarPesoMensual,
         className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl",
-        style: { background: "#1FAA59", color: "#FBF8F0" }
+        style: { background: "#1FAA59", color: "#FFFFFF" }
       },
       /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }),
       " Anotar este mes"
@@ -3553,8 +3553,8 @@ Picoteo y extras:
           className: "text-xs px-2.5 py-1 rounded-xl flex items-center gap-1",
           style: {
             border: `1.5px solid ${active ? "#C2452F" : "#1FAA59"}`,
-            background: active ? "#C2452F" : "#FBF8F0",
-            color: active ? "#FBF8F0" : "#1FAA59"
+            background: active ? "#C2452F" : "#FFFFFF",
+            color: active ? "#FFFFFF" : "#1FAA59"
           }
         },
         /* @__PURE__ */ React.createElement("span", null, g.emoji),
@@ -3571,13 +3571,13 @@ Picoteo y extras:
           className: "text-xs px-2.5 py-1 rounded-xl",
           style: {
             border: `1.5px solid ${active ? "#C2452F" : "#C9C0AC"}`,
-            background: active ? "#C2452F" : "#FBF8F0",
-            color: active ? "#FBF8F0" : "#20281F"
+            background: active ? "#C2452F" : "#FFFFFF",
+            color: active ? "#FFFFFF" : "#20281F"
           }
         },
         ing.label
       );
-    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-8" }, /* @__PURE__ */ React.createElement("div", { className: "card-hero rounded-2xl overflow-hidden", style: { background: "#FBF8F0" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#8A8470" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("p", { className: "font-display leading-none", style: { fontSize: "3rem", color: "#20281F" } }, fmt(cheapest.total), " \u20AC"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: "#4A4536" } }, "Lo m\xE1s barato esta semana, comprando en", " ", /* @__PURE__ */ React.createElement("span", { style: { color: cheapest.color, fontWeight: 600 } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-4" }, /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-8", style: { marginTop: "-1.5rem" } }, /* @__PURE__ */ React.createElement("div", { className: "card-hero rounded-2xl overflow-hidden", style: { background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "p-6" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-baseline justify-between mb-4" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs uppercase tracking-wide", style: { color: "#8A8470" } }, "Ticket de la semana"), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "14 comidas", extrasCount > 0 ? ` + ${extrasCount} extra${extrasCount > 1 ? "s" : ""}` : "", " \xB7 ", servings, " ", servings === 1 ? "raci\xF3n" : "raciones")), /* @__PURE__ */ React.createElement("p", { className: "font-display leading-none", style: { fontSize: "3.25rem", color: "#1FAA59" } }, fmt(cheapest.total), " \u20AC"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-2", style: { color: "#4A4536" } }, "Lo m\xE1s barato esta semana, comprando en", " ", /* @__PURE__ */ React.createElement("span", { style: { color: cheapest.color, fontWeight: 700 } }, cheapest.name)), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2 mt-4" }, /* @__PURE__ */ React.createElement(
       "span",
       {
         className: "font-mono text-xs font-bold px-3 py-1.5 rounded-xl",
@@ -3592,15 +3592,15 @@ Picoteo y extras:
       {
         className: "font-mono text-xs font-bold px-3 py-1.5 rounded-xl",
         style: {
-          background: cheapest.total <= historial[historial.length - 1].total ? "rgba(31,170,89,0.12)" : "rgba(194,69,47,0.12)",
-          color: cheapest.total <= historial[historial.length - 1].total ? "#1FAA59" : "#C2452F"
+          background: cheapest.total <= historial[historial.length - 1].total ? "rgba(31,170,89,0.12)" : "rgba(227,178,60,0.18)",
+          color: cheapest.total <= historial[historial.length - 1].total ? "#1FAA59" : "#B8860B"
         }
       },
       cheapest.total <= historial[historial.length - 1].total ? "\u25BC" : "\u25B2",
       " ",
       fmt(Math.abs(cheapest.total - historial[historial.length - 1].total)),
       " \u20AC vs semana anterior"
-    )))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5 px-1", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4 mt-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5 px-1", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 14, className: "mt-0.5 flex-shrink-0" }), "Cubre solo las 14 comidas y cenas de abajo (no desayunos, snacks ni higiene). Es una referencia, no tu compra completa.", avoidedCount > 0 ? ` ${avoidedCount} plato${avoidedCount > 1 ? "s" : ""} con ingredientes a evitar no est\xE1${avoidedCount > 1 ? "n" : ""} incluido${avoidedCount > 1 ? "s" : ""} en el total.` : "")), /* @__PURE__ */ React.createElement("section", { id: "presupuesto", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Tu presupuesto frente a la media nacional"), /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-4 mt-3", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("label", { className: "font-mono text-xs uppercase block mb-2", style: { color: "#6B6552" } }, "Ingresos netos del hogar al mes (opcional)"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-3" }, /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
@@ -3634,8 +3634,8 @@ Picoteo y extras:
         className: "font-mono text-xs px-2.5 py-1.5 rounded-xl flex-shrink-0",
         style: {
           border: `1.5px solid ${selectedDay === d.day ? "#1FAA59" : "#C9C0AC"}`,
-          background: selectedDay === d.day ? "#1FAA59" : "#FBF8F0",
-          color: selectedDay === d.day ? "#FBF8F0" : "#20281F"
+          background: selectedDay === d.day ? "#1FAA59" : "#FFFFFF",
+          color: selectedDay === d.day ? "#FFFFFF" : "#20281F"
         }
       },
       d.day.slice(0, 3)
@@ -3667,7 +3667,7 @@ Picoteo y extras:
         {
           key,
           className: "border rounded-xl",
-          style: { borderColor: avoided ? "#C2452F" : "#C9C0AC", background: "#FBF8F0" }
+          style: { borderColor: avoided ? "#C2452F" : "#C9C0AC", background: "#FFFFFF" }
         },
         /* @__PURE__ */ React.createElement("div", { className: "w-full flex items-center justify-between px-4 py-3" }, /* @__PURE__ */ React.createElement("button", { onClick: () => setOpenMeal(isOpen ? null : key), className: "flex items-center gap-3 text-left flex-1" }, /* @__PURE__ */ React.createElement("span", { className: "text-xl" }, r.emoji), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase flex items-center gap-1", style: { color: avoided ? "#C2452F" : "#6B6552" } }, mealType === "comida" ? "Comida" : "Cena", " \xB7 ", r.time, isSwapped && /* @__PURE__ */ React.createElement("span", { style: { color: "#1FAA59" } }, "\xB7 cambiado"), avoided && /* @__PURE__ */ React.createElement("span", { className: "flex items-center gap-0.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 11 }), " revisa ingredientes")), /* @__PURE__ */ React.createElement("p", { className: "font-medium text-sm sm:text-base flex items-center gap-2" }, r.name, menuStyle === "sana" && r.salud && /* @__PURE__ */ React.createElement(
           "span",
@@ -3718,7 +3718,7 @@ Picoteo y extras:
               style: {
                 border: `1.5px solid ${isCurrentSource ? "#1FAA59" : "#C9C0AC"}`,
                 background: isCurrentSource ? "#1FAA59" : "#FFFFFF",
-                color: isCurrentSource ? "#FBF8F0" : "#20281F"
+                color: isCurrentSource ? "#FFFFFF" : "#20281F"
               }
             },
             /* @__PURE__ */ React.createElement("span", null, candidate.emoji),
@@ -3744,14 +3744,14 @@ Picoteo y extras:
       "div",
       {
         className: "flex items-center justify-between px-4 py-3 mb-3 rounded-xl",
-        style: { background: "#FBF8F0", border: "1.5px solid #1FAA59" }
+        style: { background: "#FFFFFF", border: "1.5px solid #1FAA59" }
       },
       /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { color: "#4A4536" } }, "Te queda por comprar"),
       /* @__PURE__ */ React.createElement("span", { className: "font-mono text-lg font-bold" }, fmt(shoppingTotalPendiente), " \u20AC")
     ), /* @__PURE__ */ React.createElement("div", { className: "space-y-2" }, shoppingByCategory.map((cat) => {
       const catTotal = cat.items.reduce((s, it) => s + it.cost, 0);
       const catBought = cat.items.filter((it) => boughtItems.includes(it.id)).length;
-      return /* @__PURE__ */ React.createElement("details", { key: cat.name, className: "rounded-xl", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase px-3 py-2.5 cursor-pointer flex items-center justify-between", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement("span", null, cat.name, " ", /* @__PURE__ */ React.createElement("span", { style: { color: "#8A8470" } }, "(", catBought, "/", cat.items.length, ")")), /* @__PURE__ */ React.createElement("span", null, fmt(catTotal), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "px-3 pb-3 space-y-1.5" }, cat.items.map((it) => {
+      return /* @__PURE__ */ React.createElement("details", { key: cat.name, className: "rounded-xl", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase px-3 py-2.5 cursor-pointer flex items-center justify-between", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement("span", null, cat.name, " ", /* @__PURE__ */ React.createElement("span", { style: { color: "#8A8470" } }, "(", catBought, "/", cat.items.length, ")")), /* @__PURE__ */ React.createElement("span", null, fmt(catTotal), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "px-3 pb-3 space-y-1.5" }, cat.items.map((it) => {
         const checked = boughtItems.includes(it.id);
         return /* @__PURE__ */ React.createElement(
           "button",
@@ -3769,7 +3769,7 @@ Picoteo y extras:
               className: "flex items-center justify-center rounded-xl flex-shrink-0",
               style: { width: 18, height: 18, border: "1.5px solid #1FAA59", background: checked ? "#1FAA59" : "transparent" }
             },
-            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FFFFFF" })
           ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
           /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
         );
@@ -3777,7 +3777,7 @@ Picoteo y extras:
     }), shoppingExtras.length > 0 && (() => {
       const extrasTotal = shoppingExtras.reduce((s, it) => s + it.cost, 0);
       const extrasBought = shoppingExtras.filter((it) => boughtItems.includes(it.id)).length;
-      return /* @__PURE__ */ React.createElement("details", { className: "rounded-xl", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase px-3 py-2.5 cursor-pointer flex items-center justify-between", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement("span", null, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { style: { color: "#8A8470" } }, "(", extrasBought, "/", shoppingExtras.length, ")")), /* @__PURE__ */ React.createElement("span", null, fmt(extrasTotal), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "px-3 pb-3 space-y-1.5" }, shoppingExtras.map((it) => {
+      return /* @__PURE__ */ React.createElement("details", { className: "rounded-xl", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase px-3 py-2.5 cursor-pointer flex items-center justify-between", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement("span", null, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { style: { color: "#8A8470" } }, "(", extrasBought, "/", shoppingExtras.length, ")")), /* @__PURE__ */ React.createElement("span", null, fmt(extrasTotal), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "px-3 pb-3 space-y-1.5" }, shoppingExtras.map((it) => {
         const checked = boughtItems.includes(it.id);
         return /* @__PURE__ */ React.createElement(
           "button",
@@ -3795,30 +3795,30 @@ Picoteo y extras:
               className: "flex items-center justify-center rounded-xl flex-shrink-0",
               style: { width: 18, height: 18, border: "1.5px solid #1FAA59", background: checked ? "#1FAA59" : "transparent" }
             },
-            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FFFFFF" })
           ), /* @__PURE__ */ React.createElement("span", { className: "text-sm", style: { textDecoration: checked ? "line-through" : "none" } }, it.label)),
           /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
         );
       })));
-    })())), /* @__PURE__ */ React.createElement("section", { id: "comparativa", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "Comparativa de supermercados"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" }, totals.sort((a, b) => a.total - b.total).map((s) => /* @__PURE__ */ React.createElement("div", { key: s.id, className: "rounded-xl p-4 relative", style: { background: "#FBF8F0", border: `1.5px solid ${s.id === cheapest.id ? s.color : "#C9C0AC"}` } }, s.id === cheapest.id && /* @__PURE__ */ React.createElement("span", { className: "absolute -top-2 -right-2 rounded-full p-1", style: { background: "#1FAA59" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, s.name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xl font-bold mt-1" }, fmt(s.total), " \u20AC"))))), /* @__PURE__ */ React.createElement("section", { id: "historico", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Hist\xF3rico de semanas"), /* @__PURE__ */ React.createElement(
+    })())), /* @__PURE__ */ React.createElement("section", { id: "comparativa", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-4" }, "Comparativa de supermercados"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3" }, totals.sort((a, b) => a.total - b.total).map((s) => /* @__PURE__ */ React.createElement("div", { key: s.id, className: "rounded-xl p-4 relative", style: { background: "#FFFFFF", border: `1.5px solid ${s.id === cheapest.id ? s.color : "#C9C0AC"}` } }, s.id === cheapest.id && /* @__PURE__ */ React.createElement("span", { className: "absolute -top-2 -right-2 rounded-full p-1", style: { background: "#1FAA59" } }, /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FFFFFF" })), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#6B6552" } }, s.name), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xl font-bold mt-1" }, fmt(s.total), " \u20AC"))))), /* @__PURE__ */ React.createElement("section", { id: "historico", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-3" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Hist\xF3rico de semanas"), /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: () => guardarSemana(cheapest.total),
         className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl",
-        style: { background: "#1FAA59", color: "#FBF8F0" }
+        style: { background: "#1FAA59", color: "#FFFFFF" }
       },
       /* @__PURE__ */ React.createElement(Icon, { name: "archive", size: 13 }),
       " Guardar esta semana"
-    )), historyMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#1FAA59" } }, historyMsg), historial.length === 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, 'A\xFAn no has guardado ninguna semana. Pulsa "Guardar esta semana" para empezar a ver c\xF3mo evoluciona tu gasto con el tiempo.') : /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ver hist\xF3rico (", historial.length, " ", historial.length === 1 ? "semana guardada" : "semanas guardadas", ")"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, historial.length >= 2 && /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-3 mb-3", style: { background: "#FBF8F0", border: "1px solid #C9C0AC", height: 160 } }, /* @__PURE__ */ React.createElement(MiniLineChart, { data: historial, dataKey: "total", unit: " \u20AC" })), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, historial.slice().reverse().map((h) => /* @__PURE__ */ React.createElement(
+    )), historyMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#1FAA59" } }, historyMsg), historial.length === 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, 'A\xFAn no has guardado ninguna semana. Pulsa "Guardar esta semana" para empezar a ver c\xF3mo evoluciona tu gasto con el tiempo.') : /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Ver hist\xF3rico (", historial.length, " ", historial.length === 1 ? "semana guardada" : "semanas guardadas", ")"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, historial.length >= 2 && /* @__PURE__ */ React.createElement("div", { className: "rounded-xl p-3 mb-3", style: { background: "#FFFFFF", border: "1px solid #C9C0AC", height: 160 } }, /* @__PURE__ */ React.createElement(MiniLineChart, { data: historial, dataKey: "total", unit: " \u20AC" })), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, historial.slice().reverse().map((h) => /* @__PURE__ */ React.createElement(
       "div",
       {
         key: h.id,
         className: "flex items-center justify-between px-3 py-2 rounded-xl",
-        style: { background: "#FBF8F0", border: "1px solid #C9C0AC" }
+        style: { background: "#FFFFFF", border: "1px solid #C9C0AC" }
       },
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, h.date), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, h.style), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, h.servings, " pers.")),
       /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold" }, fmt(h.total), " \u20AC"), /* @__PURE__ */ React.createElement("button", { onClick: () => borrarSemana(h.id), "aria-label": `Borrar semana del ${h.date}`, style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "trash", size: 14 })))
-    )))))), (repeatedIngredients.length > 0 || leftoverIngredients.length > 0) && /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Aprovecha mejor la compra"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, repeatedIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }), " Se repiten en varios platos"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, repeatedIngredients.map(([id, u]) => /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-xl text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "en ", u.count, " platos \xB7 compra un pack m\xE1s grande, lo aprovechas todo"))))), leftoverIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13 }), " Esto te puede sobrar"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, leftoverIngredients.map((u) => /* @__PURE__ */ React.createElement("div", { key: u.id, className: "flex items-center justify-between px-3 py-2 rounded-xl text-sm", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[u.id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs text-right", style: { color: "#6B6552" } }, "usas ", fmtNum(u.totalQty), " de ", u.packagesNeeded, " ", prices[u.id].unit, " que compras")))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Aprovecha el resto en otra receta de la semana siguiente, o cong\xE9lalo si se puede."))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer flex items-center gap-2" }, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "opcional")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3 mt-3", style: { color: "#4A4536" } }, "Para el d\xEDa corriente \u2014 patatas, encurtidos, bebidas... M\xE1rcalos si quieres que se sumen al ticket de la semana; si no, el men\xFA sigue siendo solo las 14 comidas."), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, EXTRA_CATEGORIES.map((catName) => {
+    )))))), (repeatedIngredients.length > 0 || leftoverIngredients.length > 0) && /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer" }, "Aprovecha mejor la compra"), /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, repeatedIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#1FAA59" } }, /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }), " Se repiten en varios platos"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, repeatedIngredients.map(([id, u]) => /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-xl text-sm", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, "en ", u.count, " platos \xB7 compra un pack m\xE1s grande, lo aprovechas todo"))))), leftoverIngredients.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2 flex items-center gap-1.5", style: { color: "#C2452F" } }, /* @__PURE__ */ React.createElement(Icon, { name: "alertTriangle", size: 13 }), " Esto te puede sobrar"), /* @__PURE__ */ React.createElement("div", { className: "space-y-1.5" }, leftoverIngredients.map((u) => /* @__PURE__ */ React.createElement("div", { key: u.id, className: "flex items-center justify-between px-3 py-2 rounded-xl text-sm", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("span", null, prices[u.id].label), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs text-right", style: { color: "#6B6552" } }, "usas ", fmtNum(u.totalQty), " de ", u.packagesNeeded, " ", prices[u.id].unit, " que compras")))), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Aprovecha el resto en otra receta de la semana siguiente, o cong\xE9lalo si se puede."))))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-display text-lg cursor-pointer flex items-center gap-2" }, "Picoteo y extras ", /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#8A8470" } }, "opcional")), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3 mt-3", style: { color: "#4A4536" } }, "Para el d\xEDa corriente \u2014 patatas, encurtidos, bebidas... M\xE1rcalos si quieres que se sumen al ticket de la semana; si no, el men\xFA sigue siendo solo las 14 comidas."), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, EXTRA_CATEGORIES.map((catName) => {
       const items = EXTRAS.filter((ex) => ex.category === catName);
       if (items.length === 0) return null;
       return /* @__PURE__ */ React.createElement("div", { key: catName }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#1FAA59" } }, catName), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2" }, items.map((ex) => {
@@ -3829,7 +3829,7 @@ Picoteo y extras:
           {
             key: ex.id,
             className: "flex items-center justify-between px-3 py-2 rounded-xl",
-            style: { background: "#FBF8F0", border: `1.5px solid ${checked ? "#1FAA59" : "#C9C0AC"}` }
+            style: { background: "#FFFFFF", border: `1.5px solid ${checked ? "#1FAA59" : "#C9C0AC"}` }
           },
           /* @__PURE__ */ React.createElement("button", { onClick: () => toggleExtra(ex.id), className: "flex items-center gap-2 text-left flex-1" }, /* @__PURE__ */ React.createElement(
             "span",
@@ -3837,7 +3837,7 @@ Picoteo y extras:
               className: "flex items-center justify-center rounded-xl",
               style: { width: 18, height: 18, border: "1.5px solid #1FAA59", background: checked ? "#1FAA59" : "transparent" }
             },
-            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FBF8F0" })
+            checked && /* @__PURE__ */ React.createElement(Icon, { name: "check", size: 12, color: "#FFFFFF" })
           ), /* @__PURE__ */ React.createElement("span", { className: "text-lg" }, ex.emoji), /* @__PURE__ */ React.createElement("span", { className: "text-sm" }, ex.label)),
           checked && /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, -1), className: "px-1.5", style: { color: "#1FAA59" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => changeExtraQty(ex.id, 1), className: "px-1.5", style: { color: "#1FAA59" } }, "+"), /* @__PURE__ */ React.createElement("span", { style: { color: "#6B6552", minWidth: 48, textAlign: "right" } }, fmt(ex[cheapest.id] * qty), " \u20AC"))
         );
@@ -3850,7 +3850,7 @@ Picoteo y extras:
         style: { color: "#1FAA59" }
       },
       editing ? "Ocultar ajuste de precios" : "Ajustar precios a tu s\xFAper real \u2192"
-    ), editing && /* @__PURE__ */ React.createElement("div", { className: "mt-4 rounded-xl p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3", style: { color: "#6B6552" } }, "Cambia cualquier precio para que coincida con tu compra real. Se guarda solo en este dispositivo."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: mercadonaReal ? "#1FAA59" : "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), mercadonaReal ? "Los precios de Mercadona se actualizan autom\xE1ticamente cada semana desde su cat\xE1logo real. El resto son estimaciones orientativas." : "Varios ingredientes clave (huevos, pollo, carne picada, salm\xF3n, patatas, gambas, dorada, ternera, champi\xF1ones y m\xE1s) est\xE1n calibrados con datos reales de comparadores (FACUA, Mercastic, Supersupers, Soysuper) de 2026. El resto son estimaciones orientativas \u2014 y los de Lidl en general, porque no vende online en Espa\xF1a y apenas hay seguimiento p\xFAblico de sus precios."), /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono min-w-[480px]" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { borderBottom: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1 pr-2 text-left", style: { color: "#6B6552" } }, "Ingrediente"), STORES.map((s) => /* @__PURE__ */ React.createElement("td", { key: s.id, className: "py-1 px-2 text-right", style: { color: "#6B6552" } }, s.name)))), /* @__PURE__ */ React.createElement("tbody", null, CATEGORIES.map((cat) => {
+    ), editing && /* @__PURE__ */ React.createElement("div", { className: "mt-4 rounded-xl p-4", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3", style: { color: "#6B6552" } }, "Cambia cualquier precio para que coincida con tu compra real. Se guarda solo en este dispositivo."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: mercadonaReal ? "#1FAA59" : "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), mercadonaReal ? "Los precios de Mercadona se actualizan autom\xE1ticamente cada semana desde su cat\xE1logo real. El resto son estimaciones orientativas." : "Varios ingredientes clave (huevos, pollo, carne picada, salm\xF3n, patatas, gambas, dorada, ternera, champi\xF1ones y m\xE1s) est\xE1n calibrados con datos reales de comparadores (FACUA, Mercastic, Supersupers, Soysuper) de 2026. El resto son estimaciones orientativas \u2014 y los de Lidl en general, porque no vende online en Espa\xF1a y apenas hay seguimiento p\xFAblico de sus precios."), /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono min-w-[480px]" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { borderBottom: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1 pr-2 text-left", style: { color: "#6B6552" } }, "Ingrediente"), STORES.map((s) => /* @__PURE__ */ React.createElement("td", { key: s.id, className: "py-1 px-2 text-right", style: { color: "#6B6552" } }, s.name)))), /* @__PURE__ */ React.createElement("tbody", null, CATEGORIES.map((cat) => {
       const catOpen = !!openCategories[cat.name];
       const idsPresent = cat.ids.filter((id) => prices[id]);
       if (idsPresent.length === 0) return null;
@@ -3880,7 +3880,7 @@ Picoteo y extras:
           }
         ))));
       }));
-    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "#1FAA59", color: "#FBF8F0" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, saveMsg)))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-16" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Copia de seguridad y pasar a otro dispositivo"), /* @__PURE__ */ React.createElement("div", { className: "mt-3 rounded-xl p-4", style: { background: "#FBF8F0", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536" } }, "Tus datos se guardan solo en este navegador. Para usarlos en otro dispositivo (o no perderlos si borras el navegador), exporta un archivo aqu\xED e imp\xF3rtalo en el otro."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap items-center gap-3" }, /* @__PURE__ */ React.createElement(
+    })))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-4" }, /* @__PURE__ */ React.createElement("button", { onClick: savePrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { background: "#1FAA59", color: "#FFFFFF" } }, /* @__PURE__ */ React.createElement(Icon, { name: "save", size: 13 }), " Guardar"), /* @__PURE__ */ React.createElement("button", { onClick: resetPrices, className: "font-mono text-xs uppercase flex items-center gap-1.5 px-3 py-1.5 rounded-xl", style: { border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement(Icon, { name: "refresh", size: 13 }), " Restablecer"), saveMsg && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, saveMsg)))), /* @__PURE__ */ React.createElement("section", { className: "max-w-3xl mx-auto px-5 mb-16" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement("summary", { className: "font-mono text-xs uppercase cursor-pointer", style: { color: "#6B6552" } }, "Copia de seguridad y pasar a otro dispositivo"), /* @__PURE__ */ React.createElement("div", { className: "mt-3 rounded-xl p-4", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536" } }, "Tus datos se guardan solo en este navegador. Para usarlos en otro dispositivo (o no perderlos si borras el navegador), exporta un archivo aqu\xED e imp\xF3rtalo en el otro."), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap items-center gap-3" }, /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: exportarDatos,
