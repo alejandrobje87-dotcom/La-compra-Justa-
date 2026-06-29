@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alejandrobje87-dotcom.github.io/La-compra-Justa-/sitemap.xml
