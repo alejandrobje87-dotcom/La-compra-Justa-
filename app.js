@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new21.jsx
+  // app-source-new22.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -2861,6 +2861,7 @@
   function App() {
     const [prices, setPrices] = useState(DEFAULT_PRICES);
     const [loaded, setLoaded] = useState(false);
+    const [showWelcome, setShowWelcome] = useState(false);
     const [openMeal, setOpenMeal] = useState(null);
     const [editing, setEditing] = useState(false);
     const [saveMsg, setSaveMsg] = useState("");
@@ -3009,9 +3010,20 @@
           if (res16 && res16.value) setSwaps(JSON.parse(res16.value));
         } catch (e) {
         }
+        try {
+          const visto = await storage.get("bienvenida-vista");
+          if (!visto || !visto.value) setShowWelcome(true);
+        } catch (e) {
+          setShowWelcome(true);
+        }
         setLoaded(true);
       })();
     }, []);
+    const cerrarBienvenida = () => {
+      setShowWelcome(false);
+      storage.set("bienvenida-vista", "1").catch(() => {
+      });
+    };
     const saveExtras = async (next) => {
       try {
         await storage.set("extras-seleccionados", JSON.stringify(next));
@@ -3472,7 +3484,40 @@ Picoteo y extras:
         .tap-scale:active { transform: scale(0.97); }
       `), /* @__PURE__ */ React.createElement("style", null, `
         @media (max-width: 640px) { .pb-safe { padding-bottom: 88px; } }
-      `), /* @__PURE__ */ React.createElement("header", { style: { background: "#FFFFFF" }, className: "pt-8 pb-4 border-b" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 flex justify-center" }, /* @__PURE__ */ React.createElement(
+      `), showWelcome && /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        onClick: cerrarBienvenida,
+        style: {
+          position: "fixed",
+          inset: 0,
+          zIndex: 50,
+          background: "rgba(20,30,20,0.55)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "1.5rem"
+        }
+      },
+      /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          onClick: (e) => e.stopPropagation(),
+          className: "card-hero",
+          style: { background: "#FFFFFF", borderRadius: "1.25rem", maxWidth: 400, width: "100%", overflow: "hidden" }
+        },
+        /* @__PURE__ */ React.createElement("div", { style: { background: "#1FAA59", padding: "1.5rem", textAlign: "center" } }, /* @__PURE__ */ React.createElement("img", { src: "./logo.png", alt: "La Cesta Inteligente", style: { maxWidth: 200, width: "100%", margin: "0 auto", background: "#FFFFFF", borderRadius: "0.75rem", padding: "0.5rem" } })),
+        /* @__PURE__ */ React.createElement("div", { style: { padding: "1.5rem" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-xl mb-3", style: { color: "#20281F" } }, "\xA1Bienvenido/a! \u{1F44B}"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-3", style: { color: "#4A4536", lineHeight: 1.6 } }, "Esta app te propone un ", /* @__PURE__ */ React.createElement("strong", null, "men\xFA semanal completo"), " (comida y cena) y te dice", /* @__PURE__ */ React.createElement("strong", null, " cu\xE1nto cuesta la compra"), " y en ", /* @__PURE__ */ React.createElement("strong", null, "qu\xE9 supermercado es m\xE1s barata"), ": Mercadona, Lidl, Carrefour o D\xEDa."), /* @__PURE__ */ React.createElement("div", { className: "space-y-2 mb-4" }, /* @__PURE__ */ React.createElement("p", { className: "text-sm flex items-start gap-2", style: { color: "#4A4536" } }, /* @__PURE__ */ React.createElement("span", null, "\u{1F37D}\uFE0F"), " ", /* @__PURE__ */ React.createElement("span", null, "Elige tu estilo de men\xFA y el n\xFAmero de personas.")), /* @__PURE__ */ React.createElement("p", { className: "text-sm flex items-start gap-2", style: { color: "#4A4536" } }, /* @__PURE__ */ React.createElement("span", null, "\u{1F3EA}"), " ", /* @__PURE__ */ React.createElement("span", null, "Mira la comparativa y ahorra comprando en el s\xFAper m\xE1s barato.")), /* @__PURE__ */ React.createElement("p", { className: "text-sm flex items-start gap-2", style: { color: "#4A4536" } }, /* @__PURE__ */ React.createElement("span", null, "\u{1F6D2}"), " ", /* @__PURE__ */ React.createElement("span", null, "Lleva tu lista de la compra ya hecha, con cantidades."))), /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: cerrarBienvenida,
+            className: "w-full font-mono text-sm uppercase py-3 rounded-xl tap-scale",
+            style: { background: "#1FAA59", color: "#FFFFFF", fontWeight: 700 }
+          },
+          "Empezar"
+        ))
+      )
+    ), /* @__PURE__ */ React.createElement("header", { style: { background: "#FFFFFF" }, className: "pt-8 pb-4 border-b" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 flex justify-center" }, /* @__PURE__ */ React.createElement(
       "img",
       {
         src: "./logo.png",
