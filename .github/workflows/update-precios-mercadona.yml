@@ -8,6 +8,11 @@ on:
 permissions:
   contents: write
 
+# ESTO INDICA A GITHUB QUE REVISE DENTRO DE TU CARPETA
+defaults:
+  run:
+    working-directory: './LA COMPRA JUSTA'
+
 jobs:
   actualizar-precios:
     runs-on: ubuntu-latest
