@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new27.jsx
+  // app-source-new28.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -3197,16 +3197,42 @@
       const leftoverFraction = packagesNeeded - u.totalQty;
       return { id, ...u, packagesNeeded, leftoverFraction };
     }).filter((u) => u.leftoverFraction > 0.25).sort((a, b) => b.leftoverFraction - a.leftoverFraction);
+    const PACKAGE_UNITS = /* @__PURE__ */ new Set([
+      "docena",
+      "paquete 500g",
+      "lata 400g",
+      "pack 3 latas",
+      "paquete",
+      "paquete 4 uds",
+      "unidad",
+      "botella",
+      "barra"
+    ]);
     const weeklyTotal = useMemo(() => {
       return (storeId) => {
-        const mealsTotal = allMeals.filter((r) => !hasAvoided(r)).reduce((sum, r) => sum + recipeCost(r, storeId), 0);
+        const usage = {};
+        allMeals.filter((r) => !hasAvoided(r)).forEach((r) => {
+          r.items.forEach((it) => {
+            usage[it.id] = (usage[it.id] || 0) + it.qty * factor;
+          });
+        });
+        let mealsTotal = 0;
+        Object.entries(usage).forEach(([id, qty]) => {
+          const p = prices[id]?.[storeId];
+          if (typeof p !== "number") return;
+          if (PACKAGE_UNITS.has(prices[id].unit)) {
+            mealsTotal += p * Math.max(1, Math.ceil(qty));
+          } else {
+            mealsTotal += p * qty;
+          }
+        });
         const extrasTotal = Object.entries(extrasQty).reduce((sum, [id, qty]) => {
           const ex = EXTRAS.find((e) => e.id === id) || customExtras.find((e) => e.id === id);
           return sum + (ex ? ex[storeId] * qty : 0);
         }, 0);
         return mealsTotal + extrasTotal;
       };
-    }, [allMeals, recipeCost, extrasQty, avoidIds, customExtras]);
+    }, [allMeals, prices, factor, extrasQty, avoidIds, customExtras]);
     const updateIngresos = (value) => {
       setIngresos(value);
       storage.set("ingresos-mensuales", value).catch(() => {
@@ -3463,14 +3489,32 @@ Picoteo y extras:
       const p = t.reduce((a, b) => b.total > a.total ? b : a, t[0]);
       return { totals: t, cheapest: c, priciest: p, savings: p.total - c.total, monthlyCost: weeklyTotal(c.id) * 4.33 };
     }, [weeklyTotal]);
+    const PACKAGE_UNITS_LIST = /* @__PURE__ */ new Set([
+      "docena",
+      "paquete 500g",
+      "lata 400g",
+      "pack 3 latas",
+      "paquete",
+      "paquete 4 uds",
+      "unidad",
+      "botella",
+      "barra"
+    ]);
     const shoppingByCategory = CATEGORIES.map((cat) => ({
       name: cat.name,
-      items: cat.ids.filter((id) => ingredientUsage[id]).map((id) => ({
-        id,
-        label: prices[id].label + (PRODUCT_VARIANTS[id] && PRODUCT_VARIANTS[id][menuStyle] ? ` (${PRODUCT_VARIANTS[id][menuStyle]})` : ""),
-        qtyLabel: formatQty(ingredientUsage[id].totalQty, prices[id].unit),
-        cost: (prices[id][cheapest.id] || 0) * ingredientUsage[id].totalQty
-      }))
+      items: cat.ids.filter((id) => ingredientUsage[id]).map((id) => {
+        const rawQty = ingredientUsage[id].totalQty;
+        const isPackage = PACKAGE_UNITS_LIST.has(prices[id].unit);
+        const buyQty = isPackage ? Math.max(1, Math.ceil(rawQty)) : rawQty;
+        const cost = (prices[id][cheapest.id] || 0) * buyQty;
+        const qtyLabel = isPackage ? `${buyQty} ${buyQty === 1 ? prices[id].unit.replace(/s$/, "") : prices[id].unit}` : formatQty(rawQty, prices[id].unit);
+        return {
+          id,
+          label: prices[id].label + (PRODUCT_VARIANTS[id] && PRODUCT_VARIANTS[id][menuStyle] ? ` (${PRODUCT_VARIANTS[id][menuStyle]})` : ""),
+          qtyLabel,
+          cost
+        };
+      })
     })).filter((cat) => cat.items.length > 0);
     const ALL_EXTRAS = [...EXTRAS, ...customExtras];
     const shoppingExtras = Object.entries(extrasQty).map(([id, qty]) => {
@@ -3906,7 +3950,7 @@ Picoteo y extras:
           return /* @__PURE__ */ React.createElement("tr", { key: it.id, style: { borderTop: "1px dashed #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1.5" }, prices[it.id].label, PRODUCT_VARIANTS[it.id] && PRODUCT_VARIANTS[it.id][menuStyle] && /* @__PURE__ */ React.createElement("span", { className: "text-xs", style: { color: "#1FAA59" } }, " ", "\xB7 ", PRODUCT_VARIANTS[it.id][menuStyle])), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#20281F" } }, formatQty(totalQty, prices[it.id].unit)), /* @__PURE__ */ React.createElement("span", { className: "text-xs" }, " (", formatQty(perPerson, prices[it.id].unit), "/persona)")), /* @__PURE__ */ React.createElement("td", { className: "py-1.5 text-right pl-4" }, fmt((prices[it.id][cheapest.id] || 0) * totalQty), " \u20AC"));
         }))))
       );
-    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl app-wide mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: compartirLista, className: "font-mono text-xs underline flex items-center gap-1", style: { color: "#1FAA59" } }, "Compartir"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo"))), shareMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-1", style: { color: "#1FAA59" } }, shareMsg), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement(
+    })))))), /* @__PURE__ */ React.createElement("section", { id: "lista-compra", className: "max-w-3xl app-wide mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Lista de la compra"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("button", { onClick: compartirLista, className: "font-mono text-xs underline flex items-center gap-1", style: { color: "#1FAA59" } }, "Compartir"), /* @__PURE__ */ React.createElement("button", { onClick: vaciarLista, className: "font-mono text-xs underline", style: { color: "#6B6552" } }, "Desmarcar todo"))), shareMsg && /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-1", style: { color: "#1FAA59" } }, shareMsg), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-2", style: { color: "#4A4536" } }, "Todo lo que necesitas esta semana, en un solo listado \u2014 para llevarlo al s\xFAper sin mirar receta por receta."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-4 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), "El total refleja lo que pagas de verdad en caja: los productos que se venden por envase (latas, paquetes, packs...) se cuentan por unidades completas, no por la fracci\xF3n que usa cada receta."), /* @__PURE__ */ React.createElement(
       "div",
       {
         className: "flex items-center justify-between px-4 py-3 mb-3 rounded-xl",
