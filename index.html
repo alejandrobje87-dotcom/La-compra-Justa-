@@ -3,19 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Cesta Inteligente — La compra adaptada a tu vida</title>
+  <title>La Cesta Inteligente — Menú semanal y comparador de precios de supermercados</title>
   <link rel="icon" type="image/png" href="./logo.png" />
-  <meta name="description" content="Planifica tu menú semanal y compara su coste real en Mercadona, Lidl, Carrefour y Día." />
+
+  <meta name="description" content="Planifica tu menú semanal de comidas y cenas y descubre en qué supermercado es más barata tu compra: Mercadona, Lidl, Carrefour o Día. Lista de la compra automática y recetas fáciles." />
+  <meta name="keywords" content="menú semanal, comparador supermercados, precios Mercadona, lista de la compra, ahorrar en la compra, planificador comidas, recetas baratas, cesta de la compra" />
+  <meta name="author" content="La Cesta Inteligente" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://alejandrobje87-dotcom.github.io/La-compra-Justa-/" />
+
+  <!-- Open Graph (para WhatsApp, Facebook, etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="La Cesta Inteligente — Menú semanal y comparador de supermercados" />
+  <meta property="og:description" content="Tu menú semanal y la compra más barata entre Mercadona, Lidl, Carrefour y Día. Lista automática y recetas fáciles." />
+  <meta property="og:image" content="https://alejandrobje87-dotcom.github.io/La-compra-Justa-/logo.png" />
+  <meta property="og:url" content="https://alejandrobje87-dotcom.github.io/La-compra-Justa-/" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La Cesta Inteligente — Menú semanal y comparador de supermercados" />
+  <meta name="twitter:description" content="Tu menú semanal y la compra más barata entre Mercadona, Lidl, Carrefour y Día." />
+  <meta name="twitter:image" content="https://alejandrobje87-dotcom.github.io/La-compra-Justa-/logo.png" />
+
+  <!-- Datos estructurados: ayuda a Google a entender qué es la web -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "La Cesta Inteligente",
+    "url": "https://alejandrobje87-dotcom.github.io/La-compra-Justa-/",
+    "description": "Planificador de menú semanal y comparador de precios de supermercados en España (Mercadona, Lidl, Carrefour y Día), con lista de la compra automática y recetas.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "es-ES",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="496e7c6b-1f53-4d1a-8e14-1cfca7eee14f"></script>
   <style>
     body { margin: 0; }
+    /* Texto SEO: visible para Google, se oculta en cuanto la app React carga */
+    #seo-fallback { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem; font-family: system-ui, sans-serif; color: #20281F; line-height: 1.6; }
+    #seo-fallback h1, #seo-fallback h2 { color: #1FAA59; }
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Contenido que Google lee aunque no ejecute JavaScript.
+         Desaparece automáticamente cuando la app React se monta. -->
+    <div id="seo-fallback">
+      <h1>La Cesta Inteligente — tu menú semanal y la compra más barata</h1>
+      <p>
+        <strong>La Cesta Inteligente</strong> es una aplicación web gratuita que planifica tu
+        <strong>menú semanal</strong> de comidas y cenas y te dice <strong>en qué supermercado
+        es más barata tu compra</strong>: Mercadona, Lidl, Carrefour o Día. La compra adaptada a tu vida.
+      </p>
+      <h2>¿Qué puedes hacer?</h2>
+      <ul>
+        <li>Generar un <strong>menú semanal completo</strong> (comida y cena) para 1 a 6 personas, con 4 semanas distintas y tres estilos: sano, normal o elaborado.</li>
+        <li><strong>Comparar el precio</strong> de la misma compra en cuatro supermercados y ver cuánto ahorras.</li>
+        <li>Obtener tu <strong>lista de la compra automática</strong>, organizada por categorías y con cantidades.</li>
+        <li>Seguir <strong>recetas fáciles</strong> paso a paso, con valoración nutricional y opción de evitar ingredientes por alergias.</li>
+        <li>Ajustar el menú a tu <strong>presupuesto</strong> y a tus objetivos (ahorrar, comer más sano o equilibrado).</li>
+      </ul>
+      <p>
+        Pensada para familias y hogares en España que quieren <strong>ahorrar en la compra</strong>
+        sin renunciar a comer bien y variado. Cargando la aplicación…
+      </p>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
