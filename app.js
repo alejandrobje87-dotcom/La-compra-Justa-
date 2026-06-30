@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new23.jsx
+  // app-source-new24.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -2891,26 +2891,8 @@
     const [swapPickerKey, setSwapPickerKey] = useState(null);
     const [selectedDay, setSelectedDay] = useState("Lunes");
     const [shareMsg, setShareMsg] = useState("");
-    const [mercadonaReal, setMercadonaReal] = useState(false);
     useEffect(() => {
       (async () => {
-        try {
-          const res0 = await fetch("./precios-mercadona.json");
-          if (res0.ok) {
-            const real = await res0.json();
-            setPrices((prev) => {
-              const merged = { ...prev };
-              Object.keys(real).forEach((k) => {
-                if (merged[k] && typeof real[k] === "number") {
-                  merged[k] = { ...merged[k], mercadona: real[k] };
-                }
-              });
-              return merged;
-            });
-            setMercadonaReal(true);
-          }
-        } catch (e) {
-        }
         try {
           const res = await storage.get("precios-custom");
           if (res && res.value) {
@@ -4105,7 +4087,7 @@ Picoteo y extras:
         style: { color: "#1FAA59" }
       },
       editing ? "Ocultar ajuste de precios" : "Ajustar precios a tu s\xFAper real \u2192"
-    ), editing && /* @__PURE__ */ React.createElement("div", { className: "mt-4 rounded-xl p-4", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3", style: { color: "#6B6552" } }, "Cambia cualquier precio para que coincida con tu compra real. Se guarda solo en este dispositivo."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: mercadonaReal ? "#1FAA59" : "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), mercadonaReal ? "Los precios de Mercadona se actualizan autom\xE1ticamente cada semana desde su cat\xE1logo real. El resto son estimaciones orientativas." : "Varios ingredientes clave (huevos, pollo, carne picada, salm\xF3n, patatas, gambas, dorada, ternera, champi\xF1ones y m\xE1s) est\xE1n calibrados con datos reales de comparadores (FACUA, Mercastic, Supersupers, Soysuper) de 2026. El resto son estimaciones orientativas \u2014 y los de Lidl en general, porque no vende online en Espa\xF1a y apenas hay seguimiento p\xFAblico de sus precios."), /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono min-w-[480px]" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { borderBottom: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1 pr-2 text-left", style: { color: "#6B6552" } }, "Ingrediente"), STORES.map((s) => /* @__PURE__ */ React.createElement("td", { key: s.id, className: "py-1 px-2 text-right", style: { color: "#6B6552" } }, s.name)))), /* @__PURE__ */ React.createElement("tbody", null, CATEGORIES.map((cat) => {
+    ), editing && /* @__PURE__ */ React.createElement("div", { className: "mt-4 rounded-xl p-4", style: { background: "#FFFFFF", border: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3", style: { color: "#6B6552" } }, "Cambia cualquier precio para que coincida con tu compra real. Se guarda solo en este dispositivo."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-3 flex items-start gap-1.5", style: { color: "#6B6552" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 13, className: "mt-0.5 flex-shrink-0" }), "Los precios est\xE1n calibrados con datos reales de comparadores (FACUA, Mercastic, Supersupers, Soysuper) de 2026 y se revisan peri\xF3dicamente. Son una referencia orientativa: los precios cambian a menudo y var\xEDan por tienda, as\xED que puedes ajustar cualquiera a tu compra real. Los de Lidl son m\xE1s aproximados, porque no vende online en Espa\xF1a."), /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-sm font-mono min-w-[480px]" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { borderBottom: "1px solid #C9C0AC" } }, /* @__PURE__ */ React.createElement("td", { className: "py-1 pr-2 text-left", style: { color: "#6B6552" } }, "Ingrediente"), STORES.map((s) => /* @__PURE__ */ React.createElement("td", { key: s.id, className: "py-1 px-2 text-right", style: { color: "#6B6552" } }, s.name)))), /* @__PURE__ */ React.createElement("tbody", null, CATEGORIES.map((cat) => {
       const catOpen = !!openCategories[cat.name];
       const idsPresent = cat.ids.filter((id) => prices[id]);
       if (idsPresent.length === 0) return null;
