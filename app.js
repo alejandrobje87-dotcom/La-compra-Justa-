@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new24.jsx
+  // app-source-new25.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -3509,7 +3509,7 @@ Picoteo y extras:
         alt: "La Cesta Inteligente \u2014 La compra adaptada a tu vida",
         style: { maxWidth: "340px", width: "100%", height: "auto" }
       }
-    ))), /* @__PURE__ */ React.createElement(
+    ))), /* @__PURE__ */ React.createElement("div", { style: { background: "#1FAA59" }, className: "py-4" }, /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 text-center" }, /* @__PURE__ */ React.createElement("p", { className: "font-display text-lg sm:text-xl leading-snug", style: { color: "#FFFFFF" } }, "Descubre en qu\xE9 supermercado tu compra semanal es m\xE1s barata"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-1", style: { color: "#FFFFFF", opacity: 0.9 } }, "Men\xFA completo + lista de la compra + el precio real en Mercadona, Lidl, Carrefour y D\xEDa"))), /* @__PURE__ */ React.createElement(
       "nav",
       {
         className: "fixed bottom-0 left-0 right-0 z-20 px-2 py-1.5 sm:hidden",
