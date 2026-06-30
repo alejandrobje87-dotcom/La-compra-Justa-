@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new26.jsx
+  // app-source-new27.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -220,6 +220,30 @@
       }
     }
     return "generico";
+  }
+  function equivalenciaAhorro(euros) {
+    const opciones = [
+      { min: 300, texto: "una escapada de fin de semana \u{1F3D6}\uFE0F" },
+      { min: 150, texto: "una compra grande del mes \u{1F6D2}" },
+      { min: 80, texto: "un buen regalo para alguien \u{1F381}" },
+      { min: 50, texto: "una cena para dos en un restaurante \u{1F37D}\uFE0F" },
+      { min: 30, texto: "3 entradas de cine \u{1F3AC}" },
+      { min: 18, texto: "una pizza para toda la familia \u{1F355}" },
+      { min: 10, texto: "un par de caf\xE9s con amigos \u2615" },
+      { min: 4, texto: "una barra de pan cada semana \u{1F956}" },
+      { min: 0.01, texto: "un peque\xF1o capricho \u{1F36B}" }
+    ];
+    for (const o of opciones) {
+      if (euros >= o.min) return o.texto;
+    }
+    return "";
+  }
+  function CerditoHucha({ fill }) {
+    const nivel = Math.max(0, Math.min(1, fill));
+    const cuerpoTop = 38;
+    const cuerpoBottom = 92;
+    const yRelleno = cuerpoBottom - (cuerpoBottom - cuerpoTop) * nivel;
+    return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 120", style: { width: 120, height: 103 }, xmlns: "http://www.w3.org/2000/svg" }, /* @__PURE__ */ React.createElement("defs", null, /* @__PURE__ */ React.createElement("clipPath", { id: "cuerpoCerdito" }, /* @__PURE__ */ React.createElement("ellipse", { cx: "70", cy: "65", rx: "48", ry: "38" }))), /* @__PURE__ */ React.createElement("g", { clipPath: "url(#cuerpoCerdito)" }, /* @__PURE__ */ React.createElement("rect", { x: "22", y: yRelleno, width: "96", height: "60", fill: "#E3B23C", opacity: "0.85" })), /* @__PURE__ */ React.createElement("ellipse", { cx: "70", cy: "65", rx: "48", ry: "38", fill: "none", stroke: "#1FAA59", strokeWidth: "3.5" }), /* @__PURE__ */ React.createElement("path", { d: "M40 35 L48 22 L58 38 Z", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("rect", { x: "44", y: "98", width: "9", height: "12", rx: "3", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("rect", { x: "88", y: "98", width: "9", height: "12", rx: "3", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("ellipse", { cx: "112", cy: "64", rx: "12", ry: "14", fill: "#FFFFFF", stroke: "#1FAA59", strokeWidth: "3" }), /* @__PURE__ */ React.createElement("circle", { cx: "109", cy: "64", r: "2.2", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("circle", { cx: "115", cy: "64", r: "2.2", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("circle", { cx: "92", cy: "52", r: "3", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("rect", { x: "62", y: "30", width: "22", height: "4", rx: "2", fill: "#1FAA59" }), /* @__PURE__ */ React.createElement("path", { d: "M22 60 q-8 -2 -6 -10 q2 -6 -4 -6", fill: "none", stroke: "#1FAA59", strokeWidth: "3", strokeLinecap: "round" }));
   }
   var PRODUCT_VARIANTS = {
     atun: { sana: "al natural", normal: "en aceite de girasol", elaborada: "en aceite de oliva" },
@@ -2862,6 +2886,7 @@
     const [prices, setPrices] = useState(DEFAULT_PRICES);
     const [loaded, setLoaded] = useState(false);
     const [showWelcome, setShowWelcome] = useState(false);
+    const [ahorroHucha, setAhorroHucha] = useState(0);
     const [openMeal, setOpenMeal] = useState(null);
     const [editing, setEditing] = useState(false);
     const [saveMsg, setSaveMsg] = useState("");
@@ -2940,6 +2965,11 @@
         try {
           const res6 = await storage.get("historial-semanas");
           if (res6 && res6.value) setHistorial(JSON.parse(res6.value));
+        } catch (e) {
+        }
+        try {
+          const res6b = await storage.get("ahorro-hucha");
+          if (res6b && res6b.value) setAhorroHucha(parseFloat(res6b.value) || 0);
         } catch (e) {
         }
         try {
@@ -3200,11 +3230,18 @@
         date: (/* @__PURE__ */ new Date()).toLocaleDateString("es-ES", { day: "2-digit", month: "short" }),
         style: `${STYLES[menuStyle].label} S${weekNumber}`,
         servings,
-        total: totalSemana
+        total: totalSemana,
+        savings
       };
       setHistorial((prev) => {
         const next = [...prev, entry].slice(-12);
         storage.set("historial-semanas", JSON.stringify(next)).catch(() => {
+        });
+        return next;
+      });
+      setAhorroHucha((prev) => {
+        const next = prev + savings;
+        storage.set("ahorro-hucha", String(next)).catch(() => {
         });
         return next;
       });
@@ -3213,6 +3250,15 @@
     };
     const borrarSemana = (id) => {
       setHistorial((prev) => {
+        const removed = prev.find((h) => h.id === id);
+        if (removed && removed.savings) {
+          setAhorroHucha((p) => {
+            const next2 = Math.max(0, p - removed.savings);
+            storage.set("ahorro-hucha", String(next2)).catch(() => {
+            });
+            return next2;
+          });
+        }
         const next = prev.filter((h) => h.id !== id);
         storage.set("historial-semanas", JSON.stringify(next)).catch(() => {
         });
@@ -3266,6 +3312,7 @@
       "historial-semanas",
       "ingredientes-evitar",
       "ingresos-mensuales",
+      "ahorro-hucha",
       "intercambios-platos",
       "lista-compra-comprados",
       "objetivo-usuario",
@@ -3698,7 +3745,7 @@ Picoteo y extras:
           }
         )), !isCheapest && diff > 0 && /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs mt-1", style: { color: "#B8860B" } }, "+", fmt(diff), " \u20AC que en ", cheapest.name));
       }));
-    })(), /* @__PURE__ */ React.createElement("div", { className: "mt-5 pt-4 rounded-xl p-4", style: { background: "rgba(31,170,89,0.08)" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#20281F" } }, "Comprando en ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: cheapest.color } }, cheapest.name), " en vez de en el m\xE1s caro, te ahorras ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(savings), " \u20AC"), " esta semana", savings > 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, " \u2014 unos ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(savings * 52), " \u20AC"), " al a\xF1o."))))), /* @__PURE__ */ React.createElement("section", { id: "menu-semana", className: "max-w-3xl app-wide mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
+    })(), /* @__PURE__ */ React.createElement("div", { className: "mt-5 pt-4 rounded-xl p-4", style: { background: "rgba(31,170,89,0.08)" } }, /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#20281F" } }, "Comprando en ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: cheapest.color } }, cheapest.name), " en vez de en el m\xE1s caro, te ahorras ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(savings), " \u20AC"), " esta semana", savings > 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, " \u2014 unos ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(savings * 52), " \u20AC"), " al a\xF1o."))))), /* @__PURE__ */ React.createElement("section", { id: "hucha", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "card-soft rounded-2xl p-5", style: { background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-1" }, "Tu hucha del ahorro"), /* @__PURE__ */ React.createElement("p", { className: "text-sm mb-4", style: { color: "#6B6552" } }, "Cada vez que guardas una semana, tu ahorro se va acumulando aqu\xED."), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-4 flex-wrap sm:flex-nowrap" }, /* @__PURE__ */ React.createElement("div", { className: "flex-shrink-0 mx-auto sm:mx-0" }, /* @__PURE__ */ React.createElement(CerditoHucha, { fill: ahorroHucha / 300 })), /* @__PURE__ */ React.createElement("div", { className: "flex-1 text-center sm:text-left" }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase", style: { color: "#8A8470" } }, "Llevas ahorrado"), /* @__PURE__ */ React.createElement("p", { className: "font-display leading-none my-1", style: { fontSize: "2.75rem", color: "#1FAA59" } }, fmt(ahorroHucha), " \u20AC"), ahorroHucha > 0 ? /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#4A4536" } }, "Con eso ya tienes para ", /* @__PURE__ */ React.createElement("strong", null, equivalenciaAhorro(ahorroHucha))) : /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#8A8470" } }, 'Guarda tu primera semana (en "La semana, d\xEDa a d\xEDa" \u2192 bot\xF3n guardar) y empieza a llenar el cerdito \u{1F437}'))))), /* @__PURE__ */ React.createElement("section", { id: "menu-semana", className: "max-w-3xl app-wide mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg mb-3" }, "La semana, d\xEDa a d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 mb-4" }, /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: () => {
