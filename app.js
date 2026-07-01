@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new32.jsx
+  // app-source-new34.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -121,7 +121,7 @@
     coliflor: { unit: "kg", label: "Coliflor", mercadona: 2.05, lidl: 1.8, carrefour: 2.3, dia: 1.9 },
     pimientos: { unit: "kg", label: "Pimientos", mercadona: 2.4, lidl: 2.1, carrefour: 2.7, dia: 2.25 },
     gambas: { unit: "kg", label: "Gambas peladas", mercadona: 9.5, lidl: 8.7, carrefour: 10.2, dia: 9 },
-    dorada: { unit: "kg", label: "Dorada", mercadona: 7.5, lidl: 6.6, carrefour: 8.2, dia: 6.9 },
+    dorada: { unit: "unidad", label: "Dorada (pieza)", mercadona: 3, lidl: 2.6, carrefour: 3.3, dia: 2.8 },
     terneraGuisar: { unit: "kg", label: "Ternera para guisar", mercadona: 13.3, lidl: 11.9, carrefour: 14.2, dia: 12.4 },
     champinones: { unit: "kg", label: "Champi\xF1ones", mercadona: 2.5, lidl: 2.2, carrefour: 2.8, dia: 2.35 },
     quesoCabra: { unit: "paquete", label: "Queso de cabra (rulo)", mercadona: 2.6, lidl: 2.3, carrefour: 2.9, dia: 2.4 },
@@ -312,7 +312,7 @@
         emoji: "\u{1F357}",
         name: "Pollo al horno con verduras asadas",
         time: "45 min",
-        items: [{ id: "pollo", qty: 0.9 }, { id: "asar", qty: 0.8 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "asar", qty: 0.8 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Trocea las verduras variadas en trozos similares para que se asen de forma uniforme.",
@@ -330,7 +330,7 @@
         emoji: "\u{1F35A}",
         name: "Arroz con verduras y jam\xF3n",
         time: "25 min",
-        items: [{ id: "arroz", qty: 0.35 }, { id: "jamonYork", qty: 1 }, { id: "asar", qty: 0.4 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "jamonYork", qty: 1 }, { id: "asar", qty: 0.4 }],
         steps: [
           "Corta las verduras variadas en trozos peque\xF1os.",
           "Calienta un par de cucharadas de aceite en una sart\xE9n amplia o cazuela baja.",
@@ -345,7 +345,7 @@
         emoji: "\u{1F35D}",
         name: "Pasta con tomate y at\xFAn",
         time: "20 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "tomateFrito", qty: 1 }, { id: "atun", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "tomateFrito", qty: 1 }, { id: "atun", qty: 1 }],
         steps: [
           "Pon a hervir agua abundante con sal en una olla grande.",
           "Cuando hierva, a\xF1ade la pasta y cuece el tiempo que indique el paquete (normalmente 9-11 minutos), removiendo de vez en cuando.",
@@ -363,7 +363,7 @@
         emoji: "\u{1F41F}",
         name: "Merluza al horno con patatas panadera",
         time: "40 min",
-        items: [{ id: "merluza", qty: 0.5 }, { id: "patatas", qty: 0.6 }, { id: "cebolla", qty: 0.15 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "patatas", qty: 0.6 }, { id: "cebolla", qty: 0.15 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Pela y corta las patatas en rodajas finas, y la cebolla en juliana.",
@@ -396,7 +396,7 @@
         emoji: "\u{1F361}",
         name: "Alb\xF3ndigas en salsa de tomate con arroz",
         time: "35 min",
-        items: [{ id: "carnePicada", qty: 0.5 }, { id: "tomateFrito", qty: 1 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "carnePicada", qty: 0.6 }, { id: "tomateFrito", qty: 1 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Sazona la carne picada con sal, pimienta y, si quieres, un huevo y un poco de pan rallado para que liguen mejor.",
           "Forma bolitas del tama\xF1o de una nuez con las manos ligeramente h\xFAmedas.",
@@ -411,7 +411,7 @@
         emoji: "\u{1F420}",
         name: "Salm\xF3n al horno con arroz",
         time: "30 min",
-        items: [{ id: "salmon", qty: 0.5 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca los lomos de salm\xF3n en una bandeja con papel de horno, sazona con sal y pimienta.",
@@ -443,7 +443,7 @@
         emoji: "\u{1F354}",
         name: "Hamburguesas caseras con boniato",
         time: "30 min",
-        items: [{ id: "carnePicada", qty: 0.5 }, { id: "panHamburguesa", qty: 1 }, { id: "boniato", qty: 0.8 }],
+        items: [{ id: "carnePicada", qty: 0.6 }, { id: "panHamburguesa", qty: 1 }, { id: "boniato", qty: 0.8 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Pela el boniato y c\xF3rtalo en bastones tipo patatas fritas.",
@@ -462,7 +462,7 @@
         emoji: "\u{1F963}",
         name: "Lentejas con arroz y verduras",
         time: "35 min",
-        items: [{ id: "lentejas", qty: 1 }, { id: "arroz", qty: 0.2 }, { id: "zanahoria", qty: 0.2 }, { id: "cebolla", qty: 0.15 }],
+        items: [{ id: "lentejas", qty: 1 }, { id: "arroz", qty: 0.25 }, { id: "zanahoria", qty: 0.2 }, { id: "cebolla", qty: 0.15 }],
         steps: [
           "Pica la cebolla y la zanahoria en trozos peque\xF1os.",
           "Sofr\xEDe ambas en una olla con un poco de aceite, 5-6 minutos a fuego medio.",
@@ -513,7 +513,7 @@
         name: "Crema de calabac\xEDn con pollo a la plancha",
         time: "30 min",
         salud: 8,
-        items: [{ id: "calabacin", qty: 0.8 }, { id: "pollo", qty: 0.5 }],
+        items: [{ id: "calabacin", qty: 0.8 }, { id: "pollo", qty: 0.75 }],
         steps: [
           "Lava el calabac\xEDn y c\xF3rtalo en trozos medianos (no es necesario pelarlo).",
           "Cu\xE9celo en agua con sal 12-15 minutos, hasta que est\xE9 muy tierno.",
@@ -532,7 +532,7 @@
         name: "Merluza al vapor con verduras",
         time: "25 min",
         salud: 8,
-        items: [{ id: "merluza", qty: 0.6 }, { id: "asar", qty: 0.6 }],
+        items: [{ id: "merluza", qty: 0.9 }, { id: "asar", qty: 0.6 }],
         steps: [
           "Corta las verduras variadas en tiras o trozos peque\xF1os para que se cocinen r\xE1pido.",
           "Si tienes vaporera, coloca agua en la base y las verduras en la parte superior 5-6 minutos.",
@@ -580,7 +580,7 @@
         name: "Salm\xF3n al papillote con ensalada",
         time: "25 min",
         salud: 8,
-        items: [{ id: "salmon", qty: 0.5 }, { id: "ensalada", qty: 0.3 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "ensalada", qty: 0.3 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca cada lomo de salm\xF3n sobre un trozo de papel de horno grande.",
@@ -598,7 +598,7 @@
         name: "Pollo al horno con boniato y verduras",
         time: "40 min",
         salud: 8,
-        items: [{ id: "pollo", qty: 0.7 }, { id: "boniato", qty: 0.5 }, { id: "asar", qty: 0.4 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "boniato", qty: 0.5 }, { id: "asar", qty: 0.4 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Retira la piel del pollo para aligerar el plato.",
@@ -648,7 +648,7 @@
         name: "Merluza con calabac\xEDn salteado",
         time: "25 min",
         salud: 9,
-        items: [{ id: "merluza", qty: 0.5 }, { id: "calabacin", qty: 0.5 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "calabacin", qty: 0.5 }],
         steps: [
           "Corta el calabac\xEDn en l\xE1minas finas (con piel, no es necesario pelarlo).",
           "Sazona los lomos de merluza con sal y pimienta.",
@@ -666,7 +666,7 @@
         name: "Ensalada completa con pollo",
         time: "15 min",
         salud: 8,
-        items: [{ id: "ensalada", qty: 0.4 }, { id: "pollo", qty: 0.5 }],
+        items: [{ id: "ensalada", qty: 0.4 }, { id: "pollo", qty: 0.75 }],
         steps: [
           "Sazona el pollo con sal y pimienta y c\xF3rtalo en filetes finos.",
           "Calienta una plancha con una gota de aceite a fuego fuerte.",
@@ -701,7 +701,7 @@
         name: "Salm\xF3n al horno con verduras asadas",
         time: "35 min",
         salud: 8,
-        items: [{ id: "salmon", qty: 0.5 }, { id: "asar", qty: 0.6 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "asar", qty: 0.6 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Trocea las verduras variadas en trozos similares y col\xF3calas en una bandeja de horno con aceite y sal.",
@@ -735,7 +735,7 @@
         emoji: "\u{1F344}",
         name: "Risotto de setas con parmesano",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "setas", qty: 0.3 }, { id: "parmesano", qty: 1 }, { id: "vinoBlancoCocina", qty: 0.2 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "setas", qty: 0.3 }, { id: "parmesano", qty: 1 }, { id: "vinoBlancoCocina", qty: 0.2 }],
         steps: [
           "Limpia las setas con un pa\xF1o h\xFAmedo y c\xF3rtalas en l\xE1minas.",
           "Calienta caldo (de verduras o pollo) en una olla aparte y mantenlo caliente a fuego muy bajo.",
@@ -770,7 +770,7 @@
         emoji: "\u{1F41F}",
         name: "Bacalao al horno con patatas y pimientos",
         time: "40 min",
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "patatas", qty: 0.5 }, { id: "asar", qty: 0.3 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "patatas", qty: 0.5 }, { id: "asar", qty: 0.3 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Pela y corta las patatas en rodajas finas y los pimientos en tiras.",
@@ -803,7 +803,7 @@
         emoji: "\u{1F35D}",
         name: "Pasta con setas y parmesano",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "setas", qty: 0.3 }, { id: "parmesano", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "setas", qty: 0.3 }, { id: "parmesano", qty: 1 }],
         steps: [
           "Pon a hervir agua abundante con sal para la pasta.",
           "Limpia y corta las setas en l\xE1minas.",
@@ -818,7 +818,7 @@
         emoji: "\u{1F420}",
         name: "Salm\xF3n en salsa de vino blanco con arroz",
         time: "30 min",
-        items: [{ id: "salmon", qty: 0.5 }, { id: "vinoBlancoCocina", qty: 0.2 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "vinoBlancoCocina", qty: 0.2 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Pon a cocer el arroz en agua con sal 15-18 minutos.",
           "Sazona los lomos de salm\xF3n con sal y pimienta.",
@@ -850,7 +850,7 @@
         emoji: "\u{1F41F}",
         name: "Merluza en salsa verde con patatas",
         time: "30 min",
-        items: [{ id: "merluza", qty: 0.5 }, { id: "patatas", qty: 0.5 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "patatas", qty: 0.5 }],
         steps: [
           "Pela y cuece las patatas en agua con sal 18-20 minutos, hasta que est\xE9n tiernas.",
           "Pica un pu\xF1ado de perejil fresco muy fino.",
@@ -867,7 +867,7 @@
         emoji: "\u{1F990}",
         name: "Langostinos al ajillo con arroz",
         time: "25 min",
-        items: [{ id: "langostinos", qty: 0.4 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "langostinos", qty: 0.4 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Pon a cocer el arroz en agua con sal 15-18 minutos.",
           "Pela los langostinos si lo prefieres, o d\xE9jalos enteros para m\xE1s sabor.",
@@ -881,7 +881,7 @@
         emoji: "\u{1F344}",
         name: "Risotto de calabac\xEDn y parmesano",
         time: "30 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "calabacin", qty: 0.4 }, { id: "parmesano", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "calabacin", qty: 0.4 }, { id: "parmesano", qty: 1 }],
         steps: [
           "Corta el calabac\xEDn en dados peque\xF1os.",
           "Calienta caldo en una olla aparte y mantenlo caliente a fuego bajo.",
@@ -899,7 +899,7 @@
         emoji: "\u{1F41F}",
         name: "Bacalao confitado con pimientos",
         time: "35 min",
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "asar", qty: 0.4 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "asar", qty: 0.4 }],
         steps: [
           "Corta los pimientos en tiras y \xE1salos en el horno a 200\xB0C durante 20 minutos, o salt\xE9alos en una sart\xE9n 10 minutos.",
           "Seca bien los lomos de bacalao desalado con papel de cocina.",
@@ -930,7 +930,7 @@
         emoji: "\u{1F958}",
         name: "Paella de marisco sencilla",
         time: "40 min",
-        items: [{ id: "arroz", qty: 0.4 }, { id: "langostinos", qty: 0.4 }, { id: "asar", qty: 0.3 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "langostinos", qty: 0.4 }, { id: "asar", qty: 0.3 }],
         steps: [
           "Calienta caldo de pescado o marisco en una olla aparte y mantenlo caliente.",
           "Corta las verduras variadas en trozos peque\xF1os.",
@@ -966,7 +966,7 @@
         name: "Br\xF3coli salteado con pollo",
         time: "20 min",
         salud: 9,
-        items: [{ id: "brocoli", qty: 0.4 }, { id: "pollo", qty: 0.5 }],
+        items: [{ id: "brocoli", qty: 0.4 }, { id: "pollo", qty: 0.75 }],
         steps: [
           "Separa el br\xF3coli en arbolitos peque\xF1os y l\xE1valos bien.",
           "Cu\xE9celo al vapor o en agua con sal 4-5 minutos, hasta que est\xE9 tierno pero firme. Escurre.",
@@ -1014,7 +1014,7 @@
         name: "Merluza con br\xF3coli al vapor",
         time: "20 min",
         salud: 10,
-        items: [{ id: "merluza", qty: 0.5 }, { id: "brocoli", qty: 0.5 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "brocoli", qty: 0.5 }],
         steps: [
           "Separa el br\xF3coli en arbolitos y l\xE1valo.",
           "Si tienes vaporera, cuece el br\xF3coli 5 minutos y a\xF1ade la merluza encima 8-10 minutos m\xE1s.",
@@ -1063,7 +1063,7 @@
         name: "Pollo al horno con calabac\xEDn y zanahoria",
         time: "40 min",
         salud: 8,
-        items: [{ id: "pollo", qty: 0.7 }, { id: "calabacin", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "calabacin", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Corta el calabac\xEDn y la zanahoria en rodajas.",
@@ -1109,7 +1109,7 @@
         name: "Salm\xF3n al horno con esp\xE1rragos",
         time: "25 min",
         salud: 8,
-        items: [{ id: "salmon", qty: 0.5 }, { id: "esparragos", qty: 1 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "esparragos", qty: 1 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Corta la parte le\xF1osa de los esp\xE1rragos.",
@@ -1140,7 +1140,7 @@
         name: "Merluza con tomate y calabac\xEDn",
         time: "25 min",
         salud: 8,
-        items: [{ id: "merluza", qty: 0.5 }, { id: "tomateFrito", qty: 1 }, { id: "calabacin", qty: 0.3 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "tomateFrito", qty: 1 }, { id: "calabacin", qty: 0.3 }],
         steps: [
           "Corta el calabac\xEDn en rodajas finas.",
           "Saltea el calabac\xEDn en una sart\xE9n con un poco de aceite 5 minutos.",
@@ -1189,7 +1189,7 @@
         emoji: "\u{1F35D}",
         name: "Macarrones con verduras y jam\xF3n",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "asar", qty: 0.3 }, { id: "jamonYork", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "asar", qty: 0.3 }, { id: "jamonYork", qty: 1 }],
         steps: [
           "Pon a hervir agua con sal para la pasta.",
           "Cuece la pasta el tiempo que indique el paquete.",
@@ -1203,7 +1203,7 @@
         emoji: "\u{1F357}",
         name: "Pollo al ajillo con patatas",
         time: "35 min",
-        items: [{ id: "pollo", qty: 0.8 }, { id: "patatas", qty: 0.5 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "patatas", qty: 0.5 }],
         steps: [
           "Pela y corta las patatas en dados, y cu\xE9celas en agua con sal 15 minutos, o fr\xEDelas si prefieres.",
           "Corta el pollo en trozos medianos y sazona con sal y pimienta.",
@@ -1233,7 +1233,7 @@
         emoji: "\u{1F41F}",
         name: "Merluza con verduras variadas",
         time: "25 min",
-        items: [{ id: "merluza", qty: 0.5 }, { id: "asar", qty: 0.5 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "asar", qty: 0.5 }],
         steps: [
           "Corta las verduras variadas en trozos peque\xF1os.",
           "Salt\xE9alas en una sart\xE9n con un poco de aceite 6-7 minutos.",
@@ -1249,7 +1249,7 @@
         emoji: "\u{1F35A}",
         name: "Arroz con pollo y verduras",
         time: "30 min",
-        items: [{ id: "arroz", qty: 0.35 }, { id: "pollo", qty: 0.5 }, { id: "asar", qty: 0.3 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "pollo", qty: 0.75 }, { id: "asar", qty: 0.3 }],
         steps: [
           "Corta el pollo en trozos peque\xF1os y las verduras en dados.",
           "Sofr\xEDe el pollo en una cazuela baja con aceite 4-5 minutos, hasta que se dore.",
@@ -1292,7 +1292,7 @@
         emoji: "\u{1F420}",
         name: "Salm\xF3n con patatas al horno",
         time: "35 min",
-        items: [{ id: "salmon", qty: 0.5 }, { id: "patatas", qty: 0.5 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "patatas", qty: 0.5 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Pela y corta las patatas en rodajas finas, col\xF3calas en una bandeja con aceite y sal.",
@@ -1308,7 +1308,7 @@
         emoji: "\u{1F35D}",
         name: "Pasta a la carbonara sencilla",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "huevos", qty: 0.5 }, { id: "jamonYork", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "huevos", qty: 0.5 }, { id: "jamonYork", qty: 1 }],
         steps: [
           "Pon a hervir agua con sal y cuece la pasta el tiempo del paquete.",
           "Mientras, corta el jam\xF3n cocido en taquitos y d\xF3ralo en una sart\xE9n sin aceite 2-3 minutos.",
@@ -1339,7 +1339,7 @@
         emoji: "\u{1F354}",
         name: "Hamburguesas con boniato",
         time: "30 min",
-        items: [{ id: "carnePicada", qty: 0.5 }, { id: "panHamburguesa", qty: 1 }, { id: "boniato", qty: 0.6 }],
+        items: [{ id: "carnePicada", qty: 0.6 }, { id: "panHamburguesa", qty: 1 }, { id: "boniato", qty: 0.6 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Pela el boniato, c\xF3rtalo en bastones y hornea con aceite y sal 25 minutos.",
@@ -1368,7 +1368,7 @@
         emoji: "\u{1F361}",
         name: "Alb\xF3ndigas con arroz",
         time: "35 min",
-        items: [{ id: "carnePicada", qty: 0.5 }, { id: "tomateFrito", qty: 1 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "carnePicada", qty: 0.6 }, { id: "tomateFrito", qty: 1 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Sazona la carne picada y forma bolitas peque\xF1as con las manos h\xFAmedas.",
           "D\xF3ralas en una sart\xE9n con aceite por todos los lados, 4-5 minutos.",
@@ -1381,7 +1381,7 @@
         emoji: "\u{1F41F}",
         name: "Merluza con patatas panadera",
         time: "40 min",
-        items: [{ id: "merluza", qty: 0.5 }, { id: "patatas", qty: 0.5 }, { id: "cebolla", qty: 0.15 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "patatas", qty: 0.5 }, { id: "cebolla", qty: 0.15 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Corta las patatas en rodajas finas y la cebolla en juliana.",
@@ -1399,7 +1399,7 @@
         emoji: "\u{1F344}",
         name: "Risotto de esp\xE1rragos con parmesano",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "esparragos", qty: 1 }, { id: "parmesano", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "esparragos", qty: 1 }, { id: "parmesano", qty: 1 }],
         steps: [
           "Corta la parte le\xF1osa de los esp\xE1rragos y trocea el resto.",
           "Calienta caldo en una olla aparte y mantenlo caliente a fuego bajo.",
@@ -1413,7 +1413,7 @@
         emoji: "\u{1F969}",
         name: "Ternera a la plancha con boniato",
         time: "35 min",
-        items: [{ id: "ternera", qty: 0.5 }, { id: "boniato", qty: 0.5 }],
+        items: [{ id: "ternera", qty: 0.6 }, { id: "boniato", qty: 0.5 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Pela el boniato, c\xF3rtalo en dados y hornea con aceite y sal 25 minutos.",
@@ -1443,7 +1443,7 @@
         emoji: "\u{1F41F}",
         name: "Bacalao con esp\xE1rragos trigueros",
         time: "30 min",
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "esparragos", qty: 1 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "esparragos", qty: 1 }],
         steps: [
           "Corta la parte le\xF1osa de los esp\xE1rragos.",
           "Salt\xE9alos en una sart\xE9n con aceite 5-6 minutos, hasta que est\xE9n tiernos.",
@@ -1459,7 +1459,7 @@
         emoji: "\u{1F35D}",
         name: "Pasta con langostinos y ajo",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "langostinos", qty: 0.3 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "langostinos", qty: 0.3 }],
         steps: [
           "Pon a hervir agua con sal y cuece la pasta el tiempo del paquete.",
           "Pela los langostinos si lo prefieres.",
@@ -1490,7 +1490,7 @@
         emoji: "\u{1F969}",
         name: "Ternera al horno con patatas",
         time: "40 min",
-        items: [{ id: "ternera", qty: 0.5 }, { id: "patatas", qty: 0.5 }],
+        items: [{ id: "ternera", qty: 0.6 }, { id: "patatas", qty: 0.5 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Pela y corta las patatas en rodajas, col\xF3calas en una bandeja con aceite y sal.",
@@ -1504,7 +1504,7 @@
         emoji: "\u{1F344}",
         name: "Risotto de langostinos",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "langostinos", qty: 0.3 }, { id: "parmesano", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "langostinos", qty: 0.3 }, { id: "parmesano", qty: 1 }],
         steps: [
           "Pela los langostinos y reserva las c\xE1scaras para dar sabor al caldo si quieres (opcional).",
           "Calienta caldo en una olla aparte y mantenlo caliente.",
@@ -1521,7 +1521,7 @@
         emoji: "\u{1F41F}",
         name: "Bacalao confitado con br\xF3coli",
         time: "30 min",
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "brocoli", qty: 0.4 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "brocoli", qty: 0.4 }],
         steps: [
           "Separa el br\xF3coli en arbolitos y cu\xE9celo al vapor o en agua con sal 5 minutos.",
           "Seca bien el bacalao desalado con papel de cocina.",
@@ -1550,7 +1550,7 @@
         emoji: "\u{1F958}",
         name: "Paella de mejillones y langostinos",
         time: "40 min",
-        items: [{ id: "arroz", qty: 0.4 }, { id: "mejillones", qty: 0.4 }, { id: "langostinos", qty: 0.3 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "mejillones", qty: 0.4 }, { id: "langostinos", qty: 0.3 }],
         steps: [
           "Limpia los mejillones y pela los langostinos.",
           "Calienta caldo de pescado en una olla aparte y mantenlo caliente.",
@@ -1565,7 +1565,7 @@
         emoji: "\u{1F969}",
         name: "Ternera con setas al vino",
         time: "30 min",
-        items: [{ id: "ternera", qty: 0.5 }, { id: "setas", qty: 0.3 }, { id: "vinoBlancoCocina", qty: 0.15 }],
+        items: [{ id: "ternera", qty: 0.6 }, { id: "setas", qty: 0.3 }, { id: "vinoBlancoCocina", qty: 0.15 }],
         steps: [
           "Sazona la ternera y s\xE9llala en una sart\xE9n caliente 2 minutos por lado. Retira y reserva.",
           "En la misma sart\xE9n, saltea las setas en l\xE1minas 5-6 minutos, hasta que se doren.",
@@ -1581,7 +1581,7 @@
         emoji: "\u{1F420}",
         name: "Salm\xF3n con salsa de parmesano y esp\xE1rragos",
         time: "30 min",
-        items: [{ id: "salmon", qty: 0.5 }, { id: "parmesano", qty: 1 }, { id: "esparragos", qty: 1 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "parmesano", qty: 1 }, { id: "esparragos", qty: 1 }],
         steps: [
           "Corta la parte le\xF1osa de los esp\xE1rragos y salt\xE9alos con aceite 5-6 minutos. Reserva.",
           "Sazona el salm\xF3n y coc\xEDnalo en una sart\xE9n con un poco de aceite, 3-4 minutos por lado.",
@@ -1625,7 +1625,7 @@
         name: "Dorada al horno con verduras",
         time: "30 min",
         salud: 8,
-        items: [{ id: "dorada", qty: 0.6 }, { id: "asar", qty: 0.5 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "asar", qty: 0.5 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca la dorada y las verduras variadas en una bandeja con aceite, sal y pimienta.",
@@ -1673,7 +1673,7 @@
         name: "Pollo al lim\xF3n con guisantes",
         time: "25 min",
         salud: 8,
-        items: [{ id: "pollo", qty: 0.6 }, { id: "guisantes", qty: 0.3 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "guisantes", qty: 0.3 }],
         steps: [
           "Sazona el pollo y c\xF3rtalo en tiras.",
           "Saltea el pollo en una sart\xE9n con un poco de aceite 5-6 minutos.",
@@ -1704,7 +1704,7 @@
         name: "Salm\xF3n con jud\xEDas verdes",
         time: "25 min",
         salud: 8,
-        items: [{ id: "salmon", qty: 0.5 }, { id: "judiasVerdes", qty: 0.4 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "judiasVerdes", qty: 0.4 }],
         steps: [
           "Sazona el salm\xF3n con sal y pimienta.",
           "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
@@ -1765,7 +1765,7 @@
         name: "Merluza con pisto de verduras",
         time: "30 min",
         salud: 8,
-        items: [{ id: "merluza", qty: 0.5 }, { id: "pimientos", qty: 0.3 }, { id: "calabacin", qty: 0.3 }, { id: "tomateFrito", qty: 1 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "pimientos", qty: 0.3 }, { id: "calabacin", qty: 0.3 }, { id: "tomateFrito", qty: 1 }],
         steps: [
           "Corta los pimientos y el calabac\xEDn en dados.",
           "Sofr\xEDelos en una sart\xE9n con aceite 8-10 minutos.",
@@ -1810,7 +1810,7 @@
         name: "Dorada a la plancha con ensalada",
         time: "20 min",
         salud: 9,
-        items: [{ id: "dorada", qty: 0.5 }, { id: "ensalada", qty: 0.3 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "ensalada", qty: 0.3 }],
         steps: [
           "Sazona la dorada con sal y pimienta.",
           "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
@@ -1829,7 +1829,7 @@
         name: "Pollo con ensalada de espinacas",
         time: "20 min",
         salud: 9,
-        items: [{ id: "pollo", qty: 0.5 }, { id: "espinacas", qty: 0.3 }, { id: "zanahoria", qty: 0.1 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "espinacas", qty: 0.3 }, { id: "zanahoria", qty: 0.1 }],
         steps: [
           "Sazona el pollo en tiras con sal y pimienta.",
           "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
@@ -1860,7 +1860,7 @@
         name: "Bacalao con pimientos asados",
         time: "30 min",
         salud: 8,
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "pimientos", qty: 0.4 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "pimientos", qty: 0.4 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca el bacalao y los pimientos en tiras en una bandeja con aceite, sal y pimienta.",
@@ -1891,7 +1891,7 @@
         name: "Arroz integral con verduras y huevo",
         time: "25 min",
         salud: 7,
-        items: [{ id: "arroz", qty: 0.3 }, { id: "asar", qty: 0.3 }, { id: "huevos", qty: 0.5 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "asar", qty: 0.3 }, { id: "huevos", qty: 0.5 }],
         steps: [
           "Cuece el arroz en agua con sal el tiempo del paquete.",
           "Saltea las verduras variadas en una sart\xE9n 5-6 minutos.",
@@ -1936,7 +1936,7 @@
         name: "Merluza al vapor con guisantes",
         time: "25 min",
         salud: 8,
-        items: [{ id: "merluza", qty: 0.5 }, { id: "guisantes", qty: 0.3 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "guisantes", qty: 0.3 }],
         steps: [
           "Prepara los guisantes en trozos.",
           "Cuece los guisantes al vapor o en agua 5 minutos.",
@@ -1953,7 +1953,7 @@
         name: "Pollo guisado con verduras",
         time: "35 min",
         salud: 8,
-        items: [{ id: "pollo", qty: 0.6 }, { id: "zanahoria", qty: 0.2 }, { id: "guisantes", qty: 0.2 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "zanahoria", qty: 0.2 }, { id: "guisantes", qty: 0.2 }],
         steps: [
           "Pica la zanahoria y los guisantes en trozos peque\xF1os y sofr\xEDelos en una olla con aceite 6-7 minutos.",
           "A\xF1ade el pollo en trozos y d\xF3ralo un par de minutos.",
@@ -1984,7 +1984,7 @@
         name: "Dorada con verduras al horno",
         time: "30 min",
         salud: 9,
-        items: [{ id: "dorada", qty: 0.6 }, { id: "calabacin", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "calabacin", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca la dorada y el calabac\xEDn y la zanahoria en rodajas en una bandeja con aceite, sal y pimienta.",
@@ -2029,7 +2029,7 @@
         name: "Salm\xF3n al papillote con verduras",
         time: "25 min",
         salud: 8,
-        items: [{ id: "salmon", qty: 0.5 }, { id: "judiasVerdes", qty: 0.3 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "judiasVerdes", qty: 0.3 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca el salm\xF3n y las jud\xEDas sobre papel de horno con lim\xF3n, aceite y sal.",
@@ -2047,7 +2047,7 @@
         emoji: "\u{1F35D}",
         name: "Espaguetis con champi\xF1ones y jam\xF3n",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "champinones", qty: 0.3 }, { id: "jamonYork", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "champinones", qty: 0.3 }, { id: "jamonYork", qty: 1 }],
         steps: [
           "Pon a hervir agua abundante con sal.",
           "Cuece la pasta el tiempo que indique el paquete, removiendo de vez en cuando.",
@@ -2060,7 +2060,7 @@
         emoji: "\u{1F357}",
         name: "Pollo asado con pimientos",
         time: "35 min",
-        items: [{ id: "pollo", qty: 0.7 }, { id: "pimientos", qty: 0.3 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "pimientos", qty: 0.3 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Coloca el pollo y los pimientos en tiras en una bandeja con aceite, sal y pimienta.",
@@ -2076,7 +2076,7 @@
         emoji: "\u{1F958}",
         name: "Guiso de ternera con patatas",
         time: "45 min",
-        items: [{ id: "terneraGuisar", qty: 0.5 }, { id: "patatas", qty: 0.4 }, { id: "zanahoria", qty: 0.2 }],
+        items: [{ id: "terneraGuisar", qty: 0.6 }, { id: "patatas", qty: 0.4 }, { id: "zanahoria", qty: 0.2 }],
         steps: [
           "Pica la zanahoria, a\xF1adiendo las patatas a media cocci\xF3n en trozos peque\xF1os y sofr\xEDelos en una olla con aceite 6-7 minutos.",
           "A\xF1ade la ternera para guisar y d\xF3ralo un par de minutos.",
@@ -2089,7 +2089,7 @@
         emoji: "\u{1F41F}",
         name: "Merluza rebozada con ensalada",
         time: "25 min",
-        items: [{ id: "merluza", qty: 0.5 }, { id: "huevos", qty: 0.5 }, { id: "ensalada", qty: 0.3 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "huevos", qty: 0.5 }, { id: "ensalada", qty: 0.3 }],
         steps: [
           "Sazona la merluza en filetes.",
           "P\xE1salos por huevo batido y harina.",
@@ -2105,7 +2105,7 @@
         emoji: "\u{1F35A}",
         name: "Arroz con champi\xF1ones y pavo",
         time: "30 min",
-        items: [{ id: "arroz", qty: 0.35 }, { id: "champinones", qty: 0.3 }, { id: "pavoFilete", qty: 0.4 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "champinones", qty: 0.3 }, { id: "pavoFilete", qty: 0.4 }],
         steps: [
           "Corta el pavo en tiras y los champi\xF1ones en l\xE1minas.",
           "Sofr\xEDe el pavo en una cazuela 4-5 minutos.",
@@ -2175,7 +2175,7 @@
         emoji: "\u{1F420}",
         name: "Dorada al horno con patatas",
         time: "35 min",
-        items: [{ id: "dorada", qty: 0.5 }, { id: "patatas", qty: 0.4 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "patatas", qty: 0.4 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca la dorada y las patatas en rodajas finas en una bandeja con aceite, sal y pimienta.",
@@ -2191,7 +2191,7 @@
         emoji: "\u{1F35D}",
         name: "Pasta con at\xFAn y tomate",
         time: "20 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "atun", qty: 1 }, { id: "tomateFrito", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "atun", qty: 1 }, { id: "tomateFrito", qty: 1 }],
         steps: [
           "Pon a hervir agua abundante con sal.",
           "Cuece la pasta el tiempo que indique el paquete, removiendo de vez en cuando.",
@@ -2220,7 +2220,7 @@
         emoji: "\u{1F357}",
         name: "Pollo al curry suave con arroz",
         time: "30 min",
-        items: [{ id: "pollo", qty: 0.6 }, { id: "leche", qty: 0.2 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "leche", qty: 0.2 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Corta el pollo en dados y d\xF3ralo en una sart\xE9n.",
           "A\xF1ade un poco de curry en polvo y la leche.",
@@ -2251,7 +2251,7 @@
         emoji: "\u{1F35A}",
         name: "Arroz a la cubana",
         time: "25 min",
-        items: [{ id: "arroz", qty: 0.35 }, { id: "huevos", qty: 0.5 }, { id: "tomateFrito", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "huevos", qty: 0.5 }, { id: "tomateFrito", qty: 1 }],
         steps: [
           "Cuece el arroz en agua con sal.",
           "Calienta el tomate frito.",
@@ -2264,7 +2264,7 @@
         emoji: "\u{1F357}",
         name: "Pollo a la plancha con verduras",
         time: "25 min",
-        items: [{ id: "pollo", qty: 0.6 }, { id: "asar", qty: 0.4 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "asar", qty: 0.4 }],
         steps: [
           "Sazona el pollo con sal y pimienta.",
           "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
@@ -2280,7 +2280,7 @@
         emoji: "\u{1F35D}",
         name: "Macarrones bolo\xF1esa",
         time: "30 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "carnePicada", qty: 0.4 }, { id: "tomateFrito", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "carnePicada", qty: 0.6 }, { id: "tomateFrito", qty: 1 }],
         steps: [
           "Pon a hervir agua abundante con sal.",
           "Cuece la pasta el tiempo que indique el paquete, removiendo de vez en cuando.",
@@ -2293,7 +2293,7 @@
         emoji: "\u{1F41F}",
         name: "Merluza en salsa verde",
         time: "30 min",
-        items: [{ id: "merluza", qty: 0.5 }, { id: "guisantes", qty: 0.2 }],
+        items: [{ id: "merluza", qty: 0.75 }, { id: "guisantes", qty: 0.2 }],
         steps: [
           "Calienta un poco de caldo en una sart\xE9n baja.",
           "A\xF1ade perejil picado y los guisantes.",
@@ -2309,7 +2309,7 @@
         emoji: "\u{1F958}",
         name: "Ternera estofada con guisantes",
         time: "45 min",
-        items: [{ id: "terneraGuisar", qty: 0.5 }, { id: "guisantes", qty: 0.2 }, { id: "zanahoria", qty: 0.2 }],
+        items: [{ id: "terneraGuisar", qty: 0.6 }, { id: "guisantes", qty: 0.2 }, { id: "zanahoria", qty: 0.2 }],
         steps: [
           "Pica la zanahoria y los guisantes en trozos peque\xF1os y sofr\xEDelos en una olla con aceite 6-7 minutos.",
           "A\xF1ade la ternera para guisar y d\xF3ralo un par de minutos.",
@@ -2338,7 +2338,7 @@
         emoji: "\u{1F357}",
         name: "Muslos de pollo al horno con boniato",
         time: "40 min",
-        items: [{ id: "pollo", qty: 0.8 }, { id: "boniato", qty: 0.5 }],
+        items: [{ id: "pollo", qty: 0.75 }, { id: "boniato", qty: 0.5 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Coloca los muslos de pollo y el boniato en dados en una bandeja con aceite, sal y pimienta.",
@@ -2367,7 +2367,7 @@
         emoji: "\u{1F35A}",
         name: "Arroz con gambas y verduras",
         time: "30 min",
-        items: [{ id: "arroz", qty: 0.35 }, { id: "gambas", qty: 0.3 }, { id: "pimientos", qty: 0.2 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "gambas", qty: 0.3 }, { id: "pimientos", qty: 0.2 }],
         steps: [
           "Sofr\xEDe los pimientos en dados.",
           "A\xF1ade el arroz y rehoga 1 minuto.",
@@ -2409,7 +2409,7 @@
         emoji: "\u{1F420}",
         name: "Salm\xF3n a la plancha con verduras",
         time: "25 min",
-        items: [{ id: "salmon", qty: 0.5 }, { id: "calabacin", qty: 0.3 }],
+        items: [{ id: "salmon", qty: 0.75 }, { id: "calabacin", qty: 0.3 }],
         steps: [
           "Sazona el salm\xF3n con sal y pimienta.",
           "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
@@ -2425,7 +2425,7 @@
         emoji: "\u{1F354}",
         name: "Hamburguesas caseras con ensalada",
         time: "25 min",
-        items: [{ id: "carnePicada", qty: 0.5 }, { id: "panHamburguesa", qty: 1 }, { id: "ensalada", qty: 0.3 }],
+        items: [{ id: "carnePicada", qty: 0.6 }, { id: "panHamburguesa", qty: 1 }, { id: "ensalada", qty: 0.3 }],
         steps: [
           "Sazona la carne y forma las hamburguesas.",
           "Coc\xEDnalas a la plancha 4 minutos por lado.",
@@ -2438,7 +2438,7 @@
         emoji: "\u{1F35D}",
         name: "Espaguetis con gambas al ajillo",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "gambas", qty: 0.3 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "gambas", qty: 0.3 }],
         steps: [
           "Pon a hervir agua abundante con sal.",
           "Cuece la pasta el tiempo que indique el paquete, removiendo de vez en cuando.",
@@ -2456,7 +2456,7 @@
         emoji: "\u{1F990}",
         name: "Risotto de gambas",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "gambas", qty: 0.3 }, { id: "parmesano", qty: 1 }, { id: "vinoBlancoCocina", qty: 0.15 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "gambas", qty: 0.3 }, { id: "parmesano", qty: 1 }, { id: "vinoBlancoCocina", qty: 0.15 }],
         steps: [
           "Saltea las gambas 2 minutos y reserva.",
           "Rehoga el arroz con un poco de aceite.",
@@ -2485,7 +2485,7 @@
         emoji: "\u{1F420}",
         name: "Dorada a la sal con verduras",
         time: "40 min",
-        items: [{ id: "dorada", qty: 0.6 }, { id: "asar", qty: 0.4 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "asar", qty: 0.4 }],
         steps: [
           "Precalienta el horno a 200\xB0C.",
           "Cubre la dorada con sal gruesa h\xFAmeda.",
@@ -2498,7 +2498,7 @@
         emoji: "\u{1F344}",
         name: "Pasta con champi\xF1ones y queso de cabra",
         time: "25 min",
-        items: [{ id: "pasta", qty: 1 }, { id: "champinones", qty: 0.3 }, { id: "quesoCabra", qty: 1 }],
+        items: [{ id: "pasta", qty: 0.25 }, { id: "champinones", qty: 0.3 }, { id: "quesoCabra", qty: 1 }],
         steps: [
           "Pon a hervir agua abundante con sal.",
           "Cuece la pasta el tiempo que indique el paquete, removiendo de vez en cuando.",
@@ -2527,7 +2527,7 @@
         emoji: "\u{1F969}",
         name: "Ternera con pimientos",
         time: "30 min",
-        items: [{ id: "ternera", qty: 0.5 }, { id: "pimientos", qty: 0.3 }],
+        items: [{ id: "ternera", qty: 0.6 }, { id: "pimientos", qty: 0.3 }],
         steps: [
           "Corta los pimientos en trozos peque\xF1os.",
           "Calienta una sart\xE9n con un poco de aceite a fuego medio-alto.",
@@ -2543,7 +2543,7 @@
         emoji: "\u{1F990}",
         name: "Gambas al ajillo con arroz",
         time: "25 min",
-        items: [{ id: "gambas", qty: 0.4 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "gambas", qty: 0.4 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Cuece el arroz aparte.",
           "Dora ajo en l\xE1minas en aceite abundante.",
@@ -2556,7 +2556,7 @@
         emoji: "\u{1F41F}",
         name: "Bacalao gratinado",
         time: "35 min",
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "quesoRallado", qty: 1 }, { id: "tomateFrito", qty: 1 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "quesoRallado", qty: 1 }, { id: "tomateFrito", qty: 1 }],
         steps: [
           "Coloca el bacalao en una fuente con el tomate.",
           "Cubre con queso rallado.",
@@ -2585,7 +2585,7 @@
         emoji: "\u{1F344}",
         name: "Risotto de champi\xF1ones",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "champinones", qty: 0.3 }, { id: "parmesano", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "champinones", qty: 0.3 }, { id: "parmesano", qty: 1 }],
         steps: [
           "Saltea los champi\xF1ones y reserva la mitad.",
           "Rehoga el arroz 1 minuto.",
@@ -2601,7 +2601,7 @@
         emoji: "\u{1F420}",
         name: "Dorada al horno con patatas panadera",
         time: "40 min",
-        items: [{ id: "dorada", qty: 0.6 }, { id: "patatas", qty: 0.4 }, { id: "cebolla", qty: 0.15 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "patatas", qty: 0.4 }, { id: "cebolla", qty: 0.15 }],
         steps: [
           "Precalienta el horno a 190\xB0C.",
           "Coloca la dorada y las patatas y cebolla en rodajas en una bandeja con aceite, sal y pimienta.",
@@ -2630,7 +2630,7 @@
         emoji: "\u{1F969}",
         name: "Ternera guisada al vino tinto",
         time: "45 min",
-        items: [{ id: "terneraGuisar", qty: 0.5 }, { id: "zanahoria", qty: 0.2 }, { id: "vinoBlancoCocina", qty: 0.2 }],
+        items: [{ id: "terneraGuisar", qty: 0.6 }, { id: "zanahoria", qty: 0.2 }, { id: "vinoBlancoCocina", qty: 0.2 }],
         steps: [
           "Pica la zanahoria en trozos peque\xF1os y sofr\xEDelos en una olla con aceite 6-7 minutos.",
           "A\xF1ade la ternera para guisar con el vino y d\xF3ralo un par de minutos.",
@@ -2661,7 +2661,7 @@
         emoji: "\u{1F344}",
         name: "Risotto de queso de cabra y champi\xF1ones",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "champinones", qty: 0.3 }, { id: "quesoCabra", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "champinones", qty: 0.3 }, { id: "quesoCabra", qty: 1 }],
         steps: [
           "Saltea los champi\xF1ones laminados.",
           "Rehoga el arroz 1 minuto.",
@@ -2690,7 +2690,7 @@
         emoji: "\u{1F990}",
         name: "Paella de marisco",
         time: "45 min",
-        items: [{ id: "arroz", qty: 0.4 }, { id: "gambas", qty: 0.3 }, { id: "mejillones", qty: 0.3 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "gambas", qty: 0.3 }, { id: "mejillones", qty: 0.3 }],
         steps: [
           "Calienta caldo de pescado.",
           "Sofr\xEDe un poco de tomate y ajo en la paellera.",
@@ -2703,7 +2703,7 @@
         emoji: "\u{1F41F}",
         name: "Dorada con salsa de almendras",
         time: "30 min",
-        items: [{ id: "dorada", qty: 0.5 }, { id: "asar", qty: 0.3 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "asar", qty: 0.3 }],
         steps: [
           "Hornea la dorada con verduras 20 minutos.",
           "Tritura almendras con ajo y un poco de caldo.",
@@ -2719,7 +2719,7 @@
         emoji: "\u{1F969}",
         name: "Ternera a la pimienta con patatas",
         time: "35 min",
-        items: [{ id: "ternera", qty: 0.5 }, { id: "patatas", qty: 0.4 }],
+        items: [{ id: "ternera", qty: 0.6 }, { id: "patatas", qty: 0.4 }],
         steps: [
           "Sazona la ternera con pimienta machacada.",
           "S\xE9llala 3 minutos por lado.",
@@ -2777,7 +2777,7 @@
         emoji: "\u{1F420}",
         name: "Bacalao confitado con pimientos",
         time: "35 min",
-        items: [{ id: "bacalao", qty: 0.5 }, { id: "pimientos", qty: 0.4 }],
+        items: [{ id: "bacalao", qty: 0.75 }, { id: "pimientos", qty: 0.4 }],
         steps: [
           "Asa los pimientos en tiras 20 minutos.",
           "Confita el bacalao en aceite a fuego muy bajo 8-10 minutos.",
@@ -2790,7 +2790,7 @@
         emoji: "\u{1F990}",
         name: "Risotto de langostinos y esp\xE1rragos",
         time: "35 min",
-        items: [{ id: "arroz", qty: 0.3 }, { id: "langostinos", qty: 0.3 }, { id: "esparragos", qty: 1 }],
+        items: [{ id: "arroz", qty: 0.25 }, { id: "langostinos", qty: 0.3 }, { id: "esparragos", qty: 1 }],
         steps: [
           "Saltea los langostinos y los esp\xE1rragos troceados.",
           "Rehoga el arroz 1 minuto.",
@@ -2806,7 +2806,7 @@
         emoji: "\u{1F969}",
         name: "Ternera guisada con champi\xF1ones",
         time: "45 min",
-        items: [{ id: "terneraGuisar", qty: 0.5 }, { id: "champinones", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
+        items: [{ id: "terneraGuisar", qty: 0.6 }, { id: "champinones", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
         steps: [
           "Pica la zanahoria y los champi\xF1ones en trozos peque\xF1os y sofr\xEDelos en una olla con aceite 6-7 minutos.",
           "A\xF1ade la ternera para guisar y d\xF3ralo un par de minutos.",
@@ -2819,7 +2819,7 @@
         emoji: "\u{1F41F}",
         name: "Dorada a la plancha con esp\xE1rragos",
         time: "25 min",
-        items: [{ id: "dorada", qty: 0.5 }, { id: "esparragos", qty: 1 }],
+        items: [{ id: "dorada", qty: 3 }, { id: "esparragos", qty: 1 }],
         steps: [
           "Sazona la dorada con sal y pimienta.",
           "Calienta una plancha o sart\xE9n a fuego fuerte con una gota de aceite.",
@@ -2835,7 +2835,7 @@
         emoji: "\u{1F990}",
         name: "Langostinos al curry con arroz",
         time: "30 min",
-        items: [{ id: "langostinos", qty: 0.4 }, { id: "leche", qty: 0.2 }, { id: "arroz", qty: 0.3 }],
+        items: [{ id: "langostinos", qty: 0.4 }, { id: "leche", qty: 0.2 }, { id: "arroz", qty: 0.25 }],
         steps: [
           "Cuece el arroz aparte.",
           "Saltea los langostinos 2 minutos y reserva.",
