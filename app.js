@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new41.jsx
+  // app-source-new42.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -323,6 +323,218 @@
     tomateFrito: { sana: "triturado natural", normal: "frito cl\xE1sico", elaborada: "frito casero / artesano" },
     quesoRallado: { sana: "light", normal: "rallado mezcla", elaborada: "parmesano / curado" }
   };
+  var RECETAS_RESERVA = [
+    {
+      emoji: "\u{1F372}",
+      name: "Lentejas estofadas con chorizo",
+      time: "40 min",
+      items: [{ id: "lentejas", qty: 1 }, { id: "chorizo", qty: 0.2 }, { id: "zanahoria", qty: 0.2 }, { id: "cebolla", qty: 0.15 }],
+      steps: ["Pica la cebolla y la zanahoria.", "Sofr\xEDe la cebolla y zanahoria con aceite 8 min.", "A\xF1ade el chorizo en rodajas y dora 2 min.", "Incorpora las lentejas y cubre con agua.", "Cuece 25-30 min a fuego medio hasta que est\xE9n tiernas.", "Rectifica de sal y sirve."]
+    },
+    {
+      emoji: "\u{1F357}",
+      name: "Pollo al ajillo con patatas",
+      time: "35 min",
+      items: [{ id: "pollo", qty: 0.75 }, { id: "patatas", qty: 0.5 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Trocea el pollo y salpimienta.", "Corta las patatas en cubos y fr\xEDelas hasta dorar. Reserva.", "Dora el pollo con ajo laminado.", "A\xF1ade las patatas, saltea junto 5 min.", "Sirve caliente."]
+    },
+    {
+      emoji: "\u{1F41F}",
+      name: "Salm\xF3n al horno con verduras",
+      time: "30 min",
+      items: [{ id: "salmon", qty: 0.75 }, { id: "calabacin", qty: 0.3 }, { id: "zanahoria", qty: 0.2 }],
+      steps: ["Precalienta el horno a 200\xB0C.", "Corta las verduras en bastones.", "Coloca el salm\xF3n sobre las verduras en una bandeja.", "Riega con aceite, sal y lim\xF3n.", "Hornea 18-20 min."]
+    },
+    {
+      emoji: "\u{1F35D}",
+      name: "Pasta con at\xFAn y tomate",
+      time: "20 min",
+      items: [{ id: "pasta", qty: 0.25 }, { id: "atun", qty: 1 }, { id: "tomateFrito", qty: 0.5 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Cuece la pasta seg\xFAn el paquete.", "Sofr\xEDe la cebolla picada.", "A\xF1ade el tomate frito y el at\xFAn escurrido.", "Mezcla con la pasta y sirve."]
+    },
+    {
+      emoji: "\u{1F958}",
+      name: "Garbanzos con espinacas y huevo",
+      time: "25 min",
+      items: [{ id: "garbanzos", qty: 1 }, { id: "espinacas", qty: 0.4 }, { id: "huevos", qty: 1 }],
+      steps: ["Sofr\xEDe las espinacas con ajo.", "A\xF1ade los garbanzos escurridos.", "Saltea 5 min.", "Escalfa o fr\xEDe los huevos y sirve encima."]
+    },
+    {
+      emoji: "\u{1F35B}",
+      name: "Arroz con pollo y verduras",
+      time: "35 min",
+      items: [{ id: "arroz", qty: 0.25 }, { id: "pollo", qty: 0.6 }, { id: "guisantes", qty: 0.2 }, { id: "pimientos", qty: 0.2 }],
+      steps: ["Dora el pollo troceado.", "A\xF1ade el pimiento picado y sofr\xEDe.", "Incorpora el arroz y rehoga 2 min.", "A\xF1ade caldo (doble de volumen que arroz) y guisantes.", "Cuece 18 min y reposa 5 min."]
+    },
+    {
+      emoji: "\u{1F420}",
+      name: "Merluza en salsa verde",
+      time: "30 min",
+      items: [{ id: "merluza", qty: 0.75 }, { id: "guisantes", qty: 0.2 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Sofr\xEDe cebolla y ajo picados.", "A\xF1ade harina y caldo, remueve.", "Incorpora la merluza y los guisantes.", "Cuece 10 min a fuego suave.", "Espolvorea perejil y sirve."]
+    },
+    {
+      emoji: "\u{1F969}",
+      name: "Ternera guisada con patatas",
+      time: "50 min",
+      items: [{ id: "terneraGuisar", qty: 0.6 }, { id: "patatas", qty: 0.5 }, { id: "zanahoria", qty: 0.2 }, { id: "cebolla", qty: 0.15 }],
+      steps: ["Dora la ternera troceada.", "A\xF1ade cebolla y zanahoria, sofr\xEDe.", "Cubre con caldo y cuece 30 min.", "A\xF1ade patatas en cubos y cuece 20 min m\xE1s.", "Sirve caliente."]
+    },
+    {
+      emoji: "\u{1F373}",
+      name: "Tortilla de patatas y cebolla",
+      time: "30 min",
+      items: [{ id: "huevos", qty: 2 }, { id: "patatas", qty: 0.5 }, { id: "cebolla", qty: 0.15 }],
+      steps: ["Fr\xEDe las patatas y la cebolla en l\xE1minas.", "Bate los huevos y mezcla con las patatas.", "Cuaja en la sart\xE9n por ambos lados.", "Sirve templada."]
+    },
+    {
+      emoji: "\u{1F421}",
+      name: "Bacalao al horno con pimientos",
+      time: "35 min",
+      items: [{ id: "bacalao", qty: 0.75 }, { id: "pimientos", qty: 0.3 }, { id: "patatas", qty: 0.4 }],
+      steps: ["Precalienta el horno a 190\xB0C.", "Corta patatas y pimientos en rodajas.", "Coloca el bacalao encima.", "Riega con aceite y hornea 25 min."]
+    },
+    {
+      emoji: "\u{1F364}",
+      name: "Langostinos al ajillo con arroz",
+      time: "25 min",
+      items: [{ id: "langostinos", qty: 0.5 }, { id: "arroz", qty: 0.25 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Cuece el arroz blanco.", "Saltea los langostinos con ajo y guindilla.", "Sirve sobre el arroz."]
+    },
+    {
+      emoji: "\u{1F957}",
+      name: "Ensalada de garbanzos y at\xFAn",
+      time: "15 min",
+      items: [{ id: "garbanzos", qty: 1 }, { id: "atun", qty: 1 }, { id: "ensalada", qty: 0.3 }, { id: "cebolla", qty: 0.05 }],
+      steps: ["Escurre garbanzos y at\xFAn.", "Mezcla con la ensalada troceada y cebolla.", "Ali\xF1a con aceite, vinagre y sal."]
+    },
+    {
+      emoji: "\u{1F372}",
+      name: "Guiso de pavo con verduras",
+      time: "40 min",
+      items: [{ id: "pavoFilete", qty: 0.6 }, { id: "zanahoria", qty: 0.2 }, { id: "guisantes", qty: 0.2 }, { id: "patatas", qty: 0.3 }],
+      steps: ["Dora el pavo troceado.", "A\xF1ade verduras y sofr\xEDe.", "Cubre con caldo y cuece 25 min.", "Sirve caliente."]
+    },
+    {
+      emoji: "\u{1F355}",
+      name: "Pizza casera de jam\xF3n y queso",
+      time: "25 min",
+      items: [{ id: "masaPizza", qty: 1 }, { id: "tomateFrito", qty: 0.2 }, { id: "jamonYork", qty: 0.15 }, { id: "quesoRallado", qty: 0.2 }],
+      steps: ["Extiende la masa.", "Unta tomate, a\xF1ade jam\xF3n y queso.", "Hornea a 220\xB0C 12-15 min."]
+    },
+    {
+      emoji: "\u{1F966}",
+      name: "Salm\xF3n con br\xF3coli al vapor",
+      time: "25 min",
+      items: [{ id: "salmon", qty: 0.75 }, { id: "brocoli", qty: 0.5 }],
+      steps: ["Cuece el br\xF3coli al vapor 8 min.", "Haz el salm\xF3n a la plancha 4 min por lado.", "Sirve con un chorro de lim\xF3n."]
+    },
+    {
+      emoji: "\u{1F35A}",
+      name: "Quinoa con verduras salteadas",
+      time: "25 min",
+      items: [{ id: "quinoa", qty: 0.25 }, { id: "calabacin", qty: 0.3 }, { id: "pimientos", qty: 0.2 }, { id: "zanahoria", qty: 0.2 }],
+      steps: ["Cuece la quinoa 15 min.", "Saltea las verduras en dados.", "Mezcla y sirve."]
+    },
+    {
+      emoji: "\u{1F356}",
+      name: "Solomillo de cerdo a la mostaza",
+      time: "30 min",
+      items: [{ id: "solomilloCerdo", qty: 0.6 }, { id: "patatas", qty: 0.4 }],
+      steps: ["Sella el solomillo por todos lados.", "Hornea 15 min a 190\xB0C.", "Sirve con patatas asadas y salsa de mostaza."]
+    },
+    {
+      emoji: "\u{1F41F}",
+      name: "Dorada a la sal con ensalada",
+      time: "35 min",
+      items: [{ id: "dorada", qty: 3 }, { id: "ensalada", qty: 0.3 }],
+      steps: ["Cubre las doradas con sal gruesa.", "Hornea 25 min a 200\xB0C.", "Sirve con ensalada ali\xF1ada."]
+    },
+    {
+      emoji: "\u{1F35D}",
+      name: "Espaguetis con gambas y calabac\xEDn",
+      time: "25 min",
+      items: [{ id: "pasta", qty: 0.25 }, { id: "gambas", qty: 0.3 }, { id: "calabacin", qty: 0.3 }],
+      steps: ["Cuece la pasta.", "Saltea gambas y calabac\xEDn con ajo.", "Mezcla con la pasta y sirve."]
+    },
+    {
+      emoji: "\u{1F958}",
+      name: "Fabada r\xE1pida de alubias",
+      time: "30 min",
+      items: [{ id: "garbanzos", qty: 1 }, { id: "chorizo", qty: 0.2 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Sofr\xEDe cebolla y chorizo.", "A\xF1ade las alubias/garbanzos escurridos.", "Cuece 15 min con un poco de caldo.", "Sirve caliente."]
+    },
+    {
+      emoji: "\u{1F357}",
+      name: "Muslos de pollo al horno con boniato",
+      time: "45 min",
+      items: [{ id: "pollo", qty: 0.75 }, { id: "boniato", qty: 0.4 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Coloca el pollo y el boniato en bandeja.", "Riega con aceite, sal y hierbas.", "Hornea 40 min a 190\xB0C."]
+    },
+    {
+      emoji: "\u{1F95A}",
+      name: "Revuelto de setas y gambas",
+      time: "20 min",
+      items: [{ id: "huevos", qty: 2 }, { id: "setas", qty: 0.3 }, { id: "gambas", qty: 0.2 }],
+      steps: ["Saltea las setas y las gambas.", "A\xF1ade los huevos batidos.", "Remueve hasta cuajar suave y sirve."]
+    },
+    {
+      emoji: "\u{1F372}",
+      name: "Sopa de fideos con pollo",
+      time: "30 min",
+      items: [{ id: "pasta", qty: 0.15 }, { id: "pollo", qty: 0.4 }, { id: "zanahoria", qty: 0.15 }],
+      steps: ["Haz un caldo con el pollo y la zanahoria.", "A\xF1ade los fideos y cuece 8 min.", "Sirve caliente."]
+    },
+    {
+      emoji: "\u{1F420}",
+      name: "Mejillones al vapor",
+      time: "20 min",
+      items: [{ id: "mejillones", qty: 1 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Limpia los mejillones.", "Ponlos en una olla con cebolla, laurel y vino.", "Tapa y cuece 6-8 min hasta que se abran.", "Sirve con su jugo."]
+    },
+    {
+      emoji: "\u{1F969}",
+      name: "Filete de ternera con pimientos",
+      time: "25 min",
+      items: [{ id: "ternera", qty: 0.6 }, { id: "pimientos", qty: 0.3 }, { id: "patatas", qty: 0.3 }],
+      steps: ["Haz los filetes a la plancha.", "Saltea los pimientos en tiras.", "Sirve con patatas."]
+    },
+    {
+      emoji: "\u{1F35B}",
+      name: "Arroz caldoso con calabaza",
+      time: "35 min",
+      items: [{ id: "arroz", qty: 0.25 }, { id: "calabaza", qty: 0.3 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Sofr\xEDe cebolla y calabaza en dados.", "A\xF1ade el arroz y caldo abundante.", "Cuece 18 min caldoso y sirve."]
+    },
+    {
+      emoji: "\u{1F957}",
+      name: "Ensalada de quinoa y pavo",
+      time: "20 min",
+      items: [{ id: "quinoa", qty: 0.25 }, { id: "pavoFilete", qty: 0.4 }, { id: "ensalada", qty: 0.3 }],
+      steps: ["Cuece la quinoa y deja enfriar.", "Haz el pavo a la plancha en tiras.", "Mezcla con ensalada y ali\xF1a."]
+    },
+    {
+      emoji: "\u{1F373}",
+      name: "Huevos rotos con jam\xF3n",
+      time: "20 min",
+      items: [{ id: "huevos", qty: 2 }, { id: "patatas", qty: 0.5 }, { id: "jamonYork", qty: 0.1 }],
+      steps: ["Fr\xEDe las patatas en bastones.", "Fr\xEDe los huevos.", "Rompe los huevos sobre las patatas y a\xF1ade jam\xF3n."]
+    },
+    {
+      emoji: "\u{1F966}",
+      name: "Bacalao con coliflor gratinada",
+      time: "35 min",
+      items: [{ id: "bacalao", qty: 0.75 }, { id: "coliflor", qty: 0.4 }, { id: "quesoRallado", qty: 0.15 }],
+      steps: ["Cuece la coliflor.", "Coloca el bacalao y la coliflor en fuente.", "Cubre con queso y gratina 10 min."]
+    },
+    {
+      emoji: "\u{1F372}",
+      name: "Potaje de garbanzos y espinacas",
+      time: "40 min",
+      items: [{ id: "garbanzos", qty: 1 }, { id: "espinacas", qty: 0.4 }, { id: "patatas", qty: 0.3 }, { id: "cebolla", qty: 0.1 }],
+      steps: ["Sofr\xEDe cebolla.", "A\xF1ade garbanzos, patata y caldo.", "Cuece 20 min.", "Incorpora espinacas 5 min antes de acabar."]
+    }
+  ];
   var MENU_NORMAL = [
     {
       day: "Lunes",
@@ -3277,9 +3489,13 @@
     const activeMenu = STYLES[menuStyle].weeks[weekNumber - 1];
     const getMeal = (day, mealType) => {
       const key = `${menuStyle}|${weekNumber}|${day}|${mealType}`;
-      const overrideDay = swaps[key];
-      if (overrideDay) {
-        const sourceDay = activeMenu.find((d) => d.day === overrideDay);
+      const override = swaps[key];
+      if (override) {
+        if (typeof override === "string" && override.startsWith("reserva:")) {
+          const idx = parseInt(override.split(":")[1], 10);
+          if (RECETAS_RESERVA[idx]) return RECETAS_RESERVA[idx];
+        }
+        const sourceDay = activeMenu.find((d) => d.day === override);
         if (sourceDay) return sourceDay[mealType];
       }
       const original = activeMenu.find((d) => d.day === day);
@@ -3296,6 +3512,22 @@
         return next;
       });
       setSwapPickerKey(null);
+    };
+    const nuevaRecetaReserva = (day, mealType) => {
+      const key = `${menuStyle}|${weekNumber}|${day}|${mealType}`;
+      setSwaps((prev) => {
+        let siguiente = 0;
+        const actual = prev[key];
+        if (typeof actual === "string" && actual.startsWith("reserva:")) {
+          siguiente = (parseInt(actual.split(":")[1], 10) + 1) % RECETAS_RESERVA.length;
+        } else {
+          siguiente = Math.abs((day.length + mealType.length + weekNumber) * 7) % RECETAS_RESERVA.length;
+        }
+        const next = { ...prev, [key]: `reserva:${siguiente}` };
+        storage.set("intercambios-platos", JSON.stringify(next)).catch(() => {
+        });
+        return next;
+      });
     };
     const allMeals = useMemo(
       () => activeMenu.flatMap((d) => [
@@ -4086,7 +4318,16 @@ Picoteo y extras:
           },
           /* @__PURE__ */ React.createElement(Icon, { name: "chevronDown", size: 18, style: { transform: isOpen ? "rotate(180deg)" : "none", transition: "transform .2s" } })
         ))),
-        isPicking && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-3 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "Cambiar por el ", mealType === "comida" ? "almuerzo" : "cena", " de otro d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5" }, activeMenu.map((other) => {
+        isPicking && /* @__PURE__ */ React.createElement("div", { className: "px-4 pb-3 pt-1 border-t", style: { borderColor: "#E3DCC9" } }, /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: () => nuevaRecetaReserva(d.day, mealType),
+            className: "w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl tap-scale mb-3",
+            style: { background: "#1FAA59", color: "#FFFFFF", fontWeight: 600, fontSize: 13 }
+          },
+          /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 14 }),
+          " Dame otra receta distinta"
+        ), /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#6B6552" } }, "O cambiar por el ", mealType === "comida" ? "almuerzo" : "cena", " de otro d\xEDa"), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5" }, activeMenu.map((other) => {
           const candidate = other[mealType];
           const isCurrentSource = swaps[swapKey] ? swaps[swapKey] === other.day : other.day === d.day;
           return /* @__PURE__ */ React.createElement(
