@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new39.jsx
+  // app-source-new40.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -86,7 +86,7 @@
     asar: { unit: "kg", label: "Verduras variadas", mercadona: 1.8, lidl: 1.6, carrefour: 2, dia: 1.7 },
     pasta: { unit: "paquete 500g", label: "Pasta", mercadona: 0.65, lidl: 0.55, carrefour: 0.75, dia: 0.6 },
     tomateFrito: { unit: "lata 400g", label: "Tomate frito", mercadona: 0.75, lidl: 0.65, carrefour: 0.85, dia: 0.7 },
-    atun: { unit: "pack 3 latas", label: "At\xFAn en lata", mercadona: 2.1, lidl: 1.85, carrefour: 2.3, dia: 1.95 },
+    atun: { unit: "pack 3 latas", label: "At\xFAn en lata", mercadona: 2.7, lidl: 2.4, carrefour: 2.95, dia: 2.5 },
     lentejas: { unit: "paquete 500g", label: "Lentejas", mercadona: 1.2, lidl: 1.05, carrefour: 1.35, dia: 1.1 },
     chorizo: { unit: "kg", label: "Chorizo", mercadona: 6.5, lidl: 5.8, carrefour: 7, dia: 6 },
     zanahoria: { unit: "kg", label: "Zanahoria", mercadona: 0.9, lidl: 0.8, carrefour: 1, dia: 0.85 },
