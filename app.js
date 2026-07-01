@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new28.jsx
+  // app-source-new30.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -99,7 +99,7 @@
     leche: { unit: "litro", label: "Leche", mercadona: 0.9, lidl: 0.82, carrefour: 0.99, dia: 0.85 },
     espinacas: { unit: "kg", label: "Espinacas frescas", mercadona: 2.3, lidl: 2, carrefour: 2.55, dia: 2.15 },
     pavoFilete: { unit: "kg", label: "Filete de pavo", mercadona: 8.5, lidl: 7.6, carrefour: 9, dia: 7.9 },
-    merluza: { unit: "kg", label: "Merluza", mercadona: 11.5, lidl: 10.2, carrefour: 12.5, dia: 10.8 },
+    merluza: { unit: "kg", label: "Merluza", mercadona: 7.9, lidl: 7.2, carrefour: 8.6, dia: 7.5 },
     garbanzos: { unit: "paquete 500g", label: "Garbanzos", mercadona: 1.05, lidl: 0.9, carrefour: 1.2, dia: 0.95 },
     masaPizza: { unit: "unidad", label: "Base de pizza", mercadona: 1.8, lidl: 1.5, carrefour: 2, dia: 1.65 },
     jamonYork: { unit: "paquete", label: "Jam\xF3n cocido", mercadona: 1.6, lidl: 1.35, carrefour: 1.85, dia: 1.45 },
@@ -120,10 +120,10 @@
     guisantes: { unit: "kg", label: "Guisantes", mercadona: 2.4, lidl: 2.1, carrefour: 2.65, dia: 2.2 },
     coliflor: { unit: "kg", label: "Coliflor", mercadona: 2.05, lidl: 1.8, carrefour: 2.3, dia: 1.9 },
     pimientos: { unit: "kg", label: "Pimientos", mercadona: 2.4, lidl: 2.1, carrefour: 2.7, dia: 2.25 },
-    gambas: { unit: "kg", label: "Gambas peladas", mercadona: 6.35, lidl: 5.8, carrefour: 6.9, dia: 6 },
+    gambas: { unit: "kg", label: "Gambas peladas", mercadona: 9.5, lidl: 8.7, carrefour: 10.2, dia: 9 },
     dorada: { unit: "kg", label: "Dorada", mercadona: 7.5, lidl: 6.6, carrefour: 8.2, dia: 6.9 },
     terneraGuisar: { unit: "kg", label: "Ternera para guisar", mercadona: 10.5, lidl: 9.3, carrefour: 11.2, dia: 9.7 },
-    champinones: { unit: "kg", label: "Champi\xF1ones", mercadona: 3.5, lidl: 3.1, carrefour: 3.9, dia: 3.25 },
+    champinones: { unit: "kg", label: "Champi\xF1ones", mercadona: 2.5, lidl: 2.2, carrefour: 2.8, dia: 2.35 },
     quesoCabra: { unit: "paquete", label: "Queso de cabra (rulo)", mercadona: 2.6, lidl: 2.3, carrefour: 2.9, dia: 2.4 },
     pavoPicado: { unit: "kg", label: "Pavo picado", mercadona: 7.9, lidl: 7, carrefour: 8.5, dia: 7.3 },
     pan: { unit: "barra", label: "Pan", mercadona: 0.55, lidl: 0.45, carrefour: 0.65, dia: 0.5 }
