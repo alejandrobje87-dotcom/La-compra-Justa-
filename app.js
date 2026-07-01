@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new30.jsx
+  // app-source-new32.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -82,12 +82,12 @@
     huevos: { unit: "docena", label: "Huevos", mercadona: 3, lidl: 2.7, carrefour: 2.6, dia: 3.1 },
     cebolla: { unit: "kg", label: "Cebolla", mercadona: 1.15, lidl: 1, carrefour: 1.3, dia: 1.05 },
     ensalada: { unit: "kg", label: "Lechuga y tomate", mercadona: 2.2, lidl: 1.95, carrefour: 2.45, dia: 2.05 },
-    pollo: { unit: "kg", label: "Muslos de pollo", mercadona: 4.5, lidl: 4.1, carrefour: 4.8, dia: 4.3 },
+    pollo: { unit: "kg", label: "Muslos de pollo", mercadona: 3.9, lidl: 3.6, carrefour: 4.2, dia: 3.8 },
     asar: { unit: "kg", label: "Verduras variadas", mercadona: 1.8, lidl: 1.6, carrefour: 2, dia: 1.7 },
     pasta: { unit: "paquete 500g", label: "Pasta", mercadona: 0.65, lidl: 0.55, carrefour: 0.75, dia: 0.6 },
     tomateFrito: { unit: "lata 400g", label: "Tomate frito", mercadona: 0.75, lidl: 0.65, carrefour: 0.85, dia: 0.7 },
     atun: { unit: "pack 3 latas", label: "At\xFAn en lata", mercadona: 2.1, lidl: 1.85, carrefour: 2.3, dia: 1.95 },
-    lentejas: { unit: "paquete 500g", label: "Lentejas", mercadona: 1.1, lidl: 0.95, carrefour: 1.25, dia: 1 },
+    lentejas: { unit: "paquete 500g", label: "Lentejas", mercadona: 1.2, lidl: 1.05, carrefour: 1.35, dia: 1.1 },
     chorizo: { unit: "kg", label: "Chorizo", mercadona: 6.5, lidl: 5.8, carrefour: 7, dia: 6 },
     zanahoria: { unit: "kg", label: "Zanahoria", mercadona: 0.9, lidl: 0.8, carrefour: 1, dia: 0.85 },
     salmon: { unit: "kg", label: "Salm\xF3n", mercadona: 15.5, lidl: 11.5, carrefour: 16.9, dia: 14.2 },
@@ -115,14 +115,14 @@
     brocoli: { unit: "kg", label: "Br\xF3coli", mercadona: 1.6, lidl: 1.4, carrefour: 1.8, dia: 1.5 },
     esparragos: { unit: "manojo", label: "Esp\xE1rragos trigueros", mercadona: 1.8, lidl: 1.55, carrefour: 2, dia: 1.65 },
     mejillones: { unit: "kg", label: "Mejillones", mercadona: 4.5, lidl: 3.9, carrefour: 4.9, dia: 4.1 },
-    ternera: { unit: "kg", label: "Filete de ternera", mercadona: 12.5, lidl: 11, carrefour: 13.5, dia: 11.8 },
+    ternera: { unit: "kg", label: "Filete de ternera", mercadona: 15.3, lidl: 13.8, carrefour: 16.5, dia: 14.5 },
     judiasVerdes: { unit: "kg", label: "Jud\xEDas verdes", mercadona: 2.8, lidl: 2.5, carrefour: 3.1, dia: 2.65 },
     guisantes: { unit: "kg", label: "Guisantes", mercadona: 2.4, lidl: 2.1, carrefour: 2.65, dia: 2.2 },
     coliflor: { unit: "kg", label: "Coliflor", mercadona: 2.05, lidl: 1.8, carrefour: 2.3, dia: 1.9 },
     pimientos: { unit: "kg", label: "Pimientos", mercadona: 2.4, lidl: 2.1, carrefour: 2.7, dia: 2.25 },
     gambas: { unit: "kg", label: "Gambas peladas", mercadona: 9.5, lidl: 8.7, carrefour: 10.2, dia: 9 },
     dorada: { unit: "kg", label: "Dorada", mercadona: 7.5, lidl: 6.6, carrefour: 8.2, dia: 6.9 },
-    terneraGuisar: { unit: "kg", label: "Ternera para guisar", mercadona: 10.5, lidl: 9.3, carrefour: 11.2, dia: 9.7 },
+    terneraGuisar: { unit: "kg", label: "Ternera para guisar", mercadona: 13.3, lidl: 11.9, carrefour: 14.2, dia: 12.4 },
     champinones: { unit: "kg", label: "Champi\xF1ones", mercadona: 2.5, lidl: 2.2, carrefour: 2.8, dia: 2.35 },
     quesoCabra: { unit: "paquete", label: "Queso de cabra (rulo)", mercadona: 2.6, lidl: 2.3, carrefour: 2.9, dia: 2.4 },
     pavoPicado: { unit: "kg", label: "Pavo picado", mercadona: 7.9, lidl: 7, carrefour: 8.5, dia: 7.3 },
