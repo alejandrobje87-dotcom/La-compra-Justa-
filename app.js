@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new35.jsx
+  // app-source-new36.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -2887,6 +2887,8 @@
     const [loaded, setLoaded] = useState(false);
     const [showWelcome, setShowWelcome] = useState(false);
     const [ahorroHucha, setAhorroHucha] = useState(0);
+    const [miLista, setMiLista] = useState({});
+    const [buscarProducto, setBuscarProducto] = useState("");
     const [openMeal, setOpenMeal] = useState(null);
     const [editing, setEditing] = useState(false);
     const [saveMsg, setSaveMsg] = useState("");
@@ -2973,6 +2975,11 @@
         } catch (e) {
         }
         try {
+          const resML = await storage.get("mi-lista-libre");
+          if (resML && resML.value) setMiLista(JSON.parse(resML.value));
+        } catch (e) {
+        }
+        try {
           const res7 = await storage.get("ingredientes-evitar");
           if (res7 && res7.value) setAvoidIds(JSON.parse(res7.value));
         } catch (e) {
@@ -3035,6 +3042,32 @@
       setShowWelcome(false);
       storage.set("bienvenida-vista", "1").catch(() => {
       });
+    };
+    const guardarMiLista = (next) => {
+      storage.set("mi-lista-libre", JSON.stringify(next)).catch(() => {
+      });
+    };
+    const addAMiLista = (id) => {
+      setMiLista((prev) => {
+        const next = { ...prev, [id]: (prev[id] || 0) + 1 };
+        guardarMiLista(next);
+        return next;
+      });
+      setBuscarProducto("");
+    };
+    const cambiarCantidadMiLista = (id, delta) => {
+      setMiLista((prev) => {
+        const nuevaCant = (prev[id] || 0) + delta;
+        const next = { ...prev };
+        if (nuevaCant <= 0) delete next[id];
+        else next[id] = nuevaCant;
+        guardarMiLista(next);
+        return next;
+      });
+    };
+    const vaciarMiLista = () => {
+      setMiLista({});
+      guardarMiLista({});
     };
     const saveExtras = async (next) => {
       try {
@@ -3267,7 +3300,7 @@
       });
       setAhorroHucha((prev) => {
         const next = prev + savings;
-        storage.set("ahorro-hucha", String(next)).catch(() => {
+        storage.set("ahorro-hucha", "mi-lista-libre", String(next)).catch(() => {
         });
         return next;
       });
@@ -3280,7 +3313,7 @@
         if (removed && removed.savings) {
           setAhorroHucha((p) => {
             const next2 = Math.max(0, p - removed.savings);
-            storage.set("ahorro-hucha", String(next2)).catch(() => {
+            storage.set("ahorro-hucha", "mi-lista-libre", String(next2)).catch(() => {
             });
             return next2;
           });
@@ -3339,6 +3372,7 @@
       "ingredientes-evitar",
       "ingresos-mensuales",
       "ahorro-hucha",
+      "mi-lista-libre",
       "intercambios-platos",
       "lista-compra-comprados",
       "objetivo-usuario",
@@ -3517,6 +3551,45 @@ Picoteo y extras:
       })
     })).filter((cat) => cat.items.length > 0);
     const ALL_EXTRAS = [...EXTRAS, ...customExtras];
+    const catalogoLibre = useMemo(() => {
+      const cat = [];
+      Object.entries(prices).forEach(([id, p]) => {
+        cat.push({
+          id,
+          label: p.label,
+          unidad: p.unit,
+          mercadona: p.mercadona,
+          lidl: p.lidl,
+          carrefour: p.carrefour,
+          dia: p.dia
+        });
+      });
+      ALL_EXTRAS.forEach((ex) => {
+        cat.push({
+          id: `x-${ex.id}`,
+          label: ex.label,
+          unidad: "ud.",
+          mercadona: ex.mercadona,
+          lidl: ex.lidl,
+          carrefour: ex.carrefour,
+          dia: ex.dia
+        });
+      });
+      return cat;
+    }, [prices, customExtras]);
+    const catalogoFiltrado = buscarProducto.trim().length > 0 ? catalogoLibre.filter((p) => p.label.toLowerCase().includes(buscarProducto.trim().toLowerCase())).slice(0, 8) : [];
+    const miListaTotales = useMemo(() => {
+      return STORES.map((s) => {
+        const total = Object.entries(miLista).reduce((sum, [id, qty]) => {
+          const prod = catalogoLibre.find((p) => p.id === id);
+          return sum + (prod ? (prod[s.id] || 0) * qty : 0);
+        }, 0);
+        return { ...s, total };
+      }).sort((a, b) => a.total - b.total);
+    }, [miLista, catalogoLibre]);
+    const miListaCheapest = miListaTotales[0];
+    const miListaPriciest = miListaTotales[miListaTotales.length - 1];
+    const miListaHayProductos = Object.keys(miLista).length > 0;
     const shoppingExtras = Object.entries(extrasQty).map(([id, qty]) => {
       const ex = ALL_EXTRAS.find((e) => e.id === id);
       if (!ex) return null;
@@ -4010,7 +4083,37 @@ Picoteo y extras:
           /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#6B6552" } }, it.qtyLabel)
         );
       })));
-    })())), /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 mb-4 mt-4" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement(
+    })())), /* @__PURE__ */ React.createElement("section", { id: "mi-lista", className: "max-w-3xl mx-auto px-5 mb-10" }, /* @__PURE__ */ React.createElement("div", { className: "card-soft rounded-2xl p-5", style: { background: "#FFFFFF" } }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "flex items-center justify-center rounded-xl flex-shrink-0", style: { width: 40, height: 40, background: "rgba(31,170,89,0.1)", fontSize: 20 } }, "\u{1F9FE}"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", { className: "font-display text-lg" }, "Compara tu propia lista"), /* @__PURE__ */ React.createElement("p", { className: "text-sm", style: { color: "#6B6552" } }, "\xBFYa sabes qu\xE9 vas a comprar? Escribe tu lista y mira d\xF3nde te sale m\xE1s barata."))), /* @__PURE__ */ React.createElement("div", { className: "relative mt-4" }, /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "text",
+        value: buscarProducto,
+        onChange: (e) => setBuscarProducto(e.target.value),
+        placeholder: "Busca un producto (ej. pollo, leche, tomate...)",
+        className: "text-sm bg-transparent border rounded-xl px-3 py-2 w-full outline-none",
+        style: { borderColor: "#C9C0AC" }
+      }
+    ), catalogoFiltrado.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "absolute z-10 left-0 right-0 mt-1 rounded-xl overflow-hidden", style: { background: "#FFFFFF", border: "1px solid #C9C0AC", boxShadow: "0 4px 16px rgba(32,40,31,0.12)" } }, catalogoFiltrado.map((p) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: p.id,
+        onClick: () => addAMiLista(p.id),
+        className: "flex items-center justify-between w-full px-3 py-2 text-left text-sm tap-scale",
+        style: { borderBottom: "1px solid #F0EDE4" }
+      },
+      /* @__PURE__ */ React.createElement("span", null, p.label),
+      /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#1FAA59" } }, "+ a\xF1adir")
+    )))), miListaHayProductos ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "mt-4 space-y-1.5" }, Object.entries(miLista).map(([id, qty]) => {
+      const prod = catalogoLibre.find((p) => p.id === id);
+      if (!prod) return null;
+      return /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-xl", style: { background: "#F4F7F4" } }, /* @__PURE__ */ React.createElement("span", { className: "text-sm flex-1" }, prod.label), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => cambiarCantidadMiLista(id, -1), className: "px-1.5", style: { color: "#1FAA59" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => cambiarCantidadMiLista(id, 1), className: "px-1.5", style: { color: "#1FAA59" } }, "+")));
+    })), /* @__PURE__ */ React.createElement("button", { onClick: vaciarMiLista, className: "font-mono text-xs mt-2 mb-4", style: { color: "#C2452F" } }, "Vaciar lista"), /* @__PURE__ */ React.createElement("div", { className: "space-y-2 pt-3", style: { borderTop: "1px dashed #D8E0D8" } }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1", style: { color: "#6B6552" } }, "Tu lista, comparada"), (() => {
+      const max = miListaPriciest.total || 1;
+      return miListaTotales.map((s) => {
+        const isCheapest = s.id === miListaCheapest.id;
+        return /* @__PURE__ */ React.createElement("div", { key: s.id }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm flex items-center gap-2" }, /* @__PURE__ */ React.createElement("span", { style: { fontWeight: isCheapest ? 700 : 500 } }, s.name), isCheapest && /* @__PURE__ */ React.createElement("span", { className: "font-mono px-2 py-0.5 rounded-lg", style: { fontSize: 10, background: "#1FAA59", color: "#FFFFFF" } }, "M\xC1S BARATO")), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold", style: { color: isCheapest ? "#1FAA59" : "#20281F" } }, fmt(s.total), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "rounded-full overflow-hidden", style: { background: "#EEF2EE", height: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "h-full rounded-full", style: { width: `${s.total / max * 100}%`, background: isCheapest ? "#1FAA59" : s.color, opacity: isCheapest ? 1 : 0.55 } })));
+      });
+    })(), miListaPriciest.total > miListaCheapest.total && /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-3 rounded-xl p-3", style: { background: "rgba(31,170,89,0.08)", color: "#20281F" } }, "Comprando en ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: miListaCheapest.color } }, miListaCheapest.name), " te ahorras ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(miListaPriciest.total - miListaCheapest.total), " \u20AC"), " frente al m\xE1s caro."))) : /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-4", style: { color: "#8A8470" } }, 'A\xFAn no has a\xF1adido productos. B\xFAscalos arriba y ve construyendo tu lista. Si un producto no est\xE1, puedes crearlo en "Picoteo y extras" \u2192 "A\xF1adir un producto tuyo".'))), /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 mb-4 mt-4" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement(
       "summary",
       {
         className: "cursor-pointer card-soft rounded-2xl px-5 py-4 flex items-center gap-3",
