@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new37.jsx
+  // app-source-new39.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -2956,6 +2956,8 @@
     const [ahorroHucha, setAhorroHucha] = useState(0);
     const [miLista, setMiLista] = useState({});
     const [buscarProducto, setBuscarProducto] = useState("");
+    const [listaPegada, setListaPegada] = useState("");
+    const [noReconocidos, setNoReconocidos] = useState([]);
     const [openMeal, setOpenMeal] = useState(null);
     const [editing, setEditing] = useState(false);
     const [saveMsg, setSaveMsg] = useState("");
@@ -3135,6 +3137,39 @@
     const vaciarMiLista = () => {
       setMiLista({});
       guardarMiLista({});
+    };
+    const normalizar = (s) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+    const procesarListaPegada = () => {
+      if (!listaPegada.trim()) return;
+      const lineas = listaPegada.split("\n").map((l) => l.replace(/^[\s•\-\*\d\.\)]+/, "").trim()).filter((l) => l.length > 1);
+      const catNorm = catalogoLibre.map((p) => ({ ...p, norm: normalizar(p.label) }));
+      const nuevos = { ...miLista };
+      const noEnc = [];
+      lineas.forEach((linea) => {
+        const lineaNorm = normalizar(linea);
+        if (!lineaNorm) return;
+        let mejor = null;
+        let mejorPuntos = 0;
+        catNorm.forEach((p) => {
+          const palabrasProd = p.norm.split(" ").filter((w) => w.length > 2);
+          if (palabrasProd.length === 0) return;
+          const aciertos = palabrasProd.filter((w) => lineaNorm.includes(w)).length;
+          const puntos = aciertos / palabrasProd.length;
+          if (aciertos > 0 && puntos > mejorPuntos) {
+            mejorPuntos = puntos;
+            mejor = p;
+          }
+        });
+        if (mejor && mejorPuntos >= 0.5) {
+          nuevos[mejor.id] = (nuevos[mejor.id] || 0) + 1;
+        } else {
+          noEnc.push(linea);
+        }
+      });
+      setMiLista(nuevos);
+      guardarMiLista(nuevos);
+      setNoReconocidos(noEnc);
+      setListaPegada("");
     };
     const saveExtras = async (next) => {
       try {
@@ -4170,7 +4205,25 @@ Picoteo y extras:
       },
       /* @__PURE__ */ React.createElement("span", null, p.label),
       /* @__PURE__ */ React.createElement("span", { className: "font-mono text-xs", style: { color: "#1FAA59" } }, "+ a\xF1adir")
-    )))), miListaHayProductos ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "mt-4 space-y-1.5" }, Object.entries(miLista).map(([id, qty]) => {
+    )))), /* @__PURE__ */ React.createElement("div", { className: "mt-3 rounded-xl p-3", style: { background: "rgba(31,170,89,0.06)" } }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-2", style: { color: "#1FAA59" } }, "O pega tu lista entera de golpe"), /* @__PURE__ */ React.createElement(
+      "textarea",
+      {
+        value: listaPegada,
+        onChange: (e) => setListaPegada(e.target.value),
+        placeholder: "Pega aqu\xED tu lista, un producto por l\xEDnea:\npapel higi\xE9nico\nleche\npl\xE1tanos\ntomate frito...",
+        rows: 4,
+        className: "text-sm bg-white border rounded-xl px-3 py-2 w-full outline-none",
+        style: { borderColor: "#C9C0AC", resize: "vertical" }
+      }
+    ), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: procesarListaPegada,
+        className: "font-mono text-xs uppercase px-3 py-1.5 rounded-xl tap-scale mt-2",
+        style: { background: "#1FAA59", color: "#FFFFFF" }
+      },
+      "Reconocer y a\xF1adir"
+    ), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2", style: { color: "#8A8470" } }, "Reconocemos los productos que coincidan con nuestro cat\xE1logo. Los que no encontremos te los mostramos para que los a\xF1adas a mano.")), noReconocidos.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "mt-3 rounded-xl p-3", style: { background: "rgba(194,69,47,0.06)" } }, /* @__PURE__ */ React.createElement("p", { className: "font-mono text-xs uppercase mb-1.5", style: { color: "#C2452F" } }, "No reconocidos (", noReconocidos.length, ")"), /* @__PURE__ */ React.createElement("p", { className: "text-xs mb-2", style: { color: "#6B6552" } }, 'Estos no est\xE1n en el cat\xE1logo. B\xFAscalos arriba con otro nombre, o cr\xE9alos en "Picoteo y extras".'), /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-1.5" }, noReconocidos.map((n, i) => /* @__PURE__ */ React.createElement("span", { key: i, className: "text-xs px-2 py-1 rounded-lg", style: { background: "#FFFFFF", border: "1px solid #E3DCC9", color: "#6B6552" } }, n)))), miListaHayProductos ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "mt-4 space-y-1.5" }, Object.entries(miLista).map(([id, qty]) => {
       const prod = catalogoLibre.find((p) => p.id === id);
       if (!prod) return null;
       return /* @__PURE__ */ React.createElement("div", { key: id, className: "flex items-center justify-between px-3 py-2 rounded-xl", style: { background: "#F4F7F4" } }, /* @__PURE__ */ React.createElement("span", { className: "text-sm flex-1" }, prod.label), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 font-mono text-sm" }, /* @__PURE__ */ React.createElement("button", { onClick: () => cambiarCantidadMiLista(id, -1), className: "px-1.5", style: { color: "#1FAA59" } }, "\u2212"), /* @__PURE__ */ React.createElement("span", null, qty), /* @__PURE__ */ React.createElement("button", { onClick: () => cambiarCantidadMiLista(id, 1), className: "px-1.5", style: { color: "#1FAA59" } }, "+")));
@@ -4180,7 +4233,7 @@ Picoteo y extras:
         const isCheapest = s.id === miListaCheapest.id;
         return /* @__PURE__ */ React.createElement("div", { key: s.id }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between mb-1" }, /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm flex items-center gap-2" }, /* @__PURE__ */ React.createElement("span", { style: { fontWeight: isCheapest ? 700 : 500 } }, s.name), isCheapest && /* @__PURE__ */ React.createElement("span", { className: "font-mono px-2 py-0.5 rounded-lg", style: { fontSize: 10, background: "#1FAA59", color: "#FFFFFF" } }, "M\xC1S BARATO")), /* @__PURE__ */ React.createElement("span", { className: "font-mono text-sm font-bold", style: { color: isCheapest ? "#1FAA59" : "#20281F" } }, fmt(s.total), " \u20AC")), /* @__PURE__ */ React.createElement("div", { className: "rounded-full overflow-hidden", style: { background: "#EEF2EE", height: 10 } }, /* @__PURE__ */ React.createElement("div", { className: "h-full rounded-full", style: { width: `${s.total / max * 100}%`, background: isCheapest ? "#1FAA59" : s.color, opacity: isCheapest ? 1 : 0.55 } })));
       });
-    })(), miListaPriciest.total > miListaCheapest.total && /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-3 rounded-xl p-3", style: { background: "rgba(31,170,89,0.08)", color: "#20281F" } }, "Comprando en ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: miListaCheapest.color } }, miListaCheapest.name), " te ahorras ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(miListaPriciest.total - miListaCheapest.total), " \u20AC"), " frente al m\xE1s caro."))) : /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-4", style: { color: "#8A8470" } }, 'A\xFAn no has a\xF1adido productos. B\xFAscalos arriba y ve construyendo tu lista. Si un producto no est\xE1, puedes crearlo en "Picoteo y extras" \u2192 "A\xF1adir un producto tuyo".'))), /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 mb-4 mt-4" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement(
+    })(), miListaPriciest.total > miListaCheapest.total && /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-3 rounded-xl p-3", style: { background: "rgba(31,170,89,0.08)", color: "#20281F" } }, "Comprando en ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: miListaCheapest.color } }, miListaCheapest.name), " te ahorras ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 700, color: "#1FAA59" } }, fmt(miListaPriciest.total - miListaCheapest.total), " \u20AC"), " frente al m\xE1s caro."), /* @__PURE__ */ React.createElement("p", { className: "text-xs mt-2 flex items-start gap-1.5", style: { color: "#8A8470" } }, /* @__PURE__ */ React.createElement(Icon, { name: "info", size: 12, className: "mt-0.5 flex-shrink-0" }), "Comparaci\xF3n orientativa. Los precios de Mercadona est\xE1n calibrados con tickets reales; los de Lidl, Carrefour y D\xEDa son estimaciones de referencia, as\xED que \xFAsalo como gu\xEDa aproximada, no como precio exacto."))) : /* @__PURE__ */ React.createElement("p", { className: "text-sm mt-4", style: { color: "#8A8470" } }, 'A\xFAn no has a\xF1adido productos. B\xFAscalos arriba y ve construyendo tu lista. Si un producto no est\xE1, puedes crearlo en "Picoteo y extras" \u2192 "A\xF1adir un producto tuyo".'))), /* @__PURE__ */ React.createElement("div", { className: "max-w-3xl mx-auto px-5 mb-4 mt-4" }, /* @__PURE__ */ React.createElement("details", null, /* @__PURE__ */ React.createElement(
       "summary",
       {
         className: "cursor-pointer card-soft rounded-2xl px-5 py-4 flex items-center gap-3",
