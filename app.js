@@ -1,5 +1,5 @@
 (() => {
-  // app-source-new40.jsx
+  // app-source-new41.jsx
   var { useState, useEffect, useMemo } = React;
   var storage = {
     async get(key) {
@@ -4059,9 +4059,16 @@ Picoteo y extras:
           {
             onClick: () => setSwapPickerKey(isPicking ? null : swapKey),
             "aria-label": "Cambiar este plato por otro de la semana",
-            style: { color: isSwapped ? "#1FAA59" : "#C9C0AC" }
+            className: "flex items-center gap-1 px-2 py-1 rounded-lg tap-scale",
+            style: {
+              color: isSwapped ? "#FFFFFF" : "#1FAA59",
+              background: isSwapped ? "#1FAA59" : "rgba(31,170,89,0.1)",
+              fontSize: 12,
+              fontWeight: 600
+            }
           },
-          /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 15 })
+          /* @__PURE__ */ React.createElement(Icon, { name: "repeat", size: 13 }),
+          isSwapped ? "Cambiado" : "Cambiar"
         ), /* @__PURE__ */ React.createElement(
           "button",
           {
